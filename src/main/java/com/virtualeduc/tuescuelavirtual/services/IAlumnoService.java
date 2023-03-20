@@ -8,7 +8,6 @@ package com.virtualeduc.tuescuelavirtual.services;
 import com.virtualeduc.tuescuelavirtual.models.Alumno;
 import com.virtualeduc.tuescuelavirtual.models.DTOS.AlumnoCursoDTO;
 import com.virtualeduc.tuescuelavirtual.models.DTOS.AlumnoDTO;
-
 import com.virtualeduc.tuescuelavirtual.models.Responses;
 
 import java.util.List;
@@ -27,6 +26,18 @@ public interface IAlumnoService {
     
     public List<AlumnoDTO> consultarTodosLosAlumnos();
 
-    public Responses guardaAlumno(Alumno alumno);
+    public Responses guardaAlumno(Alumno alumno,Boolean guardar);
+    
+    public Long[] consultarIdAlumnoPorIdCurso(Long idcurso);
+    
+    public String consultarCedulasDeAlumnos(String tipoDocAl, String numDocAl);
+    
+    public Responses consultarAlumnosPorCurso(Long idcurso);
+    
+    public Responses consultarAlumnosPorCursoYmateria(Long idcurso,Long idmateria);
+    
+    public void ActualizarIdAlumno(Long idCurso,String[] Cedulas);
+    
+    
 
 }

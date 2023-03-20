@@ -5,20 +5,10 @@
  */
 package com.virtualeduc.tuescuelavirtual.models;
 
+import javax.persistence.*;
+import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 import java.util.Collection;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -35,12 +25,15 @@ public class Curso implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID_CURSO")
     private Long idCurso;
+    
     @JoinColumn(name = "ID_ANNIO", referencedColumnName = "ID_ANNIO")
     @ManyToOne(optional = false)
     private Annio idAnnio;
+    
     @JoinColumn(name = "ID_ANNIO_ESC", referencedColumnName = "ID_ANNIO_ESC")
     @ManyToOne(optional = false)
     private AnnioEscolar idAnnioEsc;
+    
     @JoinColumn(name = "ID_SEC", referencedColumnName = "ID_SEC")
     @ManyToOne(optional = false)
     private Seccion idSec;
@@ -51,15 +44,35 @@ public class Curso implements Serializable {
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCurso")
     private Collection<Alumno> alumnoCollection;
-
+    
     public Curso() {
     }
-    
+
     public Curso(Long idCurso) {
         this.idCurso = idCurso;
     }
+    
+    
 
-    public Long getIdCurso() {
+    public Curso(Annio idAnnio, AnnioEscolar idAnnioEsc, Seccion idSec, Turno idTurno) {
+		super();
+		this.idAnnio = idAnnio;
+		this.idAnnioEsc = idAnnioEsc;
+		this.idSec = idSec;
+		this.idTurno = idTurno;
+		
+	}
+    
+    
+   
+    
+    
+    
+    
+    
+    
+
+	public Long getIdCurso() {
         return idCurso;
     }
 

@@ -4,11 +4,10 @@
  * and open the template in the editor.
  */
 package com.virtualeduc.tuescuelavirtual.models.DTOS;
-
-import com.virtualeduc.tuescuelavirtual.models.Annio;
-import com.virtualeduc.tuescuelavirtual.models.AnnioEscolar;
 import com.virtualeduc.tuescuelavirtual.models.Curso;
-import com.virtualeduc.tuescuelavirtual.models.Seccion;
+
+
+
 
 /**
  *
@@ -28,16 +27,19 @@ public class CursoDTO {
     
     
     
+
     private String annio;
     
+
     private String intAnnioEsc;
     
+
     private String seccion;
-    
+
     private String turno;
-    
+
     private String nivel;
-    
+
     private String especialidad;
     
    
@@ -60,20 +62,10 @@ public class CursoDTO {
         this.nivel = nivel;
         this.especialidad = especialidad;
     }
-
-   
-     
-     
-
-  
-
-    
-  
     
    
-    
-    
-    public CursoDTO(Curso curso,String annio,String annioesco,String sec,String turn) {
+   
+    public CursoDTO(Curso curso) {
         
         this.idCurso=curso.getIdCurso();
         this.idAnnio=curso.getIdAnnio().getIdAnnio();
@@ -82,10 +74,10 @@ public class CursoDTO {
          this.nivel=curso.getIdAnnio().getNivel();
          this.especialidad=curso.getIdAnnio().getEspecialidad();
          this.idTurno=curso.getIdTurno().getIdTurno();
-         this.annio=annio;
-         this.intAnnioEsc=annioesco;
-         this.seccion=sec;
-         this.turno=turn;
+         this.annio=curso.getIdAnnio().getAnnio();
+         this.intAnnioEsc=curso.getIdAnnioEsc().getIntAnnioEsc();
+         this.seccion=curso.getIdSec().getSeccion();
+         this.turno=curso.getIdTurno().getTurno();
          
         
     }
