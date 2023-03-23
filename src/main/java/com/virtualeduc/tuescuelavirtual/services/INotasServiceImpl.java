@@ -5,12 +5,13 @@ import com.virtualeduc.tuescuelavirtual.models.DTOS.AlumnoDTO;
 import com.virtualeduc.tuescuelavirtual.models.DTOS.CursoDTO;
 import com.virtualeduc.tuescuelavirtual.models.DTOS.MateriaDTO;
 import com.virtualeduc.tuescuelavirtual.models.DTOS.NotaParDTO;
-import com.virtualeduc.tuescuelavirtual.models.DTOS.Notawrapper;
-import com.virtualeduc.tuescuelavirtual.models.DTOS.Notawrapperporlapso;
+import com.virtualeduc.tuescuelavirtual.models.DTOS.NotaWrapper;
+import com.virtualeduc.tuescuelavirtual.models.DTOS.NotaWrapperPorLapso;
 import com.virtualeduc.tuescuelavirtual.models.Lapso;
 import com.virtualeduc.tuescuelavirtual.models.NotaPar;
 import com.virtualeduc.tuescuelavirtual.models.Profesor;
 import com.virtualeduc.tuescuelavirtual.models.Responses;
+import com.virtualeduc.tuescuelavirtual.models.mappers.AlumnoDtoToAlumnoMapper;
 import com.virtualeduc.tuescuelavirtual.repo.IAlumnoRepo;
 import com.virtualeduc.tuescuelavirtual.repo.IAnnioEscolarRepo;
 import com.virtualeduc.tuescuelavirtual.repo.ICursoRepo;
@@ -172,13 +173,13 @@ public class INotasServiceImpl implements INotasService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<Notawrapper> consultarNotasPorCedula(String tipoDoc, String numDoc) {
+    public List<NotaWrapper> consultarNotasPorCedula(String tipoDoc, String numDoc) {
 
         List<NotaPar> notas = new ArrayList<>();
 
         notas = notasRepo.consultarNotasPorAlumno(tipoDoc, numDoc);
 
-        List<Notawrapper> notaswrapper = new ArrayList<>();
+        List<NotaWrapper> notaswrapper = new ArrayList<>();
 
         notaswrapper=obtenerNotas(notas);
 
@@ -202,13 +203,13 @@ public class INotasServiceImpl implements INotasService {
     }
 
     @Override
-    public List<Notawrapper> consultarNotasPorCedulaYperiodo(String tipoDoc, String numDoc, String periodo) {
+    public List<NotaWrapper> consultarNotasPorCedulaYperiodo(String tipoDoc, String numDoc, String periodo) {
 
         List<NotaPar> notas = new ArrayList<>();
 
         notas = notasRepo.consultarNotasPorAlumnoPeriodo(tipoDoc, numDoc, periodo);
 
-        List<Notawrapper> notaswrapper = new ArrayList<>();
+        List<NotaWrapper> notaswrapper = new ArrayList<>();
 
         notaswrapper=obtenerNotas(notas);
 
@@ -216,13 +217,13 @@ public class INotasServiceImpl implements INotasService {
     }
 
     @Override
-    public List<Notawrapper> consultarNotasPorCedulaPeriodoYlapso(String tipoDoc, String numDoc, String periodo, String lapso) {
+    public List<NotaWrapper> consultarNotasPorCedulaPeriodoYlapso(String tipoDoc, String numDoc, String periodo, String lapso) {
 
         List<NotaPar> notas = new ArrayList<>();
 
         notas = notasRepo.consultarNotasPorAlumnoPeriodoLapso(tipoDoc, numDoc, periodo, lapso);
 
-        List<Notawrapper> notaswrapper = new ArrayList<>();
+        List<NotaWrapper> notaswrapper = new ArrayList<>();
 
         if(!notas.isEmpty()){
             notaswrapper=obtenerNotas(notas);
@@ -234,15 +235,15 @@ public class INotasServiceImpl implements INotasService {
 
     }
 
-    public  List<Notawrapper> obtenerNotas(List<NotaPar> notas){
+    public  List<NotaWrapper> obtenerNotas(List<NotaPar> notas){
 
-        List<Notawrapper> notaswrapper = new ArrayList<>();
+        List<NotaWrapper> notaswrapper = new ArrayList<>();
 
         alumno = alumnoservice.consultarAlumnoPorId(notas.get(0).getIdAlumno());
 
         for (NotaPar notaPar : notas) {
 
-            Notawrapper notawrapper = new Notawrapper();
+            NotaWrapper notawrapper = new NotaWrapper();
 
             notawrapper.setIdAl(alumno.getIdAl());
 
@@ -328,20 +329,20 @@ public class INotasServiceImpl implements INotasService {
     }
 
     @Override
-    public List<Notawrapperporlapso> consultarNotasPorCursoMateria(List<AlumnoDTO> alumnos,Long idMat, Long idCurso) {
+    public List<NotaWrapperPorLapso> consultarNotasPorCursoMateria(List<AlumnoDTO> alumnos, Long idMat, Long idCurso) {
         //  throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
 
 //        List<NotaPar> notasDelCurso=new ArrayList<>();
 
-        List<Notawrapperporlapso> notasporlapso=new ArrayList<>();
+        List<NotaWrapperPorLapso> notasporlapso=new ArrayList<>();
 
         for(AlumnoDTO alumnodto:alumnos){
 
             List<NotaPar> notasDelAlumno=this.notasRepo.consultarNotasPorCursoMateriaYAlumno(idCurso, idMat,alumnodto.getIdAl());
 
-            Notawrapperporlapso Alumnoconnotas=new Notawrapperporlapso();
+            NotaWrapperPorLapso Alumnoconnotas=new NotaWrapperPorLapso();
 
-            Alumno alumno=new Alumno(alumnodto);
+            Alumno alumno=new AlumnoDtoToAlumnoMapper().apply(alumnodto);
 
             Alumnoconnotas.setAlumno(alumno);
 

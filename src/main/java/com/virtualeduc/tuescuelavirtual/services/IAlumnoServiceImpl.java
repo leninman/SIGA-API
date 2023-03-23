@@ -5,15 +5,11 @@
  */
 package com.virtualeduc.tuescuelavirtual.services;
 
-import com.virtualeduc.tuescuelavirtual.models.Alumno;
-import com.virtualeduc.tuescuelavirtual.models.Curso;
-import com.virtualeduc.tuescuelavirtual.models.DTOS.AlumnoCursoDTO;
-import com.virtualeduc.tuescuelavirtual.models.DTOS.AlumnoDTO;
-import com.virtualeduc.tuescuelavirtual.models.DTOS.CursoDTO;
-import com.virtualeduc.tuescuelavirtual.models.Numerosdelista;
-import com.virtualeduc.tuescuelavirtual.models.Responses;
+import com.virtualeduc.tuescuelavirtual.models.*;
+import com.virtualeduc.tuescuelavirtual.models.DTOS.*;
+import com.virtualeduc.tuescuelavirtual.models.mappers.AlumnoDtoToAlumnoMapper;
+import com.virtualeduc.tuescuelavirtual.models.mappers.AlumnoToAlumnoDtoMapper;
 import com.virtualeduc.tuescuelavirtual.repo.IAlumnoRepo;
-import com.virtualeduc.tuescuelavirtual.repo.INumerodelistaRepo;
 import com.virtualeduc.tuescuelavirtual.utils.Constantes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -32,8 +29,7 @@ import java.util.List;
 @Service
 public class IAlumnoServiceImpl implements IAlumnoService {
 
-    @Autowired
-    INumerodelistaRepo numerodelistaRepo;
+
 
     @Autowired
     IAlumnoRepo alumnorepo;
@@ -45,7 +41,7 @@ public class IAlumnoServiceImpl implements IAlumnoService {
     @Autowired
     ICursoService cursoservice;
 
-    Alumno alumnoconsultado;
+
     ;
 
 	AlumnoDTO alumnoDTO;
@@ -56,41 +52,67 @@ public class IAlumnoServiceImpl implements IAlumnoService {
 
     String cedula;
 
+
     @Override
     @Transactional
     @ResponseStatus(HttpStatus.CREATED)
-    public Responses guardaAlumno(Alumno alumno, Boolean guardar) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        // String tipoDocAl = alumno.getTipoDocAl();
-        // String numDocAl = alumno.getNumDocAl();
+    public Responses guardaAlumno(AlumnoDTO alumnoDTO) {
+        String tipoDocRpr;
+        String numDocRpr;
+        Curso curso = new Curso();
         Responses resp = new Responses();
+        Alumno alumno = new AlumnoDtoToAlumnoMapper().apply(alumnoDTO);
         try {
-            if (guardar) {
-
-                alumnoguardado = new Alumno();
-
-                alumnoactualizado = new Alumno();
-
-                alumnoconsultado = new Alumno();
-
-                alumnoconsultado = this.consultarAlumnoPorCedula(alumno.getTipoDocAl(), alumno.getNumDocAl());
-
-                // CONSULTA SI EL ALUMNO YA EXISTE, SI EXISTE RETORNA EL ALUMNO, SI NO LO GUARDA
-                if (alumnoconsultado == null) {
-                    alumno.setFechaCreacion(new Date());
-                    alumnoguardado = alumnorepo.save(alumno);
-                   // generarNumeroDeListaAlumno(alumnoguardado.getIdAl(),alumnoguardado.getIdCurso().getIdCurso());
-                    resp.setResponseCode(Constantes.ALUMNO_REGISTRADO_CODE);
-                    resp.setResponseDescription(Constantes.ALUMNO_REGISTRADO_DESC);
-                    alumnoDTO = new AlumnoDTO(alumnoguardado);
+            Alumno alumnoconsultado = this.consultarAlumnoPorCedula(alumno.getTipoDocAl(), alumno.getNumDocAl());
+            if (alumnoconsultado == null){
+                /*AnnioDTO annioDTO = cursoservice.consultarAnnioPorAnnioYnivelYespecialidad(alumnoDTO.getAnnio(), alumnoDTO.getNivel(),alumnoDTO.getEspecialidad());
+                AnnioEscolarDTO annioescolarDTO = cursoservice.consultarAnnioEscolar();
+                SeccionDTO seccionDTO = cursoservice.consultarSeccionPorSeccion(alumnoDTO.getSeccion());
+                TurnoDTO turnoDTO = cursoservice.consultarTurnoPorTurno(alumnoDTO.getTurno());
+                CursoDTO cursoDTO = cursoservice.consultarcursoporparametros(annioDTO.getIdAnnio(),annioescolarDTO.getIdAnnioEsc(), seccionDTO.getIdSec());
+                Annio annio = new Annio(annioDTO);
+                AnnioEscolar annioescolar = new AnnioEscolar(annioescolarDTO);
+                Seccion seccion = new Seccion(seccionDTO);
+                Turno turno = new Turno(turnoDTO);
+                curso.setIdAnnio(annio);
+                curso.setIdAnnioEsc(annioescolar);
+                curso.setIdSec(seccion);
+                curso.setIdTurno(turno);
+                curso.setIdCurso(cursoDTO.getIdCurso());
+                alumno.setIdCurso(curso);
+                tipoDocRpr = alumnoDTO.getTipoDocRep1();
+                numDocRpr = alumnoDTO.getNumDocRep1();
+                Representante rep1 = representanteservice.consultarepresentanteporcedula(tipoDocRpr, numDocRpr);
+                if (rep1 == null) {
+                    Representante rep = new Representante();
+                    rep1 = rep.setRepresentante1(alumnoDTO);
+                    alumno.setIdRpr1(representanteservice.guardarRepresentante(rep1));
+                } else {
+                    alumno.setIdRpr1(rep1);
+                }
+                if (alumnoDTO.getTipoDocRep2() != null && !alumnoDTO.getNumDocRep2().equals("")) {
+                    tipoDocRpr = alumnoDTO.getTipoDocRep2();
+                    numDocRpr = alumnoDTO.getNumDocRep2();
+                    Representante rep2 = representanteservice.consultarepresentanteporcedula(tipoDocRpr, numDocRpr);
+                    if (rep2 == null) {
+                        Representante rep = new Representante();
+                        rep2 = rep.setRepresentante2(alumnoDTO);
+                        alumno.setIdRpr2(representanteservice.guardarRepresentante(rep2));
+                    } else {
+                        alumno.setIdRpr2(rep2);
+                    }
 
                 } else {
-                    resp.setResponseCode(Constantes.ALUMNO_EXISTE_CODE);
-                    resp.setResponseDescription(Constantes.ALUMNO_EXISTE_DESC);
-                    alumnoDTO = new AlumnoDTO(alumnoconsultado);
-                    // alumno.setIdAl(this.alumnoDTO.getIdAl());
-                }
-                resp.setAlumno(this.alumnoDTO);
+                    alumno.setIdRpr2(rep1);
+                }*/
+                alumno.setFechaCreacion(new Date());
+                alumnoguardado = alumnorepo.save(alumno);
+                resp.setResponseCode(Constantes.ALUMNO_REGISTRADO_CODE);
+                resp.setResponseDescription(Constantes.ALUMNO_REGISTRADO_DESC);
+                resp.setResponseCode(Constantes.ALUMNO_EXISTE_CODE);
+                resp.setResponseDescription(Constantes.ALUMNO_EXISTE_DESC);
+                alumnoDTO = new AlumnoDTO(alumnoconsultado);
+                resp.setAlumno(alumnoDTO);
 
             } else {
                 resp.setResponseCode(Constantes.ALUMNO_MODIFICADO_CODE);
@@ -107,7 +129,7 @@ public class IAlumnoServiceImpl implements IAlumnoService {
 
     }
 
-    public Numerosdelista generarNumeroDeListaAlumno(Long idAlumno,Long idCurso){
+    /*public Numerosdelista generarNumeroDeListaAlumno(Long idAlumno,Long idCurso){
 
         Numerosdelista numerosdelistaAsignar = new Numerosdelista();
 
@@ -140,13 +162,13 @@ public class IAlumnoServiceImpl implements IAlumnoService {
 
         return numerosdelistaAsignar;
 
-    }
+    }*/
 
     /**
      *
      * @return
      */
-    @Override
+   /* @Override
     @Transactional(readOnly = true)
     public List<AlumnoCursoDTO> consultarAlumnos() {
         // throw new UnsupportedOperationException("Not supported yet."); //To change
@@ -170,6 +192,43 @@ public class IAlumnoServiceImpl implements IAlumnoService {
 
         return alumnosCursoDTO;
 
+    }*/
+    @Override
+    @Transactional(readOnly = true)
+    public List<AlumnoDTO> consultarAlumnos() {
+        List<Alumno> alumnos = alumnorepo.findAll();
+        List<AlumnoDTO> alumnosDTO = new ArrayList<>(alumnos.size());
+        int dimensionlista = alumnos.size();
+
+
+       /* for (Alumno alumno:alumnos) {
+            AlumnoDTO aldto=new AlumnoToAlumnoDtoMapper().apply(alumno);
+            alumnosDTO.add(aldto);
+        }
+
+        return alumnosDTO;*/
+
+
+            /* alumnosDTO = alumnos.stream().map(Alumno ->
+                    new AlumnoToAlumnoDtoMapper().apply(Alumno)).collect(Collectors.toList());*/
+
+      //  AlumnoDTO al1= new AlumnoToAlumnoDtoMapper().apply()
+
+        List<AlumnoDTO> alumnosDTO1 = new ArrayList<>();
+
+        for (int i = 0; i < alumnos.size(); i++) {
+
+            Alumno al = new Alumno();
+
+            al = alumnos.get(i);
+
+            AlumnoDTO al1 =  new AlumnoToAlumnoDtoMapper().obtenerAlumnoDto(al);
+
+            alumnosDTO1.add(al1);
+
+        }
+
+    return alumnosDTO;
     }
 
     @Override

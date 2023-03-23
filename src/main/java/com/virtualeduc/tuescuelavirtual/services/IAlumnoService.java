@@ -22,11 +22,12 @@ public interface IAlumnoService {
 
     public Alumno consultarAlumnoPorId(Long id);
 
-    public List<AlumnoCursoDTO> consultarAlumnos();
+    //public List<AlumnoCursoDTO> consultarAlumnos();
+    public List<AlumnoDTO> consultarAlumnos();
     
     public List<AlumnoDTO> consultarTodosLosAlumnos();
 
-    public Responses guardaAlumno(Alumno alumno,Boolean guardar);
+    public Responses guardaAlumno(AlumnoDTO alumnoDTO);
     
     public Long[] consultarIdAlumnoPorIdCurso(Long idcurso);
     

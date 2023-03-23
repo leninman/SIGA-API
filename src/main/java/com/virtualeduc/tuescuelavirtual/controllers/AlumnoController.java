@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -27,8 +29,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  * @author Personal
  */
 @RestController
-@RequestMapping("/app")
-public class alumnoController {
+public class AlumnoController {
 
     @Autowired
     IAlumnoService alumnoservice;
@@ -63,20 +64,26 @@ public class alumnoController {
     Representante representante;
 
     Boolean guardarAlumno;
+    boolean guardar;
 
     boolean guardarCurso;
 
     List<AlumnoDTO> lista = new ArrayList<>();
 
-    List<Notawrapper> notasresultado;
+    List<NotaWrapper> notasresultado;
 
-    //CONSULTA DE REPRESENTANTE POR CEDULA
-    @CrossOrigin(origins = {"direccionbase/consultarepresentante"})
-    @GetMapping(path = "/consultarepresentante",
-            produces = "application/json")
-    public @ResponseBody
-    RepresentanteDTO consultarepresentante(@RequestParam("tdoc") String tdoc, @RequestParam("ndoc") String ndoc) {
-        return representanteservice.obtenerRepresentantePorCedula(tdoc, ndoc);
+
+
+    //CONSULTA LA LISTA DE ALUMNOS ACTIVOS
+    @CrossOrigin(origins = {"direccionbase/consultaralumnos"})
+    @GetMapping(path = "/consultaralumnos")
+    public ResponseEntity<?> consultaralumnos() {
+
+     List<AlumnoDTO>   alumnosDTO=alumnoservice.consultarAlumnos();
+     return ResponseEntity.ok(alumnosDTO);
+
+   //   return alumnoservice.consultarAlumnos();
+
     }
 
     //CONSULTA DE ALUMNO POR CEDULA
@@ -91,6 +98,121 @@ public class alumnoController {
         return alumnoDTO;
     }
 
+
+   //REGISTRAR UN NUEVO ALUMNO
+   @CrossOrigin(origins = {"direccionbase/agregaralumno"})
+    @PostMapping(path = "/agregaralumno")
+    public ResponseEntity<?> agregaralumno(@RequestBody AlumnoDTO alumnoDTO) {
+        Responses resp = alumnoservice.guardaAlumno(alumnoDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(resp);
+    }
+
+
+
+    //MODIFICA UN ALUMNO YA EXISTENTE
+   /* @PostMapping(path = "/modificaralumno")
+    public ResponseEntity<?> modificaralumno(@RequestBody AlumnoDTO alumnoDTO) {
+
+
+
+        // cedula no existe
+        guardar = false;
+
+        Responses resp;
+
+        Representante rep1;
+
+        Representante rep2;
+
+        String tipoDocRpr;
+
+        String numDocRpr;
+
+        Alumno alumnoguardado = alumnoservice.consultarAlumnoPorId(alumnoDTO.getIdAl());
+
+        Alumno alumnoActualizar = new Alumno(alumnoDTO);
+
+        alumnoActualizar.setIdAl(alumnoguardado.getIdAl());
+
+        if (alumnoguardado.getIdAl() != null) {
+            alumnoActualizar.setFechaCreacion(alumnoguardado.getFechaCreacion());
+        }
+
+        Curso curso = new Curso();
+
+        AnnioDTO annioDTO = cursoservice.consultarAnnioPorAnnioYnivelYespecialidad(alumnoDTO.getAnnio(), alumnoDTO.getNivel(), alumnoDTO.getEspecialidad());
+
+        AnnioEscolarDTO annioescolarDTO = cursoservice.consultarAnnioEscolar();
+
+        SeccionDTO seccionDTO = cursoservice.consultarSeccionPorSeccion(alumnoDTO.getSeccion());
+
+        CursoDTO cursoDTO = cursoservice.consultarcursoporparametros(annioDTO.getIdAnnio(),
+                annioescolarDTO.getIdAnnioEsc(), seccionDTO.getIdSec());
+
+        Annio annio = new Annio(annioDTO);
+
+        AnnioEscolar annioescolar = new AnnioEscolar(annioescolarDTO);
+
+        Seccion seccion = new Seccion(seccionDTO);
+
+        curso.setIdAnnio(annio);
+
+        curso.setIdAnnioEsc(annioescolar);
+
+        curso.setIdSec(seccion);
+
+        curso.setIdCurso(cursoDTO.getIdCurso());
+
+        alumnoActualizar.setIdCurso(curso);
+
+        if (alumnoDTO.getTipoDocRep1() != null && alumnoDTO.getNumDocRep1() != null) {
+            tipoDocRpr = alumnoDTO.getTipoDocRep1();
+
+            numDocRpr = alumnoDTO.getNumDocRep1();
+
+            rep1 = representanteservice.consultarepresentanteporcedula(tipoDocRpr, numDocRpr);
+        } else {
+            rep1 = alumnoguardado.getIdRpr1();
+        }
+
+        alumnoActualizar.setIdRpr1(rep1);
+
+        if (alumnoDTO.getTipoDocRep2() != null && alumnoDTO.getNumDocRep2() != null) {
+
+            tipoDocRpr = alumnoDTO.getTipoDocRep2();
+
+            numDocRpr = alumnoDTO.getNumDocRep2();
+
+
+
+            rep2 = representanteservice.consultarepresentanteporcedula(tipoDocRpr, numDocRpr);
+        } else {
+            rep2 = alumnoguardado.getIdRpr2();
+        }
+
+        alumnoActualizar.setIdRpr2(rep2);
+
+        resp = alumnoservice.guardaAlumno(alumnoActualizar, guardar);
+
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(resp);
+
+    }*/
+
+
+
+
+
+    //CONSULTA DE REPRESENTANTE POR CEDULA
+    @CrossOrigin(origins = {"direccionbase/consultarepresentante"})
+    @GetMapping(path = "/consultarepresentante",
+            produces = "application/json")
+    public @ResponseBody
+    RepresentanteDTO consultarepresentante(@RequestParam("tdoc") String tdoc, @RequestParam("ndoc") String ndoc) {
+        return representanteservice.obtenerRepresentantePorCedula(tdoc, ndoc);
+    }
+
+
     //CONSULTA DE PROFESOR POR CEDULA
     @CrossOrigin(origins = {"direccionbase/buscarProfesor"})
     @GetMapping(path = "/buscarProfesor",
@@ -101,15 +223,6 @@ public class alumnoController {
         Profesor profesor = this.profesorservice.consultarProfesorPorCedula(tdoc, ndoc);
         profesorDTO = new ProfesorDTO(profesor);
         return profesorDTO;
-    }
-
-    //CONSULTA LA LISTA DE ALUMNOS ACTIVOS
-    @CrossOrigin(origins = {"direccionbase/consultaralumnos"})
-    @GetMapping(path = "/consultaralumnos",
-            produces = "application/json")
-    public @ResponseBody
-    List<AlumnoCursoDTO> consultaralumnos() {
-        return alumnoservice.consultarAlumnos();
     }
 
     //CONSULTA LA LISTA DE CURSOS DEL PERIODO ACUAL VIGENTE QUE ESTE ACTIVO
@@ -133,7 +246,7 @@ public class alumnoController {
     }
 
     //PARA ACTUALIZAR LOS ID DE CURSO DE LOS ALUMNOS
-    @CrossOrigin(origins = {"direccionbase/actualizaridalumnos"})
+   /* @CrossOrigin(origins = {"direccionbase/actualizaridalumnos"})
     @PostMapping(path = "/actualizaridalumnos")
     public Responses actualizarIdAlumnos(@RequestParam(name = "idcurso") Long idcurso,
                                          @RequestParam(name = "cedulasAlumnos[]") String[] cedulasAlumnos,
@@ -172,7 +285,7 @@ public class alumnoController {
         resp.setResponseDescription(Constantes.CURSO_ACTUALIZADO_DESC);
         return resp;
 
-    }
+    }*/
 
     @CrossOrigin(origins = {"direccionbase/validarmateria"})
     @GetMapping(path = "/validarmateria")
@@ -226,7 +339,7 @@ public class alumnoController {
 
     @CrossOrigin(origins = {"direccionbase/obtenerNotas"})
     @GetMapping(path = "/obtenerNotas")
-    public List<Notawrapper> obtenerNotas(@RequestParam(name = "cedula") String cedula,
+    public List<NotaWrapper> obtenerNotas(@RequestParam(name = "cedula") String cedula,
                                           String periodo, String lapso, String tipodeconsulta, Model model) {
 
         String tipoDoc = cedula.substring(0, 1);
@@ -291,58 +404,5 @@ public class alumnoController {
 
         return resp;
     }
-
- /*   @CrossOrigin(origins = {"direccionbase/eliminarcurso"})
-    @DeleteMapping(path = "/eliminarcurso/{idCurso}")
-    public @ResponseBody Responses eliminarcurso(@RequestParam(value = "idCurso") Long idCurso) {
-
-        Responses resp = new Responses();
-
-        Long[] alumnosPorCurso = alumnoservice.consultarIdAlumnoPorIdCurso(idCurso);
-        Long[] profesoresPorCurso = profesorservice.consultarProfesoresPorIdCurso(idCurso);
-        Long[] notasPorCurso = notasService.consultarNotasPorIdCurso(idCurso);
-
-        if(alumnosPorCurso.length == 0 && profesoresPorCurso.length ==0 && notasPorCurso.length == 0){
-            resp = cursoservice.eliminarCurso(idCurso);
-            if (resp.getResponseCode() == Constantes.CURSO_ELIMINADO_CODE) {
-                redirectAttributes.addFlashAttribute("mensaje7", resp.getResponseDescription())
-                        .addFlashAttribute("clase", "success");
-            }
-        }else{
-
-            if (alumnosPorCurso.length != 0) {
-
-                resp.setResponseCode(Constantes.CURSO_IMPOSIBLE_DE_ELIMINAR_CODE);
-
-                resp.setResponseDescription(Constantes.CURSO_IMPOSIBLE_DE_ELIMINAR_DESC);
-
-                redirectAttributes.addFlashAttribute("mensaje8", resp.getResponseDescription()).addFlashAttribute("clase",
-                        "success");
-
-            } else if (profesoresPorCurso.length!=0) {
-
-                resp.setResponseCode(Constantes.CURSO_IMPOSIBLE_DE_ELIMINAR_CODE_1);
-
-                resp.setResponseDescription(Constantes.CURSO_IMPOSIBLE_DE_ELIMINAR_DESC_1);
-
-                redirectAttributes.addFlashAttribute("mensaje29", resp.getResponseDescription()).addFlashAttribute("clase",
-                        "success");
-
-            }else if(notasPorCurso.length!=0){
-                resp.setResponseCode(Constantes.CURSO_IMPOSIBLE_DE_ELIMINAR_CODE_2);
-
-                resp.setResponseDescription(Constantes.CURSO_IMPOSIBLE_DE_ELIMINAR_DESC_2);
-
-                redirectAttributes.addFlashAttribute("mensaje30", resp.getResponseDescription()).addFlashAttribute("clase",
-                        "success");
-            }
-
-        }
-        return resp;
-    }*/
-
-
-
-
 
 }

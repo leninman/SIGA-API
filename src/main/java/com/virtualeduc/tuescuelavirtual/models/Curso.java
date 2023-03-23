@@ -9,6 +9,7 @@ import javax.persistence.*;
 import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 
 /**
  *
@@ -28,22 +29,22 @@ public class Curso implements Serializable {
     
     @JoinColumn(name = "ID_ANNIO", referencedColumnName = "ID_ANNIO")
     @ManyToOne(optional = false)
-    private Annio idAnnio;
+    private Annio annio;
     
     @JoinColumn(name = "ID_ANNIO_ESC", referencedColumnName = "ID_ANNIO_ESC")
     @ManyToOne(optional = false)
-    private AnnioEscolar idAnnioEsc;
+    private AnnioEscolar annioEscolar;
     
     @JoinColumn(name = "ID_SEC", referencedColumnName = "ID_SEC")
     @ManyToOne(optional = false)
-    private Seccion idSec;
+    private Seccion seccion;
     
     @JoinColumn(name = "ID_TURNO", referencedColumnName = "ID_TURNO")
     @ManyToOne(optional = false)
-    private Turno idTurno;
+    private Turno turno;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCurso")
-    private Collection<Alumno> alumnoCollection;
+    //@OneToMany(cascade = CascadeType.ALL, mappedBy = "curso")
+   // private List<Alumno> alumnos;
     
     public Curso() {
     }
@@ -51,28 +52,25 @@ public class Curso implements Serializable {
     public Curso(Long idCurso) {
         this.idCurso = idCurso;
     }
-    
-    
 
-    public Curso(Annio idAnnio, AnnioEscolar idAnnioEsc, Seccion idSec, Turno idTurno) {
-		super();
-		this.idAnnio = idAnnio;
-		this.idAnnioEsc = idAnnioEsc;
-		this.idSec = idSec;
-		this.idTurno = idTurno;
-		
-	}
-    
-    
-   
-    
-    
-    
-    
-    
-    
 
-	public Long getIdCurso() {
+    public Curso(Long idCurso, Annio annio, AnnioEscolar annioEscolar, Seccion seccion, Turno turno) {
+        this.idCurso = idCurso;
+        this.annio = annio;
+        this.annioEscolar = annioEscolar;
+        this.seccion = seccion;
+        this.turno = turno;
+        //this.alumnos = alumnos;
+    }
+
+    public Curso(Annio annio, AnnioEscolar annioEscolar, Seccion seccion, Turno turno) {
+        this.annio = annio;
+        this.annioEscolar = annioEscolar;
+        this.seccion = seccion;
+        this.turno = turno;
+    }
+
+    public Long getIdCurso() {
         return idCurso;
     }
 
@@ -80,44 +78,45 @@ public class Curso implements Serializable {
         this.idCurso = idCurso;
     }
 
-    public Annio getIdAnnio() {
-        return idAnnio;
+    public Annio getAnnio() {
+        return annio;
     }
 
-    public void setIdAnnio(Annio idAnnio) {
-        this.idAnnio = idAnnio;
+    public void setAnnio(Annio annio) {
+        this.annio = annio;
     }
 
-    public AnnioEscolar getIdAnnioEsc() {
-        return idAnnioEsc;
+    public AnnioEscolar getAnnioEscolar() {
+        return annioEscolar;
     }
 
-    public void setIdAnnioEsc(AnnioEscolar idAnnioEsc) {
-        this.idAnnioEsc = idAnnioEsc;
+    public void setAnnioEscolar(AnnioEscolar annioEscolar) {
+        this.annioEscolar = annioEscolar;
     }
 
-    public Seccion getIdSec() {
-        return idSec;
+    public Seccion getSeccion() {
+        return seccion;
     }
 
-    public void setIdSec(Seccion idSec) {
-        this.idSec = idSec;
+    public void setSeccion(Seccion seccion) {
+        this.seccion = seccion;
     }
 
-    public Turno getIdTurno() {
-        return idTurno;
+    public Turno getTurno() {
+        return turno;
     }
 
-    public void setIdTurno(Turno idTurno) {
-        this.idTurno = idTurno;
-    }
-    
-    @XmlTransient
-    public Collection<Alumno> getAlumnoCollection() {
-        return alumnoCollection;
+    public void setTurno(Turno turno) {
+        this.turno = turno;
     }
 
-    public void setAlumnoCollection(Collection<Alumno> alumnoCollection) {
-        this.alumnoCollection = alumnoCollection;
+    /*public List<Alumno> getAlumnos() {
+        return alumnos;
     }
+
+    public void setAlumnos(List<Alumno> alumnos) {
+        this.alumnos = alumnos;
+    }*/
+
+
 }

@@ -18,7 +18,7 @@ import java.util.List;
  */
 public interface IAlumnoRepo extends JpaRepository<Alumno, Long> {
 
-    @Query(value="SELECT * from alumnos a "
+    @Query(value="SELECT a from alumnos a "
                     + "LEFT JOIN cursos b ON a.ID_CURSO=b.ID_CURSO "
                     + "LEFT JOIN annios c ON b.ID_ANNIO=c.ID_ANNIO "
                     + "LEFT JOIN secciones d ON b.ID_SEC=d.ID_SEC "

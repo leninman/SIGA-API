@@ -5,17 +5,13 @@
  */
 package com.virtualeduc.tuescuelavirtual.models;
 
+import com.virtualeduc.tuescuelavirtual.models.DTOS.TurnoDTO;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import java.util.List;
+
 /**
  *
  * @author Lenin
@@ -35,8 +31,8 @@ public class Turno implements Serializable {
     @Column(name = "TURNO")
     private String turno;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTurno")
-    private Collection<Curso> cursoCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "turno")
+    private List<Curso> cursos;
 
     public Turno() {
     }
@@ -49,6 +45,12 @@ public class Turno implements Serializable {
         this.idTurno = idTurno;
         this.turno = turno;
     }
+    
+    public Turno(TurnoDTO turnoDTO) {
+        this.idTurno = turnoDTO.getIdTurno();
+        this.turno = turnoDTO.getTurno();
+    }
+    
 
     public Long getIdTurno() {
         return idTurno;
@@ -66,11 +68,11 @@ public class Turno implements Serializable {
         this.turno = turno;
     }
 
-    public Collection<Curso> getCursoCollection() {
-        return cursoCollection;
+    public List<Curso> getCursos() {
+        return cursos;
     }
 
-    public void setCursoCollection(Collection<Curso> cursoCollection) {
-        this.cursoCollection = cursoCollection;
-    }  
+    public void setCursos(List<Curso> cursos) {
+        this.cursos = cursos;
+    }
 }

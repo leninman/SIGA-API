@@ -10,7 +10,7 @@ import java.io.Serializable;
  *
  * @author lenin
  */
-public class Notawrapper implements Serializable {
+public class NotaWrapper implements Serializable {
 
     private Long idAl;
 
@@ -70,7 +70,7 @@ public class Notawrapper implements Serializable {
 
     private Float porcentaje;
 
-    public Notawrapper() {
+    public NotaWrapper() {
     }
 
     public Long getIdAl() {

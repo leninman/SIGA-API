@@ -47,8 +47,8 @@ public class AlumnoCursoDTO implements Serializable {
         this.segNombAl = alumno.getSegNombAl();
         this.primApellAl = alumno.getPrimApellAl();
         this.segApellAl = alumno.getSegApellAl();
-        this.annio = alumno.getIdCurso().getIdAnnio().getAnnio();
-        this.seccion = alumno.getIdCurso().getIdSec().getSeccion();
+        this.annio = alumno.getCurso().getAnnio().getAnnio();
+        this.seccion = alumno.getCurso().getSeccion().getSeccion();
 
     }
 

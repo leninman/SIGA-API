@@ -12,6 +12,7 @@ import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.Collection;
+import java.util.List;
 
 /**
  *
@@ -30,18 +31,18 @@ public class AnnioEscolar implements Serializable {
     @Basic(optional = false)
     @Column(name = "INT_ANNIO_ESC")
     private String intAnnioEsc;
-    
+
     @Column(name = "FECHA_I")
     private Date fechaI;
-    
+
     @Column(name = "FECHA_F")
     private Date fechaF;
-    
+
     @Column(name = "STATUS")
     private String status;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idAnnioEsc")
-    private Collection<Curso> cursoCollection;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "annioEscolar")
+    private List<Curso> cursos;
 
     public AnnioEscolar() {
     }
@@ -50,21 +51,17 @@ public class AnnioEscolar implements Serializable {
         this.idAnnioEsc = idAnnioEsc;
     }
 
- 
-    
-    
-     public AnnioEscolar(Long idAnnioEsc, String intAnnioEsc, Date fechaI, Date fechaF,
-                         String status, Collection<Curso> cursoCollection) {
-		super();
-		this.idAnnioEsc = idAnnioEsc;
-		this.intAnnioEsc = intAnnioEsc;
-		this.fechaI = fechaI;
-		this.fechaF = fechaF;
-		this.status=status;
-		this.cursoCollection = cursoCollection;
-	}
 
-	public AnnioEscolar(AnnioEscolarDTO annioescolarDTO) {
+    public AnnioEscolar(Long idAnnioEsc, String intAnnioEsc, Date fechaI, Date fechaF, String status, List<Curso> cursos) {
+        this.idAnnioEsc = idAnnioEsc;
+        this.intAnnioEsc = intAnnioEsc;
+        this.fechaI = fechaI;
+        this.fechaF = fechaF;
+        this.status = status;
+        this.cursos = cursos;
+    }
+
+    public AnnioEscolar(AnnioEscolarDTO annioescolarDTO) {
         this.idAnnioEsc = annioescolarDTO.getIdAnnioEsc();
         this.intAnnioEsc = annioescolarDTO.getIntAnnioEsc();
         this.fechaI=annioescolarDTO.getFechaI();
@@ -87,8 +84,8 @@ public class AnnioEscolar implements Serializable {
     public void setIntAnnioEsc(String intAnnioEsc) {
         this.intAnnioEsc = intAnnioEsc;
     }
-    
-    
+
+
 
     public Date getFechaI() {
 		return fechaI;
@@ -105,8 +102,8 @@ public class AnnioEscolar implements Serializable {
 	public void setFechaF(Date fechaF) {
 		this.fechaF = fechaF;
 	}
-	
-	
+
+
 
 	public String getStatus() {
 		return status;
@@ -120,12 +117,11 @@ public class AnnioEscolar implements Serializable {
 		return serialVersionUID;
 	}
 
-	@XmlTransient
-    public Collection<Curso> getCursoCollection() {
-        return cursoCollection;
+    public List<Curso> getCursos() {
+        return cursos;
     }
 
-    public void setCursoCollection(Collection<Curso> cursoCollection) {
-        this.cursoCollection = cursoCollection;
+    public void setCursos(List<Curso> cursos) {
+        this.cursos = cursos;
     }
 }

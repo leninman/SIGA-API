@@ -14,7 +14,7 @@ import java.io.Serializable;
  * @author lenin
  */
 
-public class Notawrapperporlapso implements Serializable {
+public class NotaWrapperPorLapso implements Serializable {
     
     private Alumno alumno;
     
@@ -86,7 +86,7 @@ public class Notawrapperporlapso implements Serializable {
         this.porcentajenotalapso3 = porcentajenotalapso3;
     }
 
-    public Notawrapperporlapso(){}
+    public NotaWrapperPorLapso(){}
 
 
 }

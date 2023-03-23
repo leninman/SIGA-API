@@ -8,6 +8,7 @@ package com.virtualeduc.tuescuelavirtual.models;
 import com.virtualeduc.tuescuelavirtual.models.DTOS.AnnioDTO;
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -42,8 +43,8 @@ public class Annio implements Serializable {
     @Basic(optional = false)
     @Column(name = "ESPECIALIDAD")
     private String especialidad;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idAnnio")
-    private Collection<Curso> cursoCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "annio")
+    private List<Curso> cursos;
 
     public Annio() {
     }
@@ -99,12 +100,11 @@ public class Annio implements Serializable {
         this.especialidad = especialidad;
     }
 
-    @XmlTransient
-    public Collection<Curso> getCursoCollection() {
-        return cursoCollection;
+    public List<Curso> getCursos() {
+        return cursos;
     }
 
-    public void setCursoCollection(Collection<Curso> cursoCollection) {
-        this.cursoCollection = cursoCollection;
+    public void setCursos(List<Curso> cursos) {
+        this.cursos = cursos;
     }
 }
