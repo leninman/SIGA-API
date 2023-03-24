@@ -37,19 +37,14 @@ public class Turno implements Serializable {
     public Turno() {
     }
 
-    public Turno(Long idTurno) {
-        this.idTurno = idTurno;
-    }
+
 
     public Turno(Long idTurno, String turno) {
         this.idTurno = idTurno;
         this.turno = turno;
     }
     
-    public Turno(TurnoDTO turnoDTO) {
-        this.idTurno = turnoDTO.getIdTurno();
-        this.turno = turnoDTO.getTurno();
-    }
+
     
 
     public Long getIdTurno() {

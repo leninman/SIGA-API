@@ -65,22 +65,7 @@ public class CursoDTO {
     
    
    
-    public CursoDTO(Curso curso) {
-        
-        this.idCurso=curso.getIdCurso();
-        this.idAnnio=curso.getAnnio().getIdAnnio();
-         this.idSec = curso.getSeccion().getIdSec();
-         this.idAnnioEsc=curso.getAnnioEscolar().getIdAnnioEsc();
-         this.nivel=curso.getAnnio().getNivel();
-         this.especialidad=curso.getAnnio().getEspecialidad();
-         this.idTurno=curso.getTurno().getIdTurno();
-         this.annio=curso.getAnnio().getAnnio();
-         this.intAnnioEsc=curso.getAnnioEscolar().getIntAnnioEsc();
-         this.seccion=curso.getSeccion().getSeccion();
-         this.turno=curso.getTurno().getTurno();
-         
-        
-    }
+
     
     
     

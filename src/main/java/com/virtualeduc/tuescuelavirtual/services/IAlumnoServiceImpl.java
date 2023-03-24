@@ -8,8 +8,12 @@ package com.virtualeduc.tuescuelavirtual.services;
 import com.virtualeduc.tuescuelavirtual.models.*;
 import com.virtualeduc.tuescuelavirtual.models.DTOS.*;
 import com.virtualeduc.tuescuelavirtual.models.mappers.AlumnoDtoToAlumnoMapper;
+import com.virtualeduc.tuescuelavirtual.models.mappers.AlumnoDtoToRepresentanteMapper;
 import com.virtualeduc.tuescuelavirtual.models.mappers.AlumnoToAlumnoDtoMapper;
+import com.virtualeduc.tuescuelavirtual.models.mappers.Cursomapper;
 import com.virtualeduc.tuescuelavirtual.repo.IAlumnoRepo;
+import com.virtualeduc.tuescuelavirtual.repo.ICursoRepo;
+import com.virtualeduc.tuescuelavirtual.repo.IRepresentanteRepo;
 import com.virtualeduc.tuescuelavirtual.utils.Constantes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,13 +37,11 @@ public class IAlumnoServiceImpl implements IAlumnoService {
 
     @Autowired
     IAlumnoRepo alumnorepo;
-
-
     @Autowired
-    IRepresentanteService representanteservice;
-
+    IRepresentanteRepo representanteRepo;
     @Autowired
-    ICursoService cursoservice;
+    ICursoRepo cursoRepo;
+
 
 
     ;
@@ -51,6 +53,8 @@ public class IAlumnoServiceImpl implements IAlumnoService {
     Alumno alumnoactualizado;
 
     String cedula;
+    Representante rep1;
+    Representante rep2;
 
 
     @Override
@@ -65,6 +69,7 @@ public class IAlumnoServiceImpl implements IAlumnoService {
         try {
             Alumno alumnoconsultado = this.consultarAlumnoPorCedula(alumno.getTipoDocAl(), alumno.getNumDocAl());
             if (alumnoconsultado == null){
+                alumno.setFechaCreacion(new Date());
                 /*AnnioDTO annioDTO = cursoservice.consultarAnnioPorAnnioYnivelYespecialidad(alumnoDTO.getAnnio(), alumnoDTO.getNivel(),alumnoDTO.getEspecialidad());
                 AnnioEscolarDTO annioescolarDTO = cursoservice.consultarAnnioEscolar();
                 SeccionDTO seccionDTO = cursoservice.consultarSeccionPorSeccion(alumnoDTO.getSeccion());
@@ -105,7 +110,22 @@ public class IAlumnoServiceImpl implements IAlumnoService {
                 } else {
                     alumno.setIdRpr2(rep1);
                 }*/
-                alumno.setFechaCreacion(new Date());
+                if(representanteRepo.findRepresentanteByTipoDocRprAndNumDocRpr(alumnoDTO.getTipoDocRep1(), alumnoDTO.getNumDocRep1())==null){
+                    Representante representante=new AlumnoDtoToRepresentanteMapper().apply(alumnoDTO);
+                    rep1=representanteRepo.save(representante);
+                }else{
+                    rep1=representanteRepo.findRepresentanteByTipoDocRprAndNumDocRpr(alumnoDTO.getTipoDocRep1(), alumnoDTO.getNumDocRep1());
+                }
+                if(representanteRepo.findRepresentanteByTipoDocRprAndNumDocRpr(alumnoDTO.getTipoDocRep2(), alumnoDTO.getNumDocRep2())==null){
+                    Representante representante=new AlumnoDtoToRepresentanteMapper().apply(alumnoDTO);
+                    rep2=representanteRepo.save(representante);
+                }else{
+                    rep2=representanteRepo.findRepresentanteByTipoDocRprAndNumDocRpr(alumnoDTO.getTipoDocRep1(), alumnoDTO.getNumDocRep1());
+                }
+                alumno.setRpr1(rep1);
+                alumno.setRpr2(rep2);
+
+
                 alumnoguardado = alumnorepo.save(alumno);
                 resp.setResponseCode(Constantes.ALUMNO_REGISTRADO_CODE);
                 resp.setResponseDescription(Constantes.ALUMNO_REGISTRADO_DESC);
@@ -197,38 +217,8 @@ public class IAlumnoServiceImpl implements IAlumnoService {
     @Transactional(readOnly = true)
     public List<AlumnoDTO> consultarAlumnos() {
         List<Alumno> alumnos = alumnorepo.findAll();
-        List<AlumnoDTO> alumnosDTO = new ArrayList<>(alumnos.size());
-        int dimensionlista = alumnos.size();
-
-
-       /* for (Alumno alumno:alumnos) {
-            AlumnoDTO aldto=new AlumnoToAlumnoDtoMapper().apply(alumno);
-            alumnosDTO.add(aldto);
-        }
-
-        return alumnosDTO;*/
-
-
-            /* alumnosDTO = alumnos.stream().map(Alumno ->
-                    new AlumnoToAlumnoDtoMapper().apply(Alumno)).collect(Collectors.toList());*/
-
-      //  AlumnoDTO al1= new AlumnoToAlumnoDtoMapper().apply()
-
-        List<AlumnoDTO> alumnosDTO1 = new ArrayList<>();
-
-        for (int i = 0; i < alumnos.size(); i++) {
-
-            Alumno al = new Alumno();
-
-            al = alumnos.get(i);
-
-            AlumnoDTO al1 =  new AlumnoToAlumnoDtoMapper().obtenerAlumnoDto(al);
-
-            alumnosDTO1.add(al1);
-
-        }
-
-    return alumnosDTO;
+        return alumnos.stream().map(Alumno ->
+                    new AlumnoToAlumnoDtoMapper().apply(Alumno)).collect(Collectors.toList());
     }
 
     @Override
@@ -335,7 +325,7 @@ public class IAlumnoServiceImpl implements IAlumnoService {
 
         CursoDTO cursoDTO = new CursoDTO();
 
-        cursoDTO = this.cursoservice.consultarCursoPorId(idCurso);
+        cursoDTO = new Cursomapper().CursoToCursoDto(cursoRepo.findById(idCurso));
 
     }
 

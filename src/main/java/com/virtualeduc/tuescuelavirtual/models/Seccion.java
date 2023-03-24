@@ -47,19 +47,14 @@ public class Seccion implements Serializable {
     public Seccion() {
     }
 
-    public Seccion(Long idSec) {
-        this.idSec = idSec;
-    }
+
 
     public Seccion(Long idSec, String seccion) {
         this.idSec = idSec;
         this.seccion = seccion;
     }
     
-    public Seccion(SeccionDTO seccionDTO) {
-        this.idSec = seccionDTO.getIdSec();
-        this.seccion = seccionDTO.getSeccion();
-    }
+
 
     public Long getIdSec() {
         return idSec;

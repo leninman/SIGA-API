@@ -19,7 +19,6 @@ import java.util.Date;
 @Entity
 @Table(name = "alumnos")
 public class Alumno implements Serializable {
-
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -74,22 +73,21 @@ public class Alumno implements Serializable {
 	@Basic(optional = false)
 	@Column(name = "STATUS")
 	private String status;
-	@JoinColumn(name = "ID_RPR1", referencedColumnName = "ID_RPR")
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "ID_RPR1", referencedColumnName = "ID_RPR")
 	private Representante Rpr1;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ID_RPR2", referencedColumnName = "ID_RPR")
+	private Representante Rpr2;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ID_CURSO",referencedColumnName ="ID_CURSO" )
+	private Curso curso;
 	@Basic(optional = false)
 	@Column(name = "PAR_RPR1")
 	private String parRpr1;
-	@JoinColumn(name = "ID_RPR2", referencedColumnName = "ID_RPR")
-	@ManyToOne(fetch = FetchType.LAZY)
-	private Representante Rpr2;
 	@Basic(optional = false)
 	@Column(name = "PAR_RPR2")
 	private String parRpr2;
-	@JsonIgnore
-	@ManyToOne
-	@JoinColumn(name = "ID_CURSO")
-	private Curso curso;
 	@Basic(optional = false)
 	@Column(name = "FECHA_CREACION")
 	@Temporal(TemporalType.DATE)

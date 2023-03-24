@@ -45,29 +45,17 @@ public class Annio implements Serializable {
     private String especialidad;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "annio")
     private List<Curso> cursos;
-
     public Annio() {
     }
-
     public Annio(Long idAnnio) {
         this.idAnnio = idAnnio;
     }
-    
-    
-     public Annio(AnnioDTO annioDTO) {
-        this.idAnnio = annioDTO.getIdAnnio();
-        this.annio=annioDTO.getAnnio();
-        this.nivel=annioDTO.getNivel();
-        this.especialidad=annioDTO.getEspecialidad();
-    }
-
     public Annio(Long idAnnio, String annio, String nivel, String especialidad) {
         this.idAnnio = idAnnio;
         this.annio = annio;
         this.nivel = nivel;
         this.especialidad = especialidad;
     }
-
     public Long getIdAnnio() {
         return idAnnio;
     }

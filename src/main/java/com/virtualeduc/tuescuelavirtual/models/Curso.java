@@ -43,14 +43,9 @@ public class Curso implements Serializable {
     @ManyToOne(optional = false)
     private Turno turno;
     
-    //@OneToMany(cascade = CascadeType.ALL, mappedBy = "curso")
-   // private List<Alumno> alumnos;
+
     
     public Curso() {
-    }
-
-    public Curso(Long idCurso) {
-        this.idCurso = idCurso;
     }
 
 
@@ -60,15 +55,9 @@ public class Curso implements Serializable {
         this.annioEscolar = annioEscolar;
         this.seccion = seccion;
         this.turno = turno;
-        //this.alumnos = alumnos;
     }
 
-    public Curso(Annio annio, AnnioEscolar annioEscolar, Seccion seccion, Turno turno) {
-        this.annio = annio;
-        this.annioEscolar = annioEscolar;
-        this.seccion = seccion;
-        this.turno = turno;
-    }
+
 
     public Long getIdCurso() {
         return idCurso;
@@ -110,13 +99,7 @@ public class Curso implements Serializable {
         this.turno = turno;
     }
 
-    /*public List<Alumno> getAlumnos() {
-        return alumnos;
-    }
 
-    public void setAlumnos(List<Alumno> alumnos) {
-        this.alumnos = alumnos;
-    }*/
 
 
 }

@@ -31,10 +31,6 @@ public class SeccionDTO implements Serializable {
     
     
     
-      public SeccionDTO(Seccion seccion) {
-        this.idSec = seccion.getIdSec();
-        this.seccion = seccion.getSeccion();
-    }
 
     public Long getIdSec() {
         return idSec;

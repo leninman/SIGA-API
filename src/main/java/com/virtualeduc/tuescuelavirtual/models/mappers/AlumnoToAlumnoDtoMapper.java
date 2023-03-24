@@ -5,9 +5,9 @@ import com.virtualeduc.tuescuelavirtual.models.DTOS.AlumnoDTO;
 
 import java.util.function.Function;
 
-public class AlumnoToAlumnoDtoMapper {
-
-    public AlumnoDTO obtenerAlumnoDto(Alumno alumno) {
+public class AlumnoToAlumnoDtoMapper implements Function<Alumno,AlumnoDTO> {
+    @Override
+    public AlumnoDTO apply(Alumno alumno) {
         AlumnoDTO alumnoDTO=new AlumnoDTO();
         alumnoDTO.setTextoDirPpalAl(alumno.getDirPpalAl());
         String[] arrOfStrDirPpalAl = alumnoDTO.getTextoDirPpalAl().split(",");

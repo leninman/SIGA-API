@@ -47,11 +47,6 @@ public class AnnioEscolar implements Serializable {
     public AnnioEscolar() {
     }
 
-    public AnnioEscolar(Long idAnnioEsc) {
-        this.idAnnioEsc = idAnnioEsc;
-    }
-
-
     public AnnioEscolar(Long idAnnioEsc, String intAnnioEsc, Date fechaI, Date fechaF, String status, List<Curso> cursos) {
         this.idAnnioEsc = idAnnioEsc;
         this.intAnnioEsc = intAnnioEsc;
@@ -61,13 +56,7 @@ public class AnnioEscolar implements Serializable {
         this.cursos = cursos;
     }
 
-    public AnnioEscolar(AnnioEscolarDTO annioescolarDTO) {
-        this.idAnnioEsc = annioescolarDTO.getIdAnnioEsc();
-        this.intAnnioEsc = annioescolarDTO.getIntAnnioEsc();
-        this.fechaI=annioescolarDTO.getFechaI();
-        this.fechaF=annioescolarDTO.getFechaF();
-        this.status=annioescolarDTO.getStatus();
-    }
+
 
     public Long getIdAnnioEsc() {
         return idAnnioEsc;

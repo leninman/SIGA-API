@@ -27,11 +27,7 @@ public class TurnoDTO implements Serializable {
     }
     
     
-    public TurnoDTO(Turno turno) {
-      
-        this.idTurno=turno.getIdTurno();
-        this.turno=turno.getTurno();
-    }
+
     
     
 

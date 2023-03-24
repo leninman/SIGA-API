@@ -6,6 +6,8 @@
 package com.virtualeduc.tuescuelavirtual.controllers;
 import com.virtualeduc.tuescuelavirtual.models.*;
 import com.virtualeduc.tuescuelavirtual.models.DTOS.*;
+import com.virtualeduc.tuescuelavirtual.models.mappers.AlumnoDtoToAlumnoCursoDto;
+import com.virtualeduc.tuescuelavirtual.models.mappers.AlumnoToAlumnoDtoMapper;
 import com.virtualeduc.tuescuelavirtual.services.IAlumnoService;
 import com.virtualeduc.tuescuelavirtual.services.ICursoService;
 import com.virtualeduc.tuescuelavirtual.services.IMateriaService;
@@ -16,6 +18,8 @@ import com.virtualeduc.tuescuelavirtual.services.IUsuarioService;
 import com.virtualeduc.tuescuelavirtual.utils.Constantes;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -72,30 +76,22 @@ public class AlumnoController {
 
     List<NotaWrapper> notasresultado;
 
-
-
     //CONSULTA LA LISTA DE ALUMNOS ACTIVOS
     @CrossOrigin(origins = {"direccionbase/consultaralumnos"})
     @GetMapping(path = "/consultaralumnos")
     public ResponseEntity<?> consultaralumnos() {
-
-     List<AlumnoDTO>   alumnosDTO=alumnoservice.consultarAlumnos();
-     return ResponseEntity.ok(alumnosDTO);
-
-   //   return alumnoservice.consultarAlumnos();
-
+        List<AlumnoDTO> alumnosDTO=alumnoservice.consultarAlumnos();
+        List<AlumnoCursoDTO> alumnoCursoDTOS=alumnosDTO.stream().map(AlumnoDTO->
+                new AlumnoDtoToAlumnoCursoDto().apply(AlumnoDTO)).collect(Collectors.toList());
+        return ResponseEntity.ok(alumnoCursoDTOS);
     }
 
     //CONSULTA DE ALUMNO POR CEDULA
     @CrossOrigin(origins = {"direccionbase/consultaAlumno"})
     @GetMapping(path = "/consultaAlumno",
             produces = "application/json")
-    public @ResponseBody
-    AlumnoDTO consultaAlumno(@RequestParam("tdoc") String tdoc, @RequestParam("ndoc") String ndoc) {
-        AlumnoDTO alumnoDTO;
-        Alumno alumno = this.alumnoservice.consultarAlumnoPorCedula(tdoc, ndoc);
-        alumnoDTO = new AlumnoDTO(alumno);
-        return alumnoDTO;
+    public ResponseEntity<?> consultaAlumno(@RequestParam("tdoc") String tdoc, @RequestParam("ndoc") String ndoc) {
+        return ResponseEntity.ok(new AlumnoToAlumnoDtoMapper().apply(this.alumnoservice.consultarAlumnoPorCedula(tdoc, ndoc)));
     }
 
 

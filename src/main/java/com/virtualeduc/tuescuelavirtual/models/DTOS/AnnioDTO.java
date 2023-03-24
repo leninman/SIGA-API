@@ -37,12 +37,7 @@ public class AnnioDTO implements Serializable{
     
     
     
-        public AnnioDTO(Annio annio) {
-        this.idAnnio = annio.getIdAnnio();
-        this.annio = annio.getAnnio();
-        this.nivel = annio.getNivel();
-        this.especialidad = annio.getEspecialidad();
-    }
+
 
     public Long getIdAnnio() {
         return idAnnio;

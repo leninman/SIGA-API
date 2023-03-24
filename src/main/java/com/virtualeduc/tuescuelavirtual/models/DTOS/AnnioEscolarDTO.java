@@ -49,13 +49,7 @@ public class AnnioEscolarDTO implements Serializable {
 
 
 
-	public AnnioEscolarDTO(AnnioEscolar annioescolar) {
-        this.idAnnioEsc = annioescolar.getIdAnnioEsc();
-        this.intAnnioEsc = annioescolar.getIntAnnioEsc();
-        this.FechaI=annioescolar.getFechaI();
-        this.FechaF=annioescolar.getFechaF();
-        this.status=annioescolar.getStatus();
-    }
+
 
     public Long getIdAnnioEsc() {
         return idAnnioEsc;
