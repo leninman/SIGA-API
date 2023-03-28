@@ -28,6 +28,8 @@ public interface IAlumnoService {
     public List<AlumnoDTO> consultarTodosLosAlumnos();
 
     public Responses guardaAlumno(AlumnoDTO alumnoDTO);
+    //public Responses modificaAlumno(AlumnoDTO alumnoDTO);
+
     
     public Long[] consultarIdAlumnoPorIdCurso(Long idcurso);
     
@@ -37,7 +39,7 @@ public interface IAlumnoService {
     
     public Responses consultarAlumnosPorCursoYmateria(Long idcurso,Long idmateria);
     
-    public void ActualizarIdAlumno(Long idCurso,String[] Cedulas);
+
     
     
 

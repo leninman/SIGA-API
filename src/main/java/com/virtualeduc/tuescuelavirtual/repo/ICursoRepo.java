@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  *
@@ -26,7 +27,7 @@ public interface ICursoRepo extends JpaRepository<Curso, Long> {
                     + "from cursos a left join annios b "
                     + "on a.id_annio=b.id_annio "
                     + "where a.id_annio_esc=?1",nativeQuery = true)
-    public List<Curso> consultarCursosByPeriodo(Long idannioesc);
+    public Optional<List<Curso>> consultarCursosByPeriodo(Long idannioesc);
     
     
     @Query(value="select"

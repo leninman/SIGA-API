@@ -1,16 +1,11 @@
 package com.virtualeduc.tuescuelavirtual.services;
-import com.virtualeduc.tuescuelavirtual.models.Alumno;
-import com.virtualeduc.tuescuelavirtual.models.AnnioEscolar;
+import com.virtualeduc.tuescuelavirtual.models.*;
 import com.virtualeduc.tuescuelavirtual.models.DTOS.AlumnoDTO;
 import com.virtualeduc.tuescuelavirtual.models.DTOS.CursoDTO;
 import com.virtualeduc.tuescuelavirtual.models.DTOS.MateriaDTO;
 import com.virtualeduc.tuescuelavirtual.models.DTOS.NotaParDTO;
 import com.virtualeduc.tuescuelavirtual.models.DTOS.NotaWrapper;
 import com.virtualeduc.tuescuelavirtual.models.DTOS.NotaWrapperPorLapso;
-import com.virtualeduc.tuescuelavirtual.models.Lapso;
-import com.virtualeduc.tuescuelavirtual.models.NotaPar;
-import com.virtualeduc.tuescuelavirtual.models.Profesor;
-import com.virtualeduc.tuescuelavirtual.models.Responses;
 import com.virtualeduc.tuescuelavirtual.models.mappers.AlumnoDtoToAlumnoMapper;
 import com.virtualeduc.tuescuelavirtual.repo.IAlumnoRepo;
 import com.virtualeduc.tuescuelavirtual.repo.IAnnioEscolarRepo;
@@ -68,7 +63,7 @@ public class INotasServiceImpl implements INotasService {
     @Autowired
     ILapsoRepo lapsorepo;
 
-    CursoDTO curso;
+    Curso curso;
 
     MateriaDTO materia;
 
@@ -261,21 +256,21 @@ public class INotasServiceImpl implements INotasService {
 
             curso = cursoservice.consultarCursoPorId(notaPar.getIdCurso());
 
-            periodoescolar=cursoservice.obtenerAnnioEscolarPorId(curso.getIdAnnio());
+            periodoescolar=cursoservice.obtenerAnnioEscolarPorId(curso.getAnnio().getIdAnnio());
 
             notawrapper.setIdCurso(curso.getIdCurso());
 
-            notawrapper.setAnnio(curso.getAnnio());
+            notawrapper.setAnnio(curso.getAnnio().getAnnio());
 
-            notawrapper.setSeccion(curso.getSeccion());
+            notawrapper.setSeccion(curso.getSeccion().getSeccion());
 
-            notawrapper.setIntAnnioEsc(curso.getIntAnnioEsc());
+            notawrapper.setIntAnnioEsc(curso.getAnnioEscolar().getIntAnnioEsc());
 
-            notawrapper.setTurno(curso.getTurno());
+            notawrapper.setTurno(curso.getTurno().getTurno());
 
-            notawrapper.setNivel(curso.getNivel());
+            notawrapper.setNivel(curso.getAnnio().getNivel());
 
-            notawrapper.setEspecialidad(curso.getEspecialidad());
+            notawrapper.setEspecialidad(curso.getAnnio().getEspecialidad());
 
             materia = materiaservice.consultarMateriaPorId(notaPar.getIdMat());
 

@@ -57,6 +57,12 @@ public class Curso implements Serializable {
         this.turno = turno;
     }
 
+    public Curso(Annio annio, AnnioEscolar annioEscolar, Seccion seccion, Turno turno) {
+        this.annio=annio;
+        this.annioEscolar=annioEscolar;
+        this.seccion=seccion;
+        this.turno=turno;
+    }
 
 
     public Long getIdCurso() {

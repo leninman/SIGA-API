@@ -10,6 +10,7 @@ import com.virtualeduc.tuescuelavirtual.models.*;
 import com.virtualeduc.tuescuelavirtual.models.DTOS.*;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  *
@@ -18,41 +19,41 @@ import java.util.List;
 public interface ICursoService {
     
     
-      public List<AnnioDTO> consultarannios(); 
+      public List<Annio> consultarannios();
       
-      public List<AnnioEscolarDTO> consultaranniosesc();
+      public List<AnnioEscolar> consultaranniosesc();
       
-      public List<SeccionDTO> consultarsecciones();
+      public List<Seccion> consultarsecciones();
       
-      public List<TurnoDTO>  consultarturnos();
+      public List<Turno>  consultarturnos();
 
       public List<String>  consultarespecialidades();
       
-      public List<CursoDTO> consultarcursos();
+      public List<Curso> consultarcursos();
       
-      public CursoDTO consultarcursoporparametros(Long idannio,Long idannioesc,Long idseccion);
+      public Curso consultarcursoporparametros(Long idannio,Long idannioesc,Long idseccion);
       
-      public List<CursoDTO> consultarcursosporperiodo(Long idannioesc);
+      public Optional<List<Curso>> consultarcursosporperiodo(Long idannioesc);
      
-      public AnnioDTO consultarAnnioPorAnnioYnivel(String annio,String nivel);
+      public Annio consultarAnnioPorAnnioYnivel(String annio,String nivel);
       
-      public AnnioDTO consultarAnnioPorAnnioYnivelYespecialidad(String annio,String nivel,String especialidad);
+      public Annio consultarAnnioPorAnnioYnivelYespecialidad(String annio,String nivel,String especialidad);
       
-      public AnnioEscolarDTO consultarAnnioEscolar();
+      public AnnioEscolar consultarAnnioEscolar();
       
-      public List<AnnioEscolarDTO> consultarPeriodos();
+      public List<AnnioEscolar> consultarPeriodos();
       
-      public AnnioEscolarDTO consultarAnnioEscolarPorId(Long idAnnioEscolar);
+      public AnnioEscolar consultarAnnioEscolarPorId(Long idAnnioEscolar);
       
       public AnnioEscolar obtenerAnnioEscolarPorId(Long idAnnioEscolar);
       
       public Responses eliminarPeriodo(Long idAnnioEsc);
       
-      public SeccionDTO consultarSeccionPorSeccion(String seccion);
+      public Seccion consultarSeccionPorSeccion(String seccion);
       
-      public TurnoDTO consultarTurnoPorTurno(String turno);
+      public Turno consultarTurnoPorTurno(String turno);
       
-      public CursoDTO consultarCursoPorId(Long idcurso);
+      public Curso consultarCursoPorId(Long idcurso);
       
       public Responses  guardarCurso(CursoDTO curso,boolean guardarCurso);
       

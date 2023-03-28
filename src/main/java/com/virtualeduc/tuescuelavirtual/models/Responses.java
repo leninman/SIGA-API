@@ -9,6 +9,7 @@ import com.virtualeduc.tuescuelavirtual.models.DTOS.*;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Optional;
 
 /**
  *
@@ -27,7 +28,7 @@ public class Responses implements Serializable {
 
     private AlumnoDTO alumno;
 
-    private CursoDTO curso;
+    private Optional<CursoDTO> curso;
 
     private AnnioEscolarDTO annioescolar;
 
@@ -55,11 +56,11 @@ public class Responses implements Serializable {
         this.alumno = alumno;
     }
 
-    public void setCurso(CursoDTO curso) {
+    public void setCurso(Optional<CursoDTO> curso) {
         this.curso = curso;
     }
 
-    public CursoDTO getCurso() {
+    public Optional<CursoDTO> getCurso() {
         return curso;
     }
 

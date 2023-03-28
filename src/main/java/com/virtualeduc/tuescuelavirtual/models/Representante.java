@@ -73,10 +73,7 @@ public class Representante implements Serializable {
 	@Basic(optional = false)
 	@Column(name = "EMAIL_RPR")
 	private String emailRpr;
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "Rpr1")
-	private List<Alumno> alumnosrpr1;
-	@OneToMany(mappedBy = "Rpr2")
-	private List<Alumno> alumnosrpr2;
+
 	public Representante() {
 	}
 	public Representante(Long idRpr) {
@@ -212,19 +209,4 @@ public class Representante implements Serializable {
 		this.emailRpr = emailRpr;
 	}
 
-	public List<Alumno> getAlumnosrpr1() {
-		return alumnosrpr1;
-	}
-
-	public void setAlumnosrpr1(List<Alumno> alumnosrpr1) {
-		this.alumnosrpr1 = alumnosrpr1;
-	}
-
-	public List<Alumno> getAlumnosrpr2() {
-		return alumnosrpr2;
-	}
-
-	public void setAlumnosrpr2(List<Alumno> alumnosrpr2) {
-		this.alumnosrpr2 = alumnosrpr2;
-	}
 }

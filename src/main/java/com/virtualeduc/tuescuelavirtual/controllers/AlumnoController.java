@@ -8,6 +8,7 @@ import com.virtualeduc.tuescuelavirtual.models.*;
 import com.virtualeduc.tuescuelavirtual.models.DTOS.*;
 import com.virtualeduc.tuescuelavirtual.models.mappers.AlumnoDtoToAlumnoCursoDto;
 import com.virtualeduc.tuescuelavirtual.models.mappers.AlumnoToAlumnoDtoMapper;
+import com.virtualeduc.tuescuelavirtual.models.mappers.CursoMapper;
 import com.virtualeduc.tuescuelavirtual.services.IAlumnoService;
 import com.virtualeduc.tuescuelavirtual.services.ICursoService;
 import com.virtualeduc.tuescuelavirtual.services.IMateriaService;
@@ -18,6 +19,7 @@ import com.virtualeduc.tuescuelavirtual.services.IUsuarioService;
 import com.virtualeduc.tuescuelavirtual.utils.Constantes;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -103,101 +105,13 @@ public class AlumnoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(resp);
     }
 
-
-
-    //MODIFICA UN ALUMNO YA EXISTENTE
-   /* @PostMapping(path = "/modificaralumno")
-    public ResponseEntity<?> modificaralumno(@RequestBody AlumnoDTO alumnoDTO) {
-
-
-
-        // cedula no existe
-        guardar = false;
-
-        Responses resp;
-
-        Representante rep1;
-
-        Representante rep2;
-
-        String tipoDocRpr;
-
-        String numDocRpr;
-
-        Alumno alumnoguardado = alumnoservice.consultarAlumnoPorId(alumnoDTO.getIdAl());
-
-        Alumno alumnoActualizar = new Alumno(alumnoDTO);
-
-        alumnoActualizar.setIdAl(alumnoguardado.getIdAl());
-
-        if (alumnoguardado.getIdAl() != null) {
-            alumnoActualizar.setFechaCreacion(alumnoguardado.getFechaCreacion());
-        }
-
-        Curso curso = new Curso();
-
-        AnnioDTO annioDTO = cursoservice.consultarAnnioPorAnnioYnivelYespecialidad(alumnoDTO.getAnnio(), alumnoDTO.getNivel(), alumnoDTO.getEspecialidad());
-
-        AnnioEscolarDTO annioescolarDTO = cursoservice.consultarAnnioEscolar();
-
-        SeccionDTO seccionDTO = cursoservice.consultarSeccionPorSeccion(alumnoDTO.getSeccion());
-
-        CursoDTO cursoDTO = cursoservice.consultarcursoporparametros(annioDTO.getIdAnnio(),
-                annioescolarDTO.getIdAnnioEsc(), seccionDTO.getIdSec());
-
-        Annio annio = new Annio(annioDTO);
-
-        AnnioEscolar annioescolar = new AnnioEscolar(annioescolarDTO);
-
-        Seccion seccion = new Seccion(seccionDTO);
-
-        curso.setIdAnnio(annio);
-
-        curso.setIdAnnioEsc(annioescolar);
-
-        curso.setIdSec(seccion);
-
-        curso.setIdCurso(cursoDTO.getIdCurso());
-
-        alumnoActualizar.setIdCurso(curso);
-
-        if (alumnoDTO.getTipoDocRep1() != null && alumnoDTO.getNumDocRep1() != null) {
-            tipoDocRpr = alumnoDTO.getTipoDocRep1();
-
-            numDocRpr = alumnoDTO.getNumDocRep1();
-
-            rep1 = representanteservice.consultarepresentanteporcedula(tipoDocRpr, numDocRpr);
-        } else {
-            rep1 = alumnoguardado.getIdRpr1();
-        }
-
-        alumnoActualizar.setIdRpr1(rep1);
-
-        if (alumnoDTO.getTipoDocRep2() != null && alumnoDTO.getNumDocRep2() != null) {
-
-            tipoDocRpr = alumnoDTO.getTipoDocRep2();
-
-            numDocRpr = alumnoDTO.getNumDocRep2();
-
-
-
-            rep2 = representanteservice.consultarepresentanteporcedula(tipoDocRpr, numDocRpr);
-        } else {
-            rep2 = alumnoguardado.getIdRpr2();
-        }
-
-        alumnoActualizar.setIdRpr2(rep2);
-
-        resp = alumnoservice.guardaAlumno(alumnoActualizar, guardar);
-
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(resp);
-
+    //MODIFICA UN ALUMNO
+  /*  @CrossOrigin(origins = {"direccionbase/modificarAlumno"})
+    @PutMapping(path = "/modificarAlumno")
+    public ResponseEntity<?> modificarAlumno(@RequestBody AlumnoDTO alumnoDTO) {
+        Responses resp = alumnoservice.modificaAlumno(alumnoDTO);
+        return ResponseEntity.ok(resp);
     }*/
-
-
-
-
 
     //CONSULTA DE REPRESENTANTE POR CEDULA
     @CrossOrigin(origins = {"direccionbase/consultarepresentante"})
@@ -226,19 +140,17 @@ public class AlumnoController {
     @GetMapping(path = "/consultarcursosporperiodo",
             produces = "application/json")
     public @ResponseBody
-    List<CursoDTO> consultarlistacursosporperiodo() {
-
-        AnnioEscolarDTO annioEscolar = cursoservice.consultarAnnioEscolar();
-
-        return cursoservice.consultarcursosporperiodo(annioEscolar.getIdAnnioEsc());
+    List<Optional<CursoDTO>> consultarlistacursosporperiodo() {
+        AnnioEscolar annioEscolar = cursoservice.consultarAnnioEscolar();
+        return  cursoservice.consultarcursosporperiodo(annioEscolar.getIdAnnioEsc()).stream().map(Curso->new CursoMapper().CursoToCursoDto((com.virtualeduc.tuescuelavirtual.models.Curso) Curso)).collect(Collectors.toList());
+        //return new CursoMapper().CursoToCursoDto(cursoservice.consultarcursosporperiodo(annioEscolar.getIdAnnioEsc()));
     }
 
     //CONSULTA CURSO POR ID DEL CURSO
     @CrossOrigin(origins = {"direccionbase/consultarcursoporid"})
     @GetMapping(path = "/consultarcursoporid")
-    public CursoDTO consultarcursoporid(@RequestParam(name = "idcurso") Long idcurso) {
-
-        return cursoservice.consultarCursoPorId(idcurso);
+    public Optional<CursoDTO> consultarcursoporid(@RequestParam(name = "idcurso") Long idcurso) {
+        return new CursoMapper().CursoToCursoDto(cursoservice.consultarCursoPorId(idcurso));
     }
 
     //PARA ACTUALIZAR LOS ID DE CURSO DE LOS ALUMNOS

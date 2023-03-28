@@ -7,14 +7,16 @@ package com.virtualeduc.tuescuelavirtual.services;
 
 import com.virtualeduc.tuescuelavirtual.models.*;
 import com.virtualeduc.tuescuelavirtual.models.DTOS.*;
+import com.virtualeduc.tuescuelavirtual.models.mappers.AnnioEscolarMapper;
+import com.virtualeduc.tuescuelavirtual.models.mappers.CursoMapper;
 import com.virtualeduc.tuescuelavirtual.repo.*;
 import com.virtualeduc.tuescuelavirtual.utils.Constantes;
 import com.virtualeduc.tuescuelavirtual.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  *
@@ -60,242 +62,65 @@ public class ICursoServiceImpl implements ICursoService {
 
 
     @Override
-    public AnnioEscolarDTO consultarAnnioEscolar() {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        AnnioEscolar annioescolar = annioescolarrepo.consultarAnnioEscolarVigente();
+    public AnnioEscolar consultarAnnioEscolar() {
+        return annioescolarrepo.consultarAnnioEscolarVigente();
+    }
 
-        AnnioEscolarDTO annioescolarDTO = new AnnioEscolarDTO(annioescolar);
+    @Override
+    public Seccion consultarSeccionPorSeccion(String seccion) {
+        return seccionrepo.consultarSeccionBySeccion(seccion);
+    }
 
-        return annioescolarDTO;
+    @Override
+    public List<Annio> consultarannios() {
+        return anniorepo.findAll();
+    }
+
+    @Override
+    public List<AnnioEscolar> consultaranniosesc() {
+        return annioescolarrepo.findAll();
+    }
+
+    @Override
+    public List<Seccion> consultarsecciones() {
+        return seccionrepo.findAll();
+    }
+
+    @Override
+    public List<Curso> consultarcursos() {
+        return cursorepo.findAll();
 
     }
 
     @Override
-    public SeccionDTO consultarSeccionPorSeccion(String seccion) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-
-        Seccion sec = seccionrepo.consultarSeccionBySeccion(seccion);
-
-        SeccionDTO seccionDTO = new SeccionDTO(sec);
-
-        return seccionDTO;
+    public Curso consultarcursoporparametros(Long idannio, Long idannioesc, Long idseccion) {
+        return cursorepo.consultarCursoByParametros(idannio, idannioesc, idseccion);
     }
 
     @Override
-    public List<AnnioDTO> consultarannios() {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-
-        List<Annio> annios = anniorepo.findAll();
-
-        List<AnnioDTO> anniosDTO = new ArrayList<AnnioDTO>();
-
-        for (int i = 0; i < annios.size(); i++) {
-            Annio annio = new Annio();
-
-            annio = annios.get(i);
-
-            AnnioDTO an = new AnnioDTO(annio);
-
-            anniosDTO.add(an);
-        }
-
-        return anniosDTO;
+    public Optional<List<Curso>> consultarcursosporperiodo(Long idannioesc) {
+        return cursorepo.consultarCursosByPeriodo(idannioesc);
     }
 
     @Override
-    public List<AnnioEscolarDTO> consultaranniosesc() {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-
-        List<AnnioEscolar> anniosescolares = annioescolarrepo.findAll();
-
-        List<AnnioEscolarDTO> anniosescolaresDTO = new ArrayList<AnnioEscolarDTO>();
-
-        for (int i = 0; i < anniosescolares.size(); i++) {
-            AnnioEscolar annioescolar = new AnnioEscolar();
-
-            annioescolar = anniosescolares.get(i);
-
-            AnnioEscolarDTO anesc = new AnnioEscolarDTO(annioescolar);
-
-            anniosescolaresDTO.add(anesc);
-        }
-
-        return anniosescolaresDTO;
-    }
-
-    @Override
-    public List<SeccionDTO> consultarsecciones() {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-
-        List<Seccion> secciones = seccionrepo.findAll();
-
-        List<SeccionDTO> seccionDTO = new ArrayList<SeccionDTO>();
-
-        for (int i = 0; i < secciones.size(); i++) {
-            Seccion seccion = new Seccion();
-
-            seccion = secciones.get(i);
-
-            SeccionDTO sec = new SeccionDTO(seccion);
-
-            seccionDTO.add(sec);
-        }
-
-        return seccionDTO;
-    }
-
-    @Override
-    public List<CursoDTO> consultarcursos() {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-
-        // Annio an = new Annio();
-        // AnnioEscolar anesc = new AnnioEscolar();
-        // Seccion sec = new Seccion();
-        // Turno tur = new Turno();
-        List<Curso> cursos = cursorepo.findAll();
-
-        List<CursoDTO> cursosDTO = new ArrayList<CursoDTO>();
-
-        for (int i = 0; i < cursos.size(); i++) {
-
-            Curso curso = new Curso();
-
-            curso = cursos.get(i);
-
-            /*
-			 * an = this.anniorepo.consultarAnnioByAnnio(curso.getIdAnnio().getAnnio());
-			 * 
-			 * anesc = this.annioescolarrepo.consultarAnnioEscolarVigente();
-			 * 
-			 * sec =
-			 * this.seccionrepo.consultarSeccionBySeccion(curso.getIdSec().getSeccion());
-			 * 
-			 * tur = this.turnorepo.consultarTurnoByTurno(curso.getIdTurno().getTurno());
-             */
-            CursoDTO cur = new CursoDTO(curso);
-
-            cursosDTO.add(cur);
-
-        }
-
-        return cursosDTO;
-
-    }
-
-    @Override
-    public CursoDTO consultarcursoporparametros(Long idannio, Long idannioesc, Long idseccion) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-
-        CursoDTO cursoDTO = null;
-
-        // Annio an = new Annio();
-        // AnnioEscolar anesc = new AnnioEscolar();
-        // Seccion sec = new Seccion();
-        // Turno tur = new Turno();
-        Curso curso = cursorepo.consultarCursoByParametros(idannio, idannioesc, idseccion);
-
-        if (curso != null) {
-
-            /*
-			 * an = this.anniorepo.consultarAnnioByAnnio(curso.getIdAnnio().getAnnio());
-			 * 
-			 * anesc = this.annioescolarrepo.consultarAnnioEscolarVigente();
-			 * 
-			 * sec =
-			 * this.seccionrepo.consultarSeccionBySeccion(curso.getIdSec().getSeccion());
-			 * 
-			 * tur = this.turnorepo.consultarTurnoByTurno(curso.getIdTurno().getTurno());
-             */
-            cursoDTO = new CursoDTO(curso);
-
-        }
-        return cursoDTO;
-    }
-
-    @Override
-    public List<CursoDTO> consultarcursosporperiodo(Long idannioesc) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates. 
-//        CursoDTO curDTO = null;
-
-//        Curso cur = new Curso();
-        // Annio an = new Annio();
-        // AnnioEscolar anesc = new AnnioEscolar();
-        // Seccion sec = new Seccion();
-        // Turno tur = new Turno();
-        List<Curso> cur = new ArrayList<>();
-
-        List<CursoDTO> curDTO = new ArrayList<>();
-
-        cur = this.cursorepo.consultarCursosByPeriodo(idannioesc);
-
-        if (cur != null) {
-            for (int i = 0; i < cur.size(); i++) {
-
-                Curso curso = new Curso();
-
-                curso = cur.get(i);
-
-                /*
-				 * an = this.anniorepo.consultarAnnioByAnnio(curso.getIdAnnio().getAnnio());
-				 * 
-				 * anesc = this.annioescolarrepo.consultarAnnioEscolarVigente();
-				 * 
-				 * sec =
-				 * this.seccionrepo.consultarSeccionBySeccion(curso.getIdSec().getSeccion());
-				 * 
-				 * tur = this.turnorepo.consultarTurnoByTurno(curso.getIdTurno().getTurno());
-                 */
-                CursoDTO curs = new CursoDTO(curso);
-
-                curDTO.add(curs);
-
-            }
-        }
-
-        return curDTO;
-    }
-
-    @Override
-    public AnnioDTO consultarAnnioPorAnnioYnivel(String annio, String nivel) {
+    public Annio consultarAnnioPorAnnioYnivel(String annio, String nivel) {
         return null;
     }
 
 
     @Override
-    public TurnoDTO consultarTurnoPorTurno(String turno) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-
-        Turno tur = this.turnorepo.consultarTurnoByTurno(turno);
-
-        TurnoDTO turnoDTO = new TurnoDTO(tur);
-
-        return turnoDTO;
+    public Turno consultarTurnoPorTurno(String turno) {
+        return turnorepo.consultarTurnoByTurno(turno);
     }
 
     @Override
-    public CursoDTO consultarCursoPorId(Long idcurso) {
-        // TODO Auto-generated method stub
-        CursoDTO cursoDTO;
-        cursoDTO = new CursoDTO(cursorepo.consultarCursoById(idcurso));
-        return cursoDTO;
+    public Curso consultarCursoPorId(Long idcurso) {
+        return cursorepo.consultarCursoById(idcurso);
     }
 
     @Override
-    public List<TurnoDTO> consultarturnos() {
-        // TODO Auto-generated method stub
-        List<TurnoDTO> turnosDTO = new ArrayList<>();
-        List<Turno> turnos = new ArrayList();
-        TurnoDTO turnoDTO;
-        Turno turno;
-        turnos = turnorepo.findAll();
-
-        for (int i = 0; i < turnos.size(); i++) {
-            turno = new Turno();
-            turno = turnos.get(i);
-            turnoDTO = new TurnoDTO(turno);
-            turnosDTO.add(turnoDTO);
-        }
-        return turnosDTO;
+    public List<Turno> consultarturnos() {
+        return turnorepo.findAll();
     }
 
     @Override
@@ -329,7 +154,7 @@ public class ICursoServiceImpl implements ICursoService {
 
         Curso cursoguardado = cursorepo.save(cursoaguardar);
 
-        CursoDTO cursoguardadodto = new CursoDTO(cursoguardado);
+        Optional<CursoDTO> cursoguardadodto = new CursoMapper().CursoToCursoDto(cursoguardado);
 
         resp = new Responses();
 
@@ -403,23 +228,8 @@ public class ICursoServiceImpl implements ICursoService {
     }
 
     @Override
-    public List<AnnioEscolarDTO> consultarPeriodos() {
-        // TODO Auto-generated method stub
-
-        List<AnnioEscolarDTO> periodosDTO = new ArrayList<>();
-
-        List<AnnioEscolar> periodos = new ArrayList<>();
-
-        AnnioEscolarDTO annioescolar;
-
-        periodos = annioescolarrepo.consultarPeriodosEscolares();
-
-        for (int j = 0; j < periodos.size(); j++) {
-            annioescolar = new AnnioEscolarDTO(periodos.get(j));
-            periodosDTO.add(annioescolar);
-        }
-
-        return periodosDTO;
+    public List<AnnioEscolar> consultarPeriodos() {
+        return annioescolarrepo.consultarPeriodosEscolares();
     }
 
     @Override
@@ -427,7 +237,7 @@ public class ICursoServiceImpl implements ICursoService {
         // TODO Auto-generated method stub
         Responses resp = new Responses();
 
-        AnnioEscolar annioEscolarAguardar = new AnnioEscolar(annioescolarDTO);
+        AnnioEscolar annioEscolarAguardar = new AnnioEscolarMapper().AnnioEscolarDtoToAnnioEscolar(annioescolarDTO);
 
         if (guardarPeriodo) {
 
@@ -435,7 +245,7 @@ public class ICursoServiceImpl implements ICursoService {
 
             AnnioEscolar annioEscolarGuardado = this.annioescolarrepo.save(annioEscolarAguardar);
 
-            resp.setAnnioescolar(new AnnioEscolarDTO(annioEscolarGuardado));
+            resp.setAnnioescolar(new AnnioEscolarMapper().AnnioEscolarToAnnioEscolarDto(annioEscolarGuardado));
 
             resp.setResponseCode(Constantes.ANNIO_ESCOLAR_REGISTRADO_CODE);
 
@@ -451,7 +261,7 @@ public class ICursoServiceImpl implements ICursoService {
 
             AnnioEscolar annioEscolarGuardado = this.annioescolarrepo.save(annioEscolarAguardar);
 
-            resp.setAnnioescolar(new AnnioEscolarDTO(annioEscolarGuardado));
+            resp.setAnnioescolar(new AnnioEscolarMapper().AnnioEscolarToAnnioEscolarDto(annioEscolarGuardado));
 
             resp.setResponseCode(Constantes.ANNIO_ESCOLAR_MODIFICADO_CODE);
 
@@ -468,7 +278,7 @@ public class ICursoServiceImpl implements ICursoService {
         // Consulta el periodo vigente
         Long IdPeriodoVigente;
 
-        AnnioEscolarDTO periodovigente = new AnnioEscolarDTO(annioescolarrepo.consultarAnnioEscolarVigente());
+        AnnioEscolarDTO periodovigente = new AnnioEscolarMapper().AnnioEscolarToAnnioEscolarDto(annioescolarrepo.consultarAnnioEscolarVigente());
 
         if (periodovigente != null) {
 
@@ -476,7 +286,7 @@ public class ICursoServiceImpl implements ICursoService {
 
             periodovigente.setStatus("I");
 
-            AnnioEscolar periodo = new AnnioEscolar(periodovigente);
+            AnnioEscolar periodo = new AnnioEscolarMapper().AnnioEscolarDtoToAnnioEscolar(periodovigente);
 
             periodo.setIdAnnioEsc(IdPeriodoVigente);
 
@@ -492,21 +302,13 @@ public class ICursoServiceImpl implements ICursoService {
     }
 
     @Override
-    public AnnioDTO consultarAnnioPorAnnioYnivelYespecialidad(String annio, String nivel, String especialidad) {
-        // TODO Auto-generated method stub
-        Annio an = anniorepo.consultarAnnioByAnnioAndNivelAndEspecialidad(annio, nivel, especialidad);
-
-        AnnioDTO annioDTO = new AnnioDTO(an);
-
-        return annioDTO;
+    public Annio consultarAnnioPorAnnioYnivelYespecialidad(String annio, String nivel, String especialidad) {
+        return anniorepo.consultarAnnioByAnnioAndNivelAndEspecialidad(annio, nivel, especialidad);
     }
 
     @Override
-    public AnnioEscolarDTO consultarAnnioEscolarPorId(Long idAnnioEscolar) {
-        // TODO Auto-generated method stub
-        AnnioEscolar annioescolar = annioescolarrepo.findById(idAnnioEscolar).orElse(null);
-        AnnioEscolarDTO annioescolardto = new AnnioEscolarDTO(annioescolar);
-        return annioescolardto;
+    public AnnioEscolar consultarAnnioEscolarPorId(Long idAnnioEscolar) {
+        return annioescolarrepo.findById(idAnnioEscolar).orElse(null);
     }
 
     @Override
