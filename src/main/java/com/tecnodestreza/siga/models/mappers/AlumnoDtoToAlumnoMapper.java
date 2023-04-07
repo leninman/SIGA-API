@@ -2,10 +2,16 @@ package com.tecnodestreza.siga.models.mappers;
 
 import com.tecnodestreza.siga.models.Alumno;
 import com.tecnodestreza.siga.models.DTOS.AlumnoDTO;
+import com.tecnodestreza.siga.models.Representante;
+import com.tecnodestreza.siga.repo.IRepresentanteRepo;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.function.Function;
 
 public class AlumnoDtoToAlumnoMapper implements Function<AlumnoDTO,Alumno> {
+
+
    @Override
    public Alumno apply(AlumnoDTO alumnoDTO) {
       Alumno alumno=new Alumno();

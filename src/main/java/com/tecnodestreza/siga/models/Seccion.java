@@ -5,6 +5,11 @@
  */
 package com.tecnodestreza.siga.models;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -25,10 +30,13 @@ import javax.persistence.Table;
 
 
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "secciones")
 public class Seccion implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,42 +46,4 @@ public class Seccion implements Serializable {
     @Basic(optional = false)
     @Column(name = "SECCION")
     private String seccion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "seccion")
-    private List<Curso> cursos;
-
-    public Seccion() {
-    }
-
-
-
-    public Seccion(Long idSec, String seccion) {
-        this.idSec = idSec;
-        this.seccion = seccion;
-    }
-    
-
-
-    public Long getIdSec() {
-        return idSec;
-    }
-
-    public void setIdSec(Long idSec) {
-        this.idSec = idSec;
-    }
-
-    public String getSeccion() {
-        return seccion;
-    }
-
-    public void setSeccion(String seccion) {
-        this.seccion = seccion;
-    }
-
-    public List<Curso> getCursos() {
-        return cursos;
-    }
-
-    public void setCursos(List<Curso> cursos) {
-        this.cursos = cursos;
-    }
 }

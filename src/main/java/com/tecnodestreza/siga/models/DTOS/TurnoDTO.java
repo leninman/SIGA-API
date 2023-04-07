@@ -5,54 +5,23 @@
  */
 package com.tecnodestreza.siga.models.DTOS;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.io.Serializable;
 
 /**
  *
  * @author Lenin
  */
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class TurnoDTO implements Serializable {
-    
-     private static final long serialVersionUID = 1L;
-    
+    private static final long serialVersionUID = 1L;
     private Long idTurno;
-  
     private String turno;
-    
-    
-    public TurnoDTO() {
-      
-    }
-    
-    
-
-    
-    
-
-    public TurnoDTO(Long idTurno, String turno) {
-        this.idTurno = idTurno;
-        this.turno = turno;
-    }
-
-    public Long getIdTurno() {
-        return idTurno;
-    }
-
-    public void setIdTurno(Long idTurno) {
-        this.idTurno = idTurno;
-    }
-
-    public String getTurno() {
-        return turno;
-    }
-
-    public void setTurno(String turno) {
-        this.turno = turno;
-    }
-    
-    
-    
-    
-    
-    
 }

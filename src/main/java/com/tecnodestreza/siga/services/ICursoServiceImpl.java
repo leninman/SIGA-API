@@ -146,7 +146,8 @@ public class ICursoServiceImpl implements ICursoService {
         AnnioEscolar annioEscolar = annioescolarrepo.consultarAnnioEscolarVigente();
 
         // Long idAnnioescolar=annioEscolar.getIdAnnioEsc();
-        Curso cursoaguardar = new Curso(annio, annioEscolar, seccion, turno);
+        Curso cursoaguardar = new Curso(null,annio, annioEscolar, seccion, turno);
+
 
         if (!guardarCurso) {
             cursoguardado = cursorepo.consultarCursoById(curso.getIdCurso());

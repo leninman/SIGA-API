@@ -5,6 +5,11 @@
  */
 package com.tecnodestreza.siga.models;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -21,10 +26,13 @@ import javax.persistence.Table;
  *
  * @author Lenin
  */
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "annios")
 public class Annio implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,56 +48,4 @@ public class Annio implements Serializable {
     @Basic(optional = false)
     @Column(name = "ESPECIALIDAD")
     private String especialidad;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "annio")
-    private List<Curso> cursos;
-    public Annio() {
-    }
-    public Annio(Long idAnnio) {
-        this.idAnnio = idAnnio;
-    }
-    public Annio(Long idAnnio, String annio, String nivel, String especialidad) {
-        this.idAnnio = idAnnio;
-        this.annio = annio;
-        this.nivel = nivel;
-        this.especialidad = especialidad;
-    }
-    public Long getIdAnnio() {
-        return idAnnio;
-    }
-
-    public void setIdAnnio(Long idAnnio) {
-        this.idAnnio = idAnnio;
-    }
-
-    public String getAnnio() {
-        return annio;
-    }
-
-    public void setAnnio(String annio) {
-        this.annio = annio;
-    }
-
-    public String getNivel() {
-        return nivel;
-    }
-
-    public void setNivel(String nivel) {
-        this.nivel = nivel;
-    }
-
-    public String getEspecialidad() {
-        return especialidad;
-    }
-
-    public void setEspecialidad(String especialidad) {
-        this.especialidad = especialidad;
-    }
-
-    public List<Curso> getCursos() {
-        return cursos;
-    }
-
-    public void setCursos(List<Curso> cursos) {
-        this.cursos = cursos;
-    }
 }

@@ -15,11 +15,6 @@ import org.springframework.data.repository.CrudRepository;
  * @author Lenin
  */
 public interface IRepresentanteRepo extends CrudRepository<Representante,Long> {
-    
-    @Query(value="SELECT * from representantes u"
-           + " WHERE u.ID_RPR=?1",nativeQuery = true)
-    Representante findRepresentantePorId(Long idRpr);
-    
     Representante findRepresentanteByTipoDocRprAndNumDocRpr(String tipoDocRpr,String numDocRpr);
 
 }

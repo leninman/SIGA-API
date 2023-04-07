@@ -6,6 +6,8 @@
 package com.tecnodestreza.siga.services;
 import com.tecnodestreza.siga.models.*;
 import com.tecnodestreza.siga.models.DTOS.AlumnoDTO;
+import com.tecnodestreza.siga.models.mappers.AlumnoDtoToAlumnoMapper;
+import com.tecnodestreza.siga.models.mappers.AlumnoDtoToRepresentanteMapper;
 import com.tecnodestreza.siga.models.mappers.AlumnoToAlumnoDtoMapper;
 import com.tecnodestreza.siga.repo.*;
 import com.tecnodestreza.siga.utils.Constantes;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 @Service
 public class IAlumnoServiceImpl implements IAlumnoService {
@@ -37,44 +40,83 @@ public class IAlumnoServiceImpl implements IAlumnoService {
     @Override
     @Transactional
     @ResponseStatus(HttpStatus.CREATED)
-    public Responses guardaAlumno(Alumno alumno) {
+    public Responses guardarAlumno(AlumnoDTO alumnoDTO,Boolean modificar) {
         Representante rep1;
         Representante rep2;
         Responses resp = new Responses();
+        Alumno alumno=new AlumnoDtoToAlumnoMapper().apply(alumnoDTO);
         try {
-            alumno.setFechaCreacion(new Date());
-            if(representanteRepo.findRepresentanteByTipoDocRprAndNumDocRpr(alumno.getRpr1().getTipoDocRpr(), alumno.getRpr1().getNumDocRpr())==null){
-                rep1=representanteRepo.save(alumno.getRpr1());
-            }else{
-                rep1=representanteRepo.findRepresentanteByTipoDocRprAndNumDocRpr(alumno.getRpr1().getTipoDocRpr(), alumno.getRpr1().getNumDocRpr());
-            }
-            if(representanteRepo.findRepresentanteByTipoDocRprAndNumDocRpr(alumno.getRpr2().getTipoDocRpr(), alumno.getRpr2().getNumDocRpr())==null){
-                rep2=representanteRepo.save(alumno.getRpr2());
-            }else{
-                rep2=representanteRepo.findRepresentanteByTipoDocRprAndNumDocRpr(alumno.getRpr2().getTipoDocRpr(), alumno.getRpr2().getNumDocRpr());
-            }
-            alumno.setRpr1(rep1);
-            alumno.setRpr2(rep2);
-            Annio annio=annioRepo.consultarAnnioByAnnioAndNivelAndEspecialidad(alumno.getCurso().getAnnio().getAnnio(),alumno.getCurso().getAnnio().getNivel(),alumno.getCurso().getAnnio().getEspecialidad());
-            AnnioEscolar annioEscolar=annioEscolarRepo.consultarAnnioEscolarVigente();
-            Turno turno=turnoRepo.consultarTurnoByTurno(alumno.getCurso().getTurno().getTurno());
-            Seccion seccion=seccionRepo.consultarSeccionBySeccion(alumno.getCurso().getSeccion().getSeccion());
-            Curso curso=cursoRepo.consultarCursoPorParametros(annio.getIdAnnio(),annioEscolar.getIdAnnioEsc(),seccion.getIdSec(),turno.getIdTurno());
-            alumno.setCurso(curso);
-            if (alumnorepo.findAlumnoByTipoDocAlAndNumDocAl(alumno.getTipoDocAl(), alumno.getNumDocAl()) == null) {
-                resp.setResponseCode(Constantes.ALUMNO_REGISTRADO_CODE);
-                resp.setResponseDescription(Constantes.ALUMNO_REGISTRADO_DESC);
-            }else {
-                alumno.setIdAl(alumnorepo.findAlumnoByTipoDocAlAndNumDocAl(alumno.getTipoDocAl(), alumno.getNumDocAl()).getIdAl());
-                resp.setResponseCode(Constantes.ALUMNO_MODIFICADO_CODE);
-                resp.setResponseDescription(Constantes.ALUMNO_MODIFICADO_DESC);
-            }
-            Alumno alumnoguardado = alumnorepo.save(alumno);
-            resp.setAlumno(new AlumnoToAlumnoDtoMapper().apply(alumnoguardado));
-
+                alumno.setFechaCreacion(new Date());
+                Annio annio = annioRepo.consultarAnnioByAnnioAndNivelAndEspecialidad(alumnoDTO.getAnnio(), alumnoDTO.getNivel(), alumnoDTO.getEspecialidad());
+                AnnioEscolar annioEscolar = annioEscolarRepo.consultarAnnioEscolarVigente();
+                Turno turno = turnoRepo.consultarTurnoByTurno(alumnoDTO.getTurno());
+                Seccion seccion = seccionRepo.consultarSeccionBySeccion(alumnoDTO.getSeccion());
+                Curso curso = cursoRepo.consultarCursoPorParametros(annio.getIdAnnio(), annioEscolar.getIdAnnioEsc(), seccion.getIdSec(), turno.getIdTurno());
+                alumno.setCurso(curso);
+                if (representanteRepo.findRepresentanteByTipoDocRprAndNumDocRpr(alumnoDTO.getTipoDocRep1(), alumnoDTO.getNumDocRep1()) == null) {
+                    rep1 = new AlumnoDtoToRepresentanteMapper().obtenerRepresentante1(alumnoDTO);
+                    representanteRepo.save(rep1);
+                } else {
+                    rep1 = representanteRepo.findRepresentanteByTipoDocRprAndNumDocRpr(alumnoDTO.getTipoDocRep1(), alumnoDTO.getNumDocRep1());
+                }
+                if (representanteRepo.findRepresentanteByTipoDocRprAndNumDocRpr(alumnoDTO.getTipoDocRep2(), alumnoDTO.getNumDocRep2()) == null) {
+                    rep2 = new AlumnoDtoToRepresentanteMapper().obtenerRepresentante2(alumnoDTO);
+                    representanteRepo.save(rep2);
+                } else {
+                    rep2 = representanteRepo.findRepresentanteByTipoDocRprAndNumDocRpr(alumnoDTO.getTipoDocRep2(), alumnoDTO.getNumDocRep2());
+                }
+                alumno.setRpr1(rep1);
+                alumno.setRpr2(rep2);
+                if (alumnorepo.findAlumnoByTipoDocAlAndNumDocAl(alumno.getTipoDocAl(), alumno.getNumDocAl()) == null) {
+                    Alumno alumnoguardado = alumnorepo.save(alumno);
+                    resp.setAlumno(new AlumnoToAlumnoDtoMapper().apply(alumnoguardado));
+                    resp.setResponseCode(Constantes.ALUMNO_REGISTRADO_CODE);
+                    resp.setResponseDescription(Constantes.ALUMNO_REGISTRADO_DESC);
+                } else {
+                    if(!modificar) { //NO VA A MODIFICAR
+                        resp.setResponseCode(Constantes.ALUMNO_EXISTE_CODE);
+                        resp.setResponseDescription(Constantes.ALUMNO_EXISTE_DESC);
+                    }else{ //VA A MODIFICAR
+                        Alumno alumnoguardado=alumnorepo.findAlumnoByTipoDocAlAndNumDocAl(alumno.getTipoDocAl(), alumno.getNumDocAl());
+                        alumno.setIdAl(alumnoguardado.getIdAl());
+                        alumno.setCurso(alumnoguardado.getCurso());
+                        alumno.setRpr1(alumnoguardado.getRpr1());
+                        alumno.setRpr2(alumnoguardado.getRpr2());
+                        alumnoguardado=alumnorepo.save(alumno);
+                        resp.setAlumno(new AlumnoToAlumnoDtoMapper().apply(alumnoguardado));
+                        resp.setResponseCode(Constantes.ALUMNO_MODIFICADO_CODE);
+                        resp.setResponseDescription(Constantes.ALUMNO_MODIFICADO_DESC);
+                    }
+                }
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return resp;
+    }
+    @Override
+    public Responses modificarAlumno(AlumnoDTO alumnoDTO, Long idAlumno, Boolean modificar) {
+        Responses resp=new Responses();
+        Optional<Alumno> alumnoguardado=alumnorepo.findById(idAlumno);
+        Alumno alumno=new AlumnoDtoToAlumnoMapper().apply(alumnoDTO);
+        if(alumnoguardado.get()!=null){
+            alumno.setIdAl(alumnoguardado.get().getIdAl());
+            Annio annio = annioRepo.consultarAnnioByAnnioAndNivelAndEspecialidad(alumnoDTO.getAnnio(), alumnoDTO.getNivel(), alumnoDTO.getEspecialidad());
+            AnnioEscolar annioEscolar = annioEscolarRepo.consultarAnnioEscolarVigente();
+            Turno turno = turnoRepo.consultarTurnoByTurno(alumnoDTO.getTurno());
+            Seccion seccion = seccionRepo.consultarSeccionBySeccion(alumnoDTO.getSeccion());
+            Curso curso = cursoRepo.consultarCursoPorParametros(annio.getIdAnnio(), annioEscolar.getIdAnnioEsc(), seccion.getIdSec(), turno.getIdTurno());
+            alumno.setCurso(curso);
+            Representante representante1=representanteRepo.findRepresentanteByTipoDocRprAndNumDocRpr(alumnoDTO.getTipoDocRep1(),alumnoDTO.getNumDocRep1());
+            Representante representante2=representanteRepo.findRepresentanteByTipoDocRprAndNumDocRpr(alumnoDTO.getTipoDocRep2(),alumnoDTO.getNumDocRep2());
+            alumno.setCurso(alumnoguardado.get().getCurso());
+            alumno.setRpr1(representante1);
+            alumno.setRpr2(representante2);
+            alumno.setFechaCreacion(alumnoguardado.get().getFechaCreacion());
+            alumnoguardado=Optional.of(alumnorepo.save(alumno));
+        }
+        resp.setResponseCode(Constantes.ALUMNO_MODIFICADO_CODE);
+        resp.setResponseDescription(Constantes.ALUMNO_MODIFICADO_DESC);
+        resp.setAlumno(new AlumnoToAlumnoDtoMapper().apply(alumnoguardado.get()));
         return resp;
     }
     @Override

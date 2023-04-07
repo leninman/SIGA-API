@@ -4,7 +4,10 @@
  * and open the template in the editor.
  */
 package com.tecnodestreza.siga.models;
-
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -14,10 +17,13 @@ import java.util.List;
  * @author Lenin
  */
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "turnos")
 public class Turno implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,44 +33,6 @@ public class Turno implements Serializable {
     @Basic(optional = false)
     @Column(name = "TURNO")
     private String turno;
-    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "turno")
     private List<Curso> cursos;
-
-    public Turno() {
-    }
-
-
-
-    public Turno(Long idTurno, String turno) {
-        this.idTurno = idTurno;
-        this.turno = turno;
-    }
-    
-
-    
-
-    public Long getIdTurno() {
-        return idTurno;
-    }
-
-    public void setIdTurno(Long idTurno) {
-        this.idTurno = idTurno;
-    }
-
-    public String getTurno() {
-        return turno;
-    }
-
-    public void setTurno(String turno) {
-        this.turno = turno;
-    }
-
-    public List<Curso> getCursos() {
-        return cursos;
-    }
-
-    public void setCursos(List<Curso> cursos) {
-        this.cursos = cursos;
-    }
 }

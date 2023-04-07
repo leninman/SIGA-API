@@ -19,7 +19,8 @@ public interface IAlumnoService {
     public Alumno consultarAlumnoPorCedula(String tipoDocAl, String numDocAl);
     public Alumno consultarAlumnoPorId(Long id);
     public List<AlumnoDTO> consultarAlumnos();
-    public Responses guardaAlumno(Alumno alumno);
+    public Responses guardarAlumno(AlumnoDTO alumnoDTO,Boolean modificar);
+    public Responses modificarAlumno(AlumnoDTO alumnoDTO,Long idAlumno,Boolean modificar);
     public List<AlumnoDTO> consultarTodosLosAlumnos();
     public Long[] consultarIdAlumnoPorIdCurso(Long idcurso);
     public String consultarCedulasDeAlumnos(String tipoDocAl, String numDocAl);

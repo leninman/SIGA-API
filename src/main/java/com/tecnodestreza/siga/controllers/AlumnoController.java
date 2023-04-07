@@ -9,7 +9,6 @@ import com.tecnodestreza.siga.models.DTOS.*;
 import com.tecnodestreza.siga.services.ICursoService;
 import com.tecnodestreza.siga.utils.Constantes;
 import com.tecnodestreza.siga.models.mappers.AlumnoDtoToAlumnoCursoDto;
-import com.tecnodestreza.siga.models.mappers.AlumnoDtoToAlumnoMapper;
 import com.tecnodestreza.siga.models.mappers.AlumnoToAlumnoDtoMapper;
 import com.tecnodestreza.siga.models.mappers.CursoMapper;
 import com.tecnodestreza.siga.services.IAlumnoService;
@@ -18,13 +17,11 @@ import com.tecnodestreza.siga.services.INotasService;
 import com.tecnodestreza.siga.services.IProfesoresService;
 import com.tecnodestreza.siga.services.IRepresentanteService;
 import com.tecnodestreza.siga.services.IUsuarioService;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,35 +33,24 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  *
  * @author Personal
  */
+@RequiredArgsConstructor
 @RestController
+@RequestMapping("/alumno")
+@CrossOrigin(origins = {"direccionbase"})
 public class AlumnoController {
-    @Autowired
-    IAlumnoService alumnoservice;
-    @Autowired
-    IProfesoresService profesorservice;
-    @Autowired
-    IRepresentanteService representanteservice;
-    @Autowired
-    IMateriaService materiaservice;
-    @Autowired
-    IUsuarioService usuarioservice;
-    @Autowired
-    INotasService notasservice;
-    @Autowired
-    INotasService notasService;
-    @Value("${dir.base}")
-    String direccionbase;
-    @Autowired
+    private final IAlumnoService alumnoservice;
+    private final IProfesoresService profesorservice;
+    private final IRepresentanteService representanteservice;
+    private final IMateriaService materiaservice;
+    private final INotasService notasservice;
+    private final INotasService notasService;
     ICursoService cursoservice;
-    @Autowired
     INotasService notaservice;
+    boolean modificaralumno;
     boolean guardarCurso;
     List<NotaWrapper> notasresultado;
-
-
     //CONSULTA LA LISTA DE ALUMNOS ACTIVOS
-    @CrossOrigin(origins = {"direccionbase/consultaralumnos"})
-    @GetMapping(path = "/consultaralumnos")
+    @GetMapping(path = "/listado")
     public ResponseEntity<?> consultaralumnos() {
         List<AlumnoDTO> alumnosDTO=alumnoservice.consultarAlumnos();
         List<AlumnoCursoDTO> alumnoCursoDTOS=alumnosDTO.stream().map(AlumnoDTO->
@@ -72,17 +58,22 @@ public class AlumnoController {
         return ResponseEntity.ok(alumnoCursoDTOS);
     }
     //CONSULTA DE ALUMNO POR CEDULA
-    @CrossOrigin(origins = {"direccionbase/consultaAlumno"})
-    @GetMapping(path = "/consultaAlumno",
+    @GetMapping(path = "/consultarporcedula",
             produces = "application/json")
     public ResponseEntity<?> consultaAlumno(@RequestParam("tdoc") String tdoc, @RequestParam("ndoc") String ndoc) {
         return ResponseEntity.ok(new AlumnoToAlumnoDtoMapper().apply(this.alumnoservice.consultarAlumnoPorCedula(tdoc, ndoc)));
     }
-   //REGISTRAR UN NUEVO ALUMNO
-   @CrossOrigin(origins = {"direccionbase/guardaralumno"})
-    @PostMapping(path = "/guardaralumno")
-    public ResponseEntity<?> guardaralumno(@RequestBody AlumnoDTO alumnoDTO) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(alumnoservice.guardaAlumno(new AlumnoDtoToAlumnoMapper().apply(alumnoDTO)));
+   //GUARDAR ALUMNO
+    @PostMapping("crear")
+    public ResponseEntity<?> crearalumno(@RequestBody AlumnoDTO alumnoDTO) {
+        modificaralumno=false;
+        return ResponseEntity.status(HttpStatus.CREATED).body(alumnoservice.guardarAlumno(alumnoDTO,modificaralumno));
+    }
+    //MODIFICAR ALUMNO
+    @PutMapping("modificar/{idAlumno}")
+    public ResponseEntity<?> modificaralumno(@RequestBody AlumnoDTO alumnoDTO,@PathVariable Long idAlumno) {
+        modificaralumno=true;
+        return ResponseEntity.status(HttpStatus.OK).body(alumnoservice.modificarAlumno(alumnoDTO,idAlumno,modificaralumno));
     }
     //CONSULTA DE REPRESENTANTE POR CEDULA
     @CrossOrigin(origins = {"direccionbase/consultarepresentante"})
@@ -120,7 +111,7 @@ public class AlumnoController {
         return new CursoMapper().CursoToCursoDto(cursoservice.consultarCursoPorId(idcurso));
     }
     //PARA ACTUALIZAR LOS ID DE CURSO DE LOS ALUMNOS
-    @CrossOrigin(origins = {"direccionbase/actualizaridalumnos"})
+    /*@CrossOrigin(origins = {"direccionbase/actualizaridalumnos"})
     @PostMapping(path = "/actualizaridalumnos")
     public Responses actualizarIdAlumnos(@RequestParam(name = "idcurso") Long idcurso,
                                          @RequestParam(name = "cedulasAlumnos[]") String[] cedulasAlumnos,
@@ -137,12 +128,12 @@ public class AlumnoController {
             alumnoaguardar = alumnoguardado;
             alumnoaguardar.setIdAl(alumnoguardado.getIdAl());
             alumnoaguardar.setCurso(curso);
-            resp = alumnoservice.guardaAlumno(alumnoaguardar);
+            resp = alumnoservice.guardarAlumno(new AlumnoToAlumnoDtoMapper().apply(alumnoaguardar));
         }
         resp.setResponseCode(Constantes.CURSO_ACTUALIZADO_CODE);
         resp.setResponseDescription(Constantes.CURSO_ACTUALIZADO_DESC);
         return resp;
-    }
+    }*/
     @CrossOrigin(origins = {"direccionbase/validarmateria"})
     @GetMapping(path = "/validarmateria")
     public Long validarmateria(@RequestParam(name = "materia") String materia,

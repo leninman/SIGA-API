@@ -5,53 +5,24 @@
  */
 package com.tecnodestreza.siga.models.DTOS;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.io.Serializable;
 
 /**
  *
  * @author Lenin
  */
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class SeccionDTO implements Serializable {
-    
-     private static final long serialVersionUID = 1L;
-    
+    private static final long serialVersionUID = 1L;
     private Long idSec;
-  
     private String seccion;
 
-      public SeccionDTO() {
-        
-    }
-    
-    public SeccionDTO(Long idSec, String seccion) {
-        this.idSec = idSec;
-        this.seccion = seccion;
-    }
-    
-    
-    
-
-    public Long getIdSec() {
-        return idSec;
-    }
-
-    public void setIdSec(Long idSec) {
-        this.idSec = idSec;
-    }
-
-    public String getSeccion() {
-        return seccion;
-    }
-
-    public void setSeccion(String seccion) {
-        this.seccion = seccion;
-    }
-      
-      
-      
-    
-    
-    
-    
-    
 }
