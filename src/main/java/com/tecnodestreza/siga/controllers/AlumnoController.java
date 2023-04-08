@@ -5,17 +5,17 @@
  */
 package com.tecnodestreza.siga.controllers;
 import com.tecnodestreza.siga.models.*;
-import com.tecnodestreza.siga.services.ICursoService;
 import com.tecnodestreza.siga.services.IAlumnoService;
-import com.tecnodestreza.siga.services.IRepresentanteService;
 import java.util.List;
+import java.util.Optional;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 /**
  *
- * @author Personal
+ * @author Lenin
  */
 @RequiredArgsConstructor
 @RestController
@@ -23,29 +23,31 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = {"direccionbase"})
 public class AlumnoController {
     private final IAlumnoService alumnoservice;
-    private final IRepresentanteService representanteservice;
-    ICursoService cursoservice;
     boolean modificaralumno;
 
-    //CONSULTA LA LISTA DE ALUMNOS ACTIVOS
+    //CONSULTA LA LISTA COMPLETA DE ALUMNOS ACTIVOS
     @GetMapping(path = "/listado")
-    public ResponseEntity<?> consultaralumnos() {
+    public ResponseEntity<?> listado() {
         List<Alumno> alumnos=alumnoservice.consultarAlumnos();
         return ResponseEntity.ok().body(alumnos);
     }
-    //CONSULTA DE ALUMNO POR CEDULA
+    //CONSULTA POR CEDULA
     @GetMapping(path = "/consultarporcedula",
             produces = "application/json")
-    public ResponseEntity<?> consultaAlumno(@RequestParam("tdoc") String tdoc, @RequestParam("ndoc") String ndoc) {
+    public ResponseEntity<?> consultarporcedula(@RequestParam("tdoc") String tdoc, @RequestParam("ndoc") String ndoc) {
         return ResponseEntity.ok().body(alumnoservice.consultarAlumnoPorCedula(tdoc,ndoc));
     }
-   //GUARDAR ALUMNO
+   //CREAR
     @PostMapping("crear")
     public ResponseEntity<?> crear(@RequestBody Alumno alumno) {
+        Optional<Alumno> optionalAlumno=alumnoservice.consultarAlumnoPorCedula(alumno.getTipoDocumento(),alumno.getNumeroDocumento());
+        if(optionalAlumno.isPresent()){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
         modificaralumno=false;
         return ResponseEntity.status(HttpStatus.CREATED).body(alumnoservice.crearAlumno(alumno,modificaralumno));
     }
-    //MODIFICAR ALUMNO
+    //MODIFICAR
     @PutMapping("modificar/{idAlumno}")
     public ResponseEntity<?> modificar(@RequestBody Alumno alumno,@PathVariable Long idAlumno) {
         modificaralumno=true;

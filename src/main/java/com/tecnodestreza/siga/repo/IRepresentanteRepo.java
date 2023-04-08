@@ -10,11 +10,13 @@ import com.tecnodestreza.siga.models.Representante;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
+import java.util.Optional;
+
 /**
  *
  * @author Lenin
  */
 public interface IRepresentanteRepo extends CrudRepository<Representante,Long> {
-    Representante findRepresentanteByTipoDocumentoAndNumeroDocumento(String tipoDocumento,String numeroDocumento);
+    Optional<Representante> findRepresentanteByTipoDocumentoAndNumeroDocumento(String tipoDocumento, String numeroDocumento);
 
 }

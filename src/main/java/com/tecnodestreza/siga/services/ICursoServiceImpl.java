@@ -28,7 +28,12 @@ public class ICursoServiceImpl implements ICursoService {
     }
 
     @Override
-    public Optional<Curso> crearCurso(Curso curso, boolean guardarCurso) {
+    public Optional<Curso> consultarCursoPorParametros(String periodo, String annio, String seccion, String turno, String nivel, String especialidad, String periodoAcademico) {
+        return cursorepo.consultarCursosPorParametros(annio,seccion,periodoAcademico,turno,nivel,especialidad);
+    }
+
+    @Override
+    public Optional<Curso> crear(Curso curso) {
         return Optional.of(cursorepo.save(curso));
     }
 }

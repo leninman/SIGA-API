@@ -34,4 +34,6 @@ public class Curso implements Serializable {
     @Column(name = "periodo_academico")
     private String periodoAcademico;
     private String turno;
+    private String nivel;
+    private String especialidad;
 }

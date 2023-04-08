@@ -29,15 +29,27 @@ public class IAlumnoServiceImpl implements IAlumnoService {
     @Override
     @ResponseStatus(HttpStatus.CREATED)
     public Optional<Alumno> crearAlumno(Alumno alumno, Boolean modificar) {
-        Representante representante;
+        Optional<Representante> optionalRepresentante;
+        Optional<Curso> optionalCurso;
         Alumno alumnoguardado=new Alumno();
         try {
-                if (representanteRepo.findRepresentanteByTipoDocumentoAndNumeroDocumento(alumno.getRepresentante().getTipoDocumento(),alumno.getRepresentante().getNumeroDocumento())==null) {
-                    representanteRepo.save(alumno.getRepresentante());
-                }
-                if (alumnorepo.consultarAlumnoPorCedula(alumno.getTipoDocumento(), alumno.getNumeroDocumento()) == null) {
-                     alumnoguardado = alumnorepo.save(alumno);
-                }
+            optionalRepresentante=representanteRepo.findRepresentanteByTipoDocumentoAndNumeroDocumento(alumno.getRepresentante().getTipoDocumento(),alumno.getRepresentante().getNumeroDocumento());
+            if (!optionalRepresentante.isPresent()) {
+                representanteRepo.save(alumno.getRepresentante());
+            }else{
+                alumno.getRepresentante().setId(optionalRepresentante.get().getId());
+            }
+            optionalCurso=cursoRepo.consultarCursosPorParametros(alumno.getCurso().getAnnio(),
+                    alumno.getCurso().getSeccion(),alumno.getCurso().getPeriodoAcademico(),
+                    alumno.getCurso().getTurno(),alumno.getCurso().getNivel(),
+                    alumno.getCurso().getEspecialidad());
+
+            alumno.getCurso().setId(optionalCurso.get().getId());
+
+
+            if (!alumnorepo.findAlumnoByTipoDocumentoAndNumeroDocumento(alumno.getTipoDocumento(), alumno.getNumeroDocumento()).isPresent()) {
+                alumnoguardado = alumnorepo.save(alumno);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -55,7 +67,7 @@ public class IAlumnoServiceImpl implements IAlumnoService {
     }
     @Override
     public Optional<Alumno> consultarAlumnoPorCedula(String tipoDoc, String numDoc) {
-        return Optional.ofNullable(alumnorepo.consultarAlumnoPorCedula(tipoDoc, numDoc));
+        return alumnorepo.findAlumnoByTipoDocumentoAndNumeroDocumento(tipoDoc, numDoc);
     }
 
     @Override

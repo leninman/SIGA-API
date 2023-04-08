@@ -26,7 +26,7 @@ public class IRepresentanteServiceImpl implements IRepresentanteService {
     }
     @Override
     public Optional<Representante> consultarRepresentantePorCedula(String tipodocumento, String numerodocumento) {
-        return Optional.ofNullable(representanteRepo.findRepresentanteByTipoDocumentoAndNumeroDocumento(tipodocumento, numerodocumento));
+        return representanteRepo.findRepresentanteByTipoDocumentoAndNumeroDocumento(tipodocumento, numerodocumento);
     }
     @Override
     public Optional<Representante> crearRepresentante(Representante representante) {

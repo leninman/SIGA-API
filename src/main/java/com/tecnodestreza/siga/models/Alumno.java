@@ -37,12 +37,6 @@ public class Alumno implements Serializable {
 	@Basic(optional = false)
 	@Column(name = "numero_documento")
 	private String numeroDocumento;
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "representante", referencedColumnName = "id")
-	private Representante representante;
-	@Basic(optional = false)
-	@Column(name = "parentesco")
-	private String parentesco;
 	@Basic(optional = false)
 	@Column(name = "primer_nombre")
 	private String primerNombre;
@@ -76,6 +70,12 @@ public class Alumno implements Serializable {
 	@Column(name = "fecha_ingreso")
 	@Temporal(TemporalType.DATE)
 	private Date fechaIngreso;
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "representante", referencedColumnName = "id")
+	private Representante representante;
+	@Basic(optional = false)
+	@Column(name = "parentesco")
+	private String parentesco;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "curso",referencedColumnName ="id" )
 	private Curso curso;

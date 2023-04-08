@@ -11,6 +11,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  *
@@ -18,11 +19,8 @@ import java.util.List;
  */
 public interface IAlumnoRepo extends JpaRepository<Alumno, Long> {
 
-    @Query(value="SELECT a from alumnos a "
-                    + "WHERE a.STATUS='ACTIVO'",nativeQuery = true)
+    @Query(value="SELECT a from Alumno a "
+                    + "WHERE a.estado='ACTIVO'")
     public List<Alumno> consultarAlumnos();
-
-    @Query(value="SELECT a from alumnos a "
-            + "WHERE a.TIPO_DOC_AL=?1 and a.NUM_DOC_AL=?2 and a.STATUS='ACTIVO'",nativeQuery = true)
-    public Alumno consultarAlumnoPorCedula(String tipoDocAl, String numDocAl);
+    Optional<Alumno> findAlumnoByTipoDocumentoAndNumeroDocumento(String tipoDocuemnto, String numeroDocumento);
 }
