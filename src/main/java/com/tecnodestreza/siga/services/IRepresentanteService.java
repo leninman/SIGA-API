@@ -5,20 +5,16 @@
  */
 package com.tecnodestreza.siga.services;
 
-import com.tecnodestreza.siga.models.DTOS.RepresentanteDTO;
 import com.tecnodestreza.siga.models.Representante;
+
+import java.util.Optional;
 
 /**
  *
  * @author Lenin
  */
 public interface IRepresentanteService {
-    
-    public Representante consultarepresentanteporid(Long id);
-    
-    public Representante consultarepresentanteporcedula(String tipodocumento,String numerodocumento);
-    
-    public RepresentanteDTO obtenerRepresentantePorCedula(String tipodocumento, String numerodocumento);
-    
-    public Representante guardarRepresentante(Representante representante); 
+    public Optional<Optional<Representante>> consultarRepresentantePorId(Long id);
+    public Optional<Representante> consultarRepresentantePorCedula(String tipodocumento, String numerodocumento);
+    public Optional<Representante> crearRepresentante(Representante representante);
 }

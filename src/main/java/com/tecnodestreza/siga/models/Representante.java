@@ -28,50 +28,60 @@ public class Representante implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic(optional = false)
-	@Column(name = "ID_RPR")
-	private Long idRpr;
+	@Column(name = "id")
+	private Long id;
 	@Basic(optional = false)
-	@Column(name = "TIPO_DOC_RPR")
-	private String tipoDocRpr;
+	@Column(name = "tipo_documento")
+	private String tipoDocumento;
 	@Basic(optional = false)
-	@Column(name = "NUM_DOC_RPR")
-	private String numDocRpr;
+	@Column(name = "numero_documento")
+	private String numeroDocumento;
 	@Basic(optional = false)
-	@Column(name = "PRIM_NOMB_RPR")
-	private String primNombRpr;
-	@Column(name = "SEG_NOMB_RPR")
-	private String segNombRpr;
+	@Column(name = "primer_nombre")
+	private String primerNombre;
+	@Column(name = "segundo_nombre")
+	private String segundoNombre;
 	@Basic(optional = false)
-	@Column(name = "PRIM_APELL_RPR")
-	private String primApellRpr;
-	@Column(name = "SEG_APELL_RPR")
-	private String segApellRpr;
+	@Column(name = "primer_apellido")
+	private String primerApellido;
+	@Column(name = "segundo_apellido")
+	private String segundoApellido;
 	@Basic(optional = false)
-	@Column(name = "SEXO_RPR")
-	private String sexoRpr;
+	@Column(name = "sexo")
+	private String sexo;
 	@Basic(optional = false)
-	@Column(name = "FECH_NAC_RPR")
+	@Column(name = "fecha_nacimiento")
 	@Temporal(TemporalType.DATE)
-	private Date fechNacRpr;
+	private Date fechaNacimieno;
 	@Basic(optional = false)
-	@Column(name = "EDAD_RPR")
-	private String edadRpr;
+	@Column(name = "edad")
+	private String edad;
 	@Basic(optional = false)
-	@Column(name = "EDO_CIV_RPR")
-	private String edoCivRpr;
+	@Column(name = "estado_civil")
+	private String estadoCivil;
 	@Basic(optional = false)
-	@Column(name = "DIR_PPAL_RPR")
-	private String dirPpalRpr;
+	@Column(name = "direccion")
+	private String direccion;
 	@Basic(optional = false)
-	@Column(name = "DIR_SEC_RPR")
-	private String dirSecRpr;
+	@Column(name = "empresa_donde_trabaja")
+	private String empresaDondeTrabaja;
 	@Basic(optional = false)
-	@Column(name = "TLF_PPAL_RPR")
-	private String tlfPpalRpr;
+	@Column(name = "direccion_laboral")
+	private String direccionLaboral;
 	@Basic(optional = false)
-	@Column(name = "TLF_SEC_RPR")
-	private String tlfSecRpr;
+	@Column(name = "telefono")
+	private String telefono;
 	@Basic(optional = false)
-	@Column(name = "EMAIL_RPR")
-	private String emailRpr;
+	@Column(name = "telefono_empresa")
+	private String telefono_empresa;
+	@Basic(optional = false)
+	@Column(name = "email")
+	private String email;
+	@Basic(optional = false)
+	@Column(name = "estado")
+	private String estado;
+	@Column(name = "profesion")
+	private String profesion;
+	@Column(name = "ocupacion")
+	private String ocupacion;
 }

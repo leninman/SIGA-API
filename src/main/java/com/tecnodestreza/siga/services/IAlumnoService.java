@@ -6,24 +6,19 @@
 package com.tecnodestreza.siga.services;
 
 import com.tecnodestreza.siga.models.Alumno;
-import com.tecnodestreza.siga.models.DTOS.AlumnoDTO;
-import com.tecnodestreza.siga.models.Responses;
+
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  *
  * @author Personal
  */
 public interface IAlumnoService {
-    public Alumno consultarAlumnoPorCedula(String tipoDocAl, String numDocAl);
-    public Alumno consultarAlumnoPorId(Long id);
-    public List<AlumnoDTO> consultarAlumnos();
-    public Responses guardarAlumno(AlumnoDTO alumnoDTO,Boolean modificar);
-    public Responses modificarAlumno(AlumnoDTO alumnoDTO,Long idAlumno,Boolean modificar);
-    public List<AlumnoDTO> consultarTodosLosAlumnos();
-    public Long[] consultarIdAlumnoPorIdCurso(Long idcurso);
-    public String consultarCedulasDeAlumnos(String tipoDocAl, String numDocAl);
-    public Responses consultarAlumnosPorCurso(Long idcurso);
-    public Responses consultarAlumnosPorCursoYmateria(Long idcurso,Long idmateria);
+    public Optional<Alumno> consultarAlumnoPorCedula(String tipoDocAl, String numDocAl);
+    public Optional<Alumno> consultarAlumnoPorId(Long idAlumno);
+    public List<Alumno> consultarAlumnos();
+    public Optional<Alumno> crearAlumno(Alumno alumno,Boolean modificar);
+    public Optional<Alumno> modificarAlumno(Alumno alumno,Long idAlumno,Boolean modificar);
 }

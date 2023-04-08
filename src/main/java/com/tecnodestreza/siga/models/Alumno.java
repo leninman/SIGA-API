@@ -29,75 +29,63 @@ public class Alumno implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic(optional = false)
-	@Column(name = "ID_AL")
-	private Long idAl;
+	@Column(name = "id")
+	private Long id;
 	@Basic(optional = false)
-	@Column(name = "TIPO_DOC_AL")
-	private String tipoDocAl;
+	@Column(name = "tipo_documento")
+	private String tipoDocumento;
 	@Basic(optional = false)
-	@Column(name = "NUM_DOC_AL")
-	private String numDocAl;
-	@Basic(optional = false)
-	@Column(name = "PRIM_NOMB_AL")
-	private String primNombAl;
-	@Column(name = "SEG_NOMB_AL")
-	private String segNombAl;
-	@Basic(optional = false)
-	@Column(name = "PRIM_APELL_AL")
-	private String primApellAl;
-	@Column(name = "SEG_APELL_AL")
-	private String segApellAl;
-	@Basic(optional = false)
-	@Column(name = "SEXO_AL")
-	private String sexoAl;
-	@Basic(optional = false)
-	@Column(name = "FECH_NAC_AL")
-	@Temporal(TemporalType.DATE)
-	private Date fechNacAl;
-	@Basic(optional = false)
-	@Column(name = "EDAD_AL")
-	private String edadAl;
-	@Basic(optional = false)
-	@Column(name = "DIR_PPAL_AL")
-	private String dirPpalAl;
-	@Basic(optional = false)
-	@Column(name = "DIR_SEC_AL")
-	private String dirSecAl;
-	@Basic(optional = false)
-	@Column(name = "TLF_PPAL_AL")
-	private String tlfPpalAl;
-	@Basic(optional = false)
-	@Column(name = "TLF_SEC_AL")
-	private String tlfSecAl;
-	@Basic(optional = false)
-	@Column(name = "EMAIL_AL")
-	private String emailAl;
-	@Basic(optional = false)
-	@Column(name = "FECH_ING_AL")
-	@Temporal(TemporalType.DATE)
-	private Date fechIngAl;
-	@Basic(optional = false)
-	@Column(name = "STATUS")
-	private String status;
+	@Column(name = "numero_documento")
+	private String numeroDocumento;
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "ID_RPR1", referencedColumnName = "ID_RPR")
-	private Representante Rpr1;
+	@JoinColumn(name = "representante", referencedColumnName = "id")
+	private Representante representante;
+	@Basic(optional = false)
+	@Column(name = "parentesco")
+	private String parentesco;
+	@Basic(optional = false)
+	@Column(name = "primer_nombre")
+	private String primerNombre;
+	@Column(name = "segundo_nombre")
+	private String segundoNombre;
+	@Basic(optional = false)
+	@Column(name = "primer_apellido")
+	private String primerApellido;
+	@Column(name = "segundo_apellido")
+	private String segundoApellido;
+	@Basic(optional = false)
+	@Column(name = "sexo")
+	private String sexo;
+	@Basic(optional = false)
+	@Column(name = "fecha_nacimiento")
+	@Temporal(TemporalType.DATE)
+	private Date fechaNacimiento;
+	@Basic(optional = false)
+	@Column(name = "edad")
+	private String edad;
+	@Basic(optional = false)
+	@Column(name = "direccion")
+	private String direccion;
+	@Basic(optional = false)
+	@Column(name = "telefono")
+	private String telefono;
+	@Basic(optional = false)
+	@Column(name = "email")
+	private String email;
+	@Basic(optional = false)
+	@Column(name = "fecha_ingreso")
+	@Temporal(TemporalType.DATE)
+	private Date fechaIngreso;
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "ID_RPR2", referencedColumnName = "ID_RPR")
-	private Representante Rpr2;
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "ID_CURSO",referencedColumnName ="ID_CURSO" )
+	@JoinColumn(name = "curso",referencedColumnName ="id" )
 	private Curso curso;
 	@Basic(optional = false)
-	@Column(name = "PAR_RPR1")
-	private String parRpr1;
-	@Basic(optional = false)
-	@Column(name = "PAR_RPR2")
-	private String parRpr2;
-	@Basic(optional = false)
-	@Column(name = "FECHA_CREACION")
+	@Column(name = "fecha_creacion")
 	@Temporal(TemporalType.DATE)
 	private Date fechaCreacion;
+	@Basic(optional = false)
+	@Column(name = "estado")
+	private String estado;
 	@PrePersist
 	public void prePersist() {
 		fechaCreacion = new Date();

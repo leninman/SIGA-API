@@ -27,18 +27,11 @@ public class Curso implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "ID_CURSO")
-    private Long idCurso;
-    @JoinColumn(name = "ID_ANNIO", referencedColumnName = "ID_ANNIO")
-    @ManyToOne(optional = false)
-    private Annio annio;
-    @JoinColumn(name = "ID_ANNIO_ESC", referencedColumnName = "ID_ANNIO_ESC")
-    @ManyToOne(optional = false)
-    private AnnioEscolar annioEscolar;
-    @JoinColumn(name = "ID_SEC", referencedColumnName = "ID_SEC")
-    @ManyToOne(optional = false)
-    private Seccion seccion;
-    @JoinColumn(name = "ID_TURNO", referencedColumnName = "ID_TURNO")
-    @ManyToOne(optional = false)
-    private Turno turno;
+    @Column(name = "id")
+    private Long id;
+    private String annio;
+    private String seccion;
+    @Column(name = "periodo_academico")
+    private String periodoAcademico;
+    private String turno;
 }

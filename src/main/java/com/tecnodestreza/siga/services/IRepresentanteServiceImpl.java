@@ -5,55 +5,31 @@
  */
 package com.tecnodestreza.siga.services;
 
-import com.tecnodestreza.siga.models.DTOS.RepresentanteDTO;
 import com.tecnodestreza.siga.models.Representante;
 import com.tecnodestreza.siga.repo.IRepresentanteRepo;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 /**
  *
  * @author Lenin
  */
+@RequiredArgsConstructor
 @Service
 public class IRepresentanteServiceImpl implements IRepresentanteService {
-
-     @Autowired
-     IRepresentanteRepo representanteRepo;
-     
-     Representante rep;
-    
+     private final IRepresentanteRepo representanteRepo;
     @Override
-    public Representante consultarepresentanteporid(Long id) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        return representanteRepo.findById(id).orElse(null);
+    public Optional<Optional<Representante>> consultarRepresentantePorId(Long id) {
+        return Optional.of(representanteRepo.findById(id));
     }
-    
-    
     @Override
-    public Representante consultarepresentanteporcedula(String tipodocumento, String numerodocumento) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-          return representanteRepo.findRepresentanteByTipoDocRprAndNumDocRpr(tipodocumento, numerodocumento);
+    public Optional<Representante> consultarRepresentantePorCedula(String tipodocumento, String numerodocumento) {
+        return Optional.ofNullable(representanteRepo.findRepresentanteByTipoDocumentoAndNumeroDocumento(tipodocumento, numerodocumento));
     }
-
     @Override
-    public Representante guardarRepresentante(Representante representante) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//        rep=new Representante();
-        return representanteRepo.save(representante);
-//        return rep;
+    public Optional<Representante> crearRepresentante(Representante representante) {
+        return Optional.of(representanteRepo.save(representante));
     }
-
-    @Override
-    public RepresentanteDTO obtenerRepresentantePorCedula(String tipodocumento, String numerodocumento) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-         Representante rep=representanteRepo.findRepresentanteByTipoDocRprAndNumDocRpr(tipodocumento, numerodocumento);
-         
-         RepresentanteDTO repdto=new RepresentanteDTO(rep);
-         
-         return repdto;
-    }
-
-    
-    
 }

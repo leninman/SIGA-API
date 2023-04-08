@@ -15,6 +15,6 @@ import org.springframework.data.repository.CrudRepository;
  * @author Lenin
  */
 public interface IRepresentanteRepo extends CrudRepository<Representante,Long> {
-    Representante findRepresentanteByTipoDocRprAndNumDocRpr(String tipoDocRpr,String numDocRpr);
+    Representante findRepresentanteByTipoDocumentoAndNumeroDocumento(String tipoDocumento,String numeroDocumento);
 
 }
