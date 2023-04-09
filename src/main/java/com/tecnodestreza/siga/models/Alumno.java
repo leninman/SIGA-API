@@ -86,6 +86,9 @@ public class Alumno implements Serializable {
 	@Basic(optional = false)
 	@Column(name = "estado")
 	private String estado;
+	@Basic(optional = false)
+	@Column(name = "condicion")
+	private String condicion;
 	@PrePersist
 	public void prePersist() {
 		fechaCreacion = new Date();

@@ -53,6 +53,17 @@ public class IAlumnoServiceImpl implements IAlumnoService {
         }
         return Optional.of(alumnoguardado);
     }
+
+    @Override
+    public void desactivar(Long idAlumno,String condicion) {
+        Optional<Alumno> alumno=alumnorepo.findById(idAlumno);
+        if(alumno.isPresent()){
+            alumno.get().setEstado("INACTIVO");
+            alumno.get().setCondicion(condicion);
+        }
+        alumnorepo.save(alumno.get());
+    }
+
     @Override
     @Transactional(readOnly = true)
     public List<Alumno> consultarAlumnos() {

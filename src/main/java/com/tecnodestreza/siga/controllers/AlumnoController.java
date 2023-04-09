@@ -50,6 +50,10 @@ public class AlumnoController {
     public ResponseEntity<?> modificar(@RequestBody Alumno alumno,@PathVariable Long idAlumno) {
         return ResponseEntity.status(HttpStatus.OK).body(alumnoservice.guardarAlumno(alumno,idAlumno));
     }
-
-
+    //DESACTIVAR
+    @PutMapping("desactivar/{idAlumno}/{condicion}")
+    public ResponseEntity<?> desactivar(@PathVariable Long idAlumno,@PathVariable String condicion) {
+        alumnoservice.desactivar(idAlumno,condicion);
+        return ResponseEntity.noContent().build();
+    }
 }
