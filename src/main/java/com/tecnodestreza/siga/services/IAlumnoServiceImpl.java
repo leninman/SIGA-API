@@ -46,10 +46,8 @@ public class IAlumnoServiceImpl implements IAlumnoService {
                 Optional<Alumno> optionalAlumnoguardado=alumnorepo.findById(idAlumno);
                 alumno.setId(idAlumno);
                 alumno.setFechaCreacion(optionalAlumnoguardado.get().getFechaCreacion());
-                alumnoguardado=alumnorepo.save(alumno);
-            }else{ //GUARDAR
-                alumnoguardado = alumnorepo.save(alumno);
             }
+            alumnoguardado=alumnorepo.save(alumno);
         } catch (Exception e) {
             e.printStackTrace();
         }

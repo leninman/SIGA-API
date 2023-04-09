@@ -17,6 +17,8 @@ import java.util.Optional;
 @CrossOrigin(origins = {"direccionbase"})
 public class CursoController {
     private final ICursoService iCursoService;
+
+    //CREAR
     @PostMapping(path = "/crear")
     public ResponseEntity<?> crear(@RequestBody Curso curso){
         Optional<Curso> optionalCurso=iCursoService.consultarCursoPorParametros(curso.getPeriodoAcademico(), curso.getAnnio(),curso.getSeccion(),curso.getTurno(),curso.getNivel(),curso.getEspecialidad(), curso.getPeriodoAcademico());

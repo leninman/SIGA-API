@@ -16,6 +16,8 @@ import java.util.Optional;
 @CrossOrigin(origins = {"direccionbase"})
 public class RepresentanteController {
     private final IRepresentanteService iRepresentanteService;
+
+    //CREAR
     @PostMapping("crear")
     public ResponseEntity<?> crear(@RequestBody Representante representante){
         Optional<Representante> optionalRepresentante=iRepresentanteService.consultarRepresentantePorCedula(representante.getTipoDocumento(),representante.getNumeroDocumento());
