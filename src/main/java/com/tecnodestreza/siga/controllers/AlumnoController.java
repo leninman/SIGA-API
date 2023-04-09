@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = {"direccionbase"})
 public class AlumnoController {
     private final IAlumnoService alumnoservice;
-    boolean modificaralumno;
 
     //CONSULTA LA LISTA COMPLETA DE ALUMNOS ACTIVOS
     @GetMapping(path = "/listado")
@@ -44,14 +43,12 @@ public class AlumnoController {
         if(optionalAlumno.isPresent()){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
-        modificaralumno=false;
-        return ResponseEntity.status(HttpStatus.CREATED).body(alumnoservice.crearAlumno(alumno,modificaralumno));
+        return ResponseEntity.status(HttpStatus.CREATED).body(alumnoservice.guardarAlumno(alumno,null));
     }
     //MODIFICAR
     @PutMapping("modificar/{idAlumno}")
     public ResponseEntity<?> modificar(@RequestBody Alumno alumno,@PathVariable Long idAlumno) {
-        modificaralumno=true;
-        return ResponseEntity.status(HttpStatus.OK).body(alumnoservice.modificarAlumno(alumno,idAlumno,modificaralumno));
+        return ResponseEntity.status(HttpStatus.OK).body(alumnoservice.guardarAlumno(alumno,idAlumno));
     }
 
 

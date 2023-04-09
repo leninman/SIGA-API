@@ -17,8 +17,6 @@ import java.util.Optional;
  */
 public interface IAlumnoService {
     public Optional<Alumno> consultarAlumnoPorCedula(String tipoDocAl, String numDocAl);
-    public Optional<Alumno> consultarAlumnoPorId(Long idAlumno);
     public List<Alumno> consultarAlumnos();
-    public Optional<Alumno> crearAlumno(Alumno alumno,Boolean modificar);
-    public Optional<Alumno> modificarAlumno(Alumno alumno,Long idAlumno,Boolean modificar);
+    public Optional<Alumno> guardarAlumno(Alumno alumno,Long idAlumno);
 }

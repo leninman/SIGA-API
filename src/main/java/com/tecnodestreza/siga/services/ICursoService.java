@@ -16,7 +16,6 @@ import java.util.Optional;
  * @author Lenin
  */
 public interface ICursoService {
-      public Optional<Curso> consultarCursoPorId(Long idcurso);
       public Optional<Curso> consultarCursoPorParametros(String periodo,String annio,String seccion,String turno,String nivel,String especialidad,String periodoAcademico);
       public Optional<Curso>  crear(Curso curso);
 }

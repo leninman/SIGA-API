@@ -20,10 +20,7 @@ import java.util.Optional;
 @Service
 public class IRepresentanteServiceImpl implements IRepresentanteService {
      private final IRepresentanteRepo representanteRepo;
-    @Override
-    public Optional<Optional<Representante>> consultarRepresentantePorId(Long id) {
-        return Optional.of(representanteRepo.findById(id));
-    }
+
     @Override
     public Optional<Representante> consultarRepresentantePorCedula(String tipodocumento, String numerodocumento) {
         return representanteRepo.findRepresentanteByTipoDocumentoAndNumeroDocumento(tipodocumento, numerodocumento);

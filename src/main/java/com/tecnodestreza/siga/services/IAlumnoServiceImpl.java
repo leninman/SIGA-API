@@ -4,16 +4,14 @@
  * and open the template in the editor.
  */
 package com.tecnodestreza.siga.services;
-import com.tecnodestreza.siga.models.*;
 
+import com.tecnodestreza.siga.models.*;
 import com.tecnodestreza.siga.repo.*;
-import com.tecnodestreza.siga.utils.Constantes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ResponseStatus;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -28,7 +26,7 @@ public class IAlumnoServiceImpl implements IAlumnoService {
     @Transactional
     @Override
     @ResponseStatus(HttpStatus.CREATED)
-    public Optional<Alumno> crearAlumno(Alumno alumno, Boolean modificar) {
+    public Optional<Alumno> guardarAlumno(Alumno alumno,Long idAlumno) {
         Optional<Representante> optionalRepresentante;
         Optional<Curso> optionalCurso;
         Alumno alumnoguardado=new Alumno();
@@ -43,22 +41,19 @@ public class IAlumnoServiceImpl implements IAlumnoService {
                     alumno.getCurso().getSeccion(),alumno.getCurso().getPeriodoAcademico(),
                     alumno.getCurso().getTurno(),alumno.getCurso().getNivel(),
                     alumno.getCurso().getEspecialidad());
-
             alumno.getCurso().setId(optionalCurso.get().getId());
-
-
-            if (!alumnorepo.findAlumnoByTipoDocumentoAndNumeroDocumento(alumno.getTipoDocumento(), alumno.getNumeroDocumento()).isPresent()) {
+            if(idAlumno!=null){  //MODIFICAR
+                Optional<Alumno> optionalAlumnoguardado=alumnorepo.findById(idAlumno);
+                alumno.setId(idAlumno);
+                alumno.setFechaCreacion(optionalAlumnoguardado.get().getFechaCreacion());
+                alumnoguardado=alumnorepo.save(alumno);
+            }else{ //GUARDAR
                 alumnoguardado = alumnorepo.save(alumno);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return Optional.of(alumnoguardado);
-    }
-    @Override
-    public Optional<Alumno> modificarAlumno(Alumno alumno, Long idAlumno, Boolean modificar) {
-        alumno.setId(idAlumno);
-        return Optional.of(alumnorepo.save(alumno));
     }
     @Override
     @Transactional(readOnly = true)
@@ -69,10 +64,4 @@ public class IAlumnoServiceImpl implements IAlumnoService {
     public Optional<Alumno> consultarAlumnoPorCedula(String tipoDoc, String numDoc) {
         return alumnorepo.findAlumnoByTipoDocumentoAndNumeroDocumento(tipoDoc, numDoc);
     }
-
-    @Override
-    public Optional<Alumno> consultarAlumnoPorId(Long idAlumno) {
-        return alumnorepo.findById(idAlumno);
-    }
-
 }
