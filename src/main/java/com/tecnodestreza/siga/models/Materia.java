@@ -1,6 +1,5 @@
-package com.tecnodestreza.siga.security.entity;
+package com.tecnodestreza.siga.models;
 
-import com.tecnodestreza.siga.security.enums.RolNombre;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,13 +13,17 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="roles")
-public class Rol implements Serializable {
+@Table(name = "materias")
+public class Materia implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     private Long id;
-    @Column(name = "rol_nombre")
-    private String rolNombre;
+    private String codigo;
+
+    private String nombre;
+    private String annio;
+    private String nivel;
+
 }

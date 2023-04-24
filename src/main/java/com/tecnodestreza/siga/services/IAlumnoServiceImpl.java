@@ -12,6 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ResponseStatus;
+
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,21 +34,32 @@ public class IAlumnoServiceImpl implements IAlumnoService {
         Alumno alumnoguardado=new Alumno();
         try {
             optionalRepresentante=representanteRepo.findRepresentanteByTipoDocumentoAndNumeroDocumento(alumno.getRepresentante().getTipoDocumento(),alumno.getRepresentante().getNumeroDocumento());
-            if (!optionalRepresentante.isPresent()) {
-                representanteRepo.save(alumno.getRepresentante());
-            }else{
+            if (optionalRepresentante.isPresent()) {
                 alumno.getRepresentante().setId(optionalRepresentante.get().getId());
+            }else{
+                representanteRepo.save(alumno.getRepresentante());
             }
             optionalCurso=cursoRepo.consultarCursosPorParametros(alumno.getCurso().getAnnio(),
                     alumno.getCurso().getSeccion(),alumno.getCurso().getPeriodoAcademico(),
-                    alumno.getCurso().getTurno(),alumno.getCurso().getNivel(),
-                    alumno.getCurso().getEspecialidad());
-            alumno.getCurso().setId(optionalCurso.get().getId());
+                    alumno.getCurso().getTurno(),alumno.getCurso().getNivel());
+           if(!optionalCurso.isPresent()) {
+               Curso curso=cursoRepo.save(alumno.getCurso());
+               alumno.setCurso(curso);
+           }else {
+               alumno.setCurso(optionalCurso.get());
+           }
             if(idAlumno!=null){  //MODIFICAR
                 Optional<Alumno> optionalAlumnoguardado=alumnorepo.findById(idAlumno);
                 alumno.setId(idAlumno);
                 alumno.setFechaCreacion(optionalAlumnoguardado.get().getFechaCreacion());
             }
+            alumno.setFechaCreacion(new Date());
+            if(alumno.getCondicion().equals("REGULAR")){
+                alumno.setActivo(true);
+            }else{
+                alumno.setActivo(false);
+            }
+
             alumnoguardado=alumnorepo.save(alumno);
         } catch (Exception e) {
             e.printStackTrace();
@@ -58,7 +71,7 @@ public class IAlumnoServiceImpl implements IAlumnoService {
     public void desactivar(Long idAlumno,String condicion) {
         Optional<Alumno> alumno=alumnorepo.findById(idAlumno);
         if(alumno.isPresent()){
-            alumno.get().setEstado("INACTIVO");
+            alumno.get().setActivo(false);
             alumno.get().setCondicion(condicion);
         }
         alumnorepo.save(alumno.get());

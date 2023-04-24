@@ -78,8 +78,8 @@ public class Representante implements Serializable {
 	@Column(name = "email")
 	private String email;
 	@Basic(optional = false)
-	@Column(name = "estado")
-	private String estado;
+	@Column(name = "activo")
+	private Boolean activo;
 	@Column(name = "profesion")
 	private String profesion;
 	@Column(name = "ocupacion")

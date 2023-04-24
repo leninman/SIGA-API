@@ -20,7 +20,7 @@ import java.util.Optional;
 public interface IAlumnoRepo extends JpaRepository<Alumno, Long> {
 
     @Query(value="SELECT a from Alumno a "
-                    + "WHERE a.estado='ACTIVO'")
+                    + "WHERE a.activo=true")
     public List<Alumno> consultarAlumnos();
     Optional<Alumno> findAlumnoByTipoDocumentoAndNumeroDocumento(String tipoDocuemnto, String numeroDocumento);
 }

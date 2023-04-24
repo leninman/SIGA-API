@@ -12,6 +12,7 @@ import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 /**
  *
@@ -37,6 +38,7 @@ public class AlumnoController {
         return ResponseEntity.ok().body(alumnoservice.consultarAlumnoPorCedula(tdoc,ndoc));
     }
    //CREAR
+    @PreAuthorize("hasRole('DIRECTOR') || hasRole('ADMINISTRATIVO')")
     @PostMapping("crear")
     public ResponseEntity<?> crear(@RequestBody Alumno alumno) {
         Optional<Alumno> optionalAlumno=alumnoservice.consultarAlumnoPorCedula(alumno.getTipoDocumento(),alumno.getNumeroDocumento());
@@ -46,11 +48,13 @@ public class AlumnoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(alumnoservice.guardarAlumno(alumno,null));
     }
     //MODIFICAR
+    @PreAuthorize("hasRole('DIRECTOR') || hasRole('ADMINISTRATIVO')")
     @PutMapping("modificar/{idAlumno}")
     public ResponseEntity<?> modificar(@RequestBody Alumno alumno,@PathVariable Long idAlumno) {
         return ResponseEntity.status(HttpStatus.OK).body(alumnoservice.guardarAlumno(alumno,idAlumno));
     }
     //DESACTIVAR
+    @PreAuthorize("hasRole('DIRECTOR') || hasRole('ADMINISTRATIVO')")
     @PutMapping("desactivar/{idAlumno}/{condicion}")
     public ResponseEntity<?> desactivar(@PathVariable Long idAlumno,@PathVariable String condicion) {
         alumnoservice.desactivar(idAlumno,condicion);

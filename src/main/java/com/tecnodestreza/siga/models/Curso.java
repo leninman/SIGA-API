@@ -35,5 +35,4 @@ public class Curso implements Serializable {
     private String periodoAcademico;
     private String turno;
     private String nivel;
-    private String especialidad;
 }

@@ -29,7 +29,6 @@ public class Alumno implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic(optional = false)
-	@Column(name = "id")
 	private Long id;
 	@Basic(optional = false)
 	@Column(name = "tipo_documento")
@@ -48,23 +47,18 @@ public class Alumno implements Serializable {
 	@Column(name = "segundo_apellido")
 	private String segundoApellido;
 	@Basic(optional = false)
-	@Column(name = "sexo")
 	private String sexo;
 	@Basic(optional = false)
 	@Column(name = "fecha_nacimiento")
 	@Temporal(TemporalType.DATE)
 	private Date fechaNacimiento;
 	@Basic(optional = false)
-	@Column(name = "edad")
 	private String edad;
 	@Basic(optional = false)
-	@Column(name = "direccion")
 	private String direccion;
 	@Basic(optional = false)
-	@Column(name = "telefono")
 	private String telefono;
 	@Basic(optional = false)
-	@Column(name = "email")
 	private String email;
 	@Basic(optional = false)
 	@Column(name = "fecha_ingreso")
@@ -74,7 +68,6 @@ public class Alumno implements Serializable {
 	@JoinColumn(name = "representante", referencedColumnName = "id")
 	private Representante representante;
 	@Basic(optional = false)
-	@Column(name = "parentesco")
 	private String parentesco;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "curso",referencedColumnName ="id" )
@@ -84,10 +77,8 @@ public class Alumno implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date fechaCreacion;
 	@Basic(optional = false)
-	@Column(name = "estado")
-	private String estado;
+	private Boolean activo;
 	@Basic(optional = false)
-	@Column(name = "condicion")
 	private String condicion;
 	@PrePersist
 	public void prePersist() {

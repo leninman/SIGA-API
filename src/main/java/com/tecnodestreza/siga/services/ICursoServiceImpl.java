@@ -10,6 +10,7 @@ import com.tecnodestreza.siga.repo.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -23,12 +24,17 @@ public class ICursoServiceImpl implements ICursoService {
     private final ICursoRepo cursorepo;
 
     @Override
-    public Optional<Curso> consultarCursoPorParametros(String periodo, String annio, String seccion, String turno, String nivel, String especialidad, String periodoAcademico) {
-        return cursorepo.consultarCursosPorParametros(annio,seccion,periodoAcademico,turno,nivel,especialidad);
+    public Optional<Curso> consultarCursoPorParametros(String periodo, String annio, String seccion, String turno, String nivel, String periodoAcademico) {
+        return cursorepo.consultarCursosPorParametros(annio,seccion,periodoAcademico,turno,nivel);
     }
 
     @Override
     public Optional<Curso> crear(Curso curso) {
         return Optional.of(cursorepo.save(curso));
+    }
+
+    @Override
+    public List<Curso> listarcursos() {
+        return cursorepo.findAll();
     }
 }
