@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/alumno")
-@CrossOrigin(origins = {"direccionbase"})
+@CrossOrigin(origins = {"sigaBasicUrl"})
 public class AlumnoController {
     private final IAlumnoService alumnoservice;
 

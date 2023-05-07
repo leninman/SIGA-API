@@ -16,7 +16,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/curso")
-@CrossOrigin(origins = {"direccionbase"})
+@CrossOrigin(origins = {"sigaBasiUrl"})
 public class CursoController {
     private final ICursoService cursoService;
 

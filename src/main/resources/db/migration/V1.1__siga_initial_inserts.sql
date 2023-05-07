@@ -49,6 +49,13 @@ INSERT INTO roles (rol_nombre) VALUES('ROLE_SISTEMA'),
 INSERT INTO roles (rol_nombre) VALUES('ROLE_ALUMNO'),
                                      ('ROLE_REPRESENTANTE');
 
+INSERT INTO usuarios (nombre, apellido, nombre_usuario, password, email, num_intentos_fallidos, activo, fecha_ultima_conexion) VALUES ('', '', 'director', '$2a$10$jhhc/FL4CzvRkn365duK4.QO4OiT0UE8aNNSSYl1ZT0hQtsIhASRS', '', 0, true, '2023-04-30'),
+                                                                                                                                          ('', '', 'administrativo', '$2a$10$PW.agLCV1UFb6p/f08ogTOoezTCDZP2Gs562O7.LGBRik9KEjYV0a', '.', 0, true, '2023-04-30');
+
+INSERT INTO siga.usuario_rol (usuario_id, rol_id) VALUES (1, 2);
+INSERT INTO siga.usuario_rol (usuario_id, rol_id) VALUES (2, 3);
+
+
 
 
 

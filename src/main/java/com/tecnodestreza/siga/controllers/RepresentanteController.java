@@ -13,7 +13,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/representante")
-@CrossOrigin(origins = {"direccionbase"})
+@CrossOrigin(origins = {"sigaBasicUrl"})
 public class RepresentanteController {
     private final IRepresentanteService iRepresentanteService;
 

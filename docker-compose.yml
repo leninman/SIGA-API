@@ -1,0 +1,23 @@
+version: "3.9"
+services:
+  sigadb:
+    image: mariadb
+    ports:
+      - "3307:3306"
+    environment:
+      MARIADB_ROOT_PASSWORD: password
+      MARIADB_DATABASE: siga
+      MARIADB_ROOT_HOST: host.docker.internal
+    restart: always
+  sigaservice:
+    image: siga
+    ports:
+      - "8090:8090"
+    depends_on:
+      - sigadb
+    restart: always
+    env_file: .env
+
+
+
+
