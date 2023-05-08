@@ -25,46 +25,46 @@ create table representantes
         primary key,
     direccion             varchar(255) not null,
     direccion_laboral     varchar(255) not null,
-    edad                  varchar(255) not null,
+    edad                  varchar(2) not null,
     email                 varchar(255) not null,
     empresa_donde_trabaja varchar(255) not null,
     activo                bit          not null,
-    estado_civil          varchar(255) not null,
+    estado_civil          varchar(10) not null,
     fecha_nacimiento      date         not null,
-    numero_documento      varchar(255) not null,
+    numero_documento      varchar(25) not null,
     ocupacion             varchar(255) null,
     primer_apellido       varchar(255) not null,
     primer_nombre         varchar(255) not null,
     profesion             varchar(255) null,
     segundo_apellido      varchar(255) null,
     segundo_nombre        varchar(255) null,
-    sexo                  varchar(255) not null,
+    sexo                  varchar(15) not null,
     telefono              varchar(255) not null,
     telefono_empresa      varchar(255) not null,
-    tipo_documento        varchar(255) not null
+    tipo_documento        varchar(1) not null
 );
 
 create table alumnos
 (
     id               bigint auto_increment
         primary key,
-    condicion        varchar(255) not null,
+    condicion        varchar(15) not null,
     direccion        varchar(255) not null,
-    edad             varchar(255) not null,
+    edad             varchar(2) not null,
     email            varchar(255) not null,
     activo           bit          not null,
     fecha_creacion   date         not null,
     fecha_ingreso    date         not null,
     fecha_nacimiento date         not null,
-    numero_documento varchar(255) not null,
+    numero_documento varchar(25) not null,
     parentesco       varchar(255) not null,
     primer_apellido  varchar(255) not null,
     primer_nombre    varchar(255) not null,
     segundo_apellido varchar(255) null,
     segundo_nombre   varchar(255) null,
-    sexo             varchar(255) not null,
+    sexo             varchar(15) not null,
     telefono         varchar(255) not null,
-    tipo_documento   varchar(255) not null,
+    tipo_documento   varchar(1) not null,
     curso            bigint       null,
     representante    bigint       not null,
     constraint fk_curso
@@ -72,6 +72,39 @@ create table alumnos
     constraint fk_representante
         foreign key (representante) references representantes (id)
 );
+create table docentes (
+    id          bigint auto_increment
+        primary key,
+    tipo_documento varchar(1) not null,
+    numero_documento varchar(25) not null,
+    primer_nombre varchar(255) not null,
+    segundo_nombre varchar(255) null,
+    primer_apellido varchar(255) not null,
+    segundo_apellido varchar(255) null,
+    sexo varchar(15) not null,
+    fecha_nacimiento date not null,
+    fecha_ingreso date not null,
+    fecha_creacion date not null,
+    estado_civil varchar(10) not null,
+    edad varchar(2) not null,
+    pregrado1 varchar(255) not null,
+    pregrado2 varchar(255) null,
+    postgrado1 varchar(255) null,
+    postgrado2 varchar(255) null,
+    curso1 varchar(255) null,
+    curso2 varchar(255) null,
+    curso3 varchar(255) null,
+    curso4 varchar(255) null,
+    graduado_pregrado1 varchar(2) not null,
+    categoria varchar(50) null,
+    tiempo_de_servicio integer not null,
+    direccion varchar(255) not null ,
+    telefono varchar(15) not null,
+    email varchar(30) not null,
+    activo bit not null,
+    condicion varchar(15) not null
+);
+
 
 create table periodos
 (

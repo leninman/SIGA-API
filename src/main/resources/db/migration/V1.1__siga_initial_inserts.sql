@@ -40,7 +40,8 @@ INSERT INTO secciones (valor) VALUES('A'),
                                 ('F');
 INSERT INTO condiciones (valor) VALUES('REGULAR'),
                                     ('GRADUADO'),
-                                    ('RETIRADO');
+                                    ('RETIRADO'),
+                                    ('EN EJERCICIO');
 INSERT INTO roles (rol_nombre) VALUES('ROLE_SISTEMA'),
                                       ('ROLE_DIRECTOR'),
                                       ('ROLE_ADMINISTRATIVO'),

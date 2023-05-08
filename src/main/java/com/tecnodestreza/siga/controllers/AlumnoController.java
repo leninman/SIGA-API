@@ -5,11 +5,13 @@
  */
 package com.tecnodestreza.siga.controllers;
 import com.tecnodestreza.siga.models.*;
+import com.tecnodestreza.siga.models.dto.Alumnodto;
 import com.tecnodestreza.siga.services.IAlumnoService;
 import java.util.List;
 import java.util.Optional;
 
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -27,20 +29,22 @@ public class AlumnoController {
 
     //CONSULTA LA LISTA COMPLETA DE ALUMNOS ACTIVOS
     @GetMapping(path = "/listado")
-    public ResponseEntity<?> listado() {
+    public ResponseEntity<List<Alumno>> listado() {
         List<Alumno> alumnos=alumnoservice.consultarAlumnos();
         return ResponseEntity.ok().body(alumnos);
     }
     //CONSULTA POR CEDULA
     @GetMapping(path = "/consultarporcedula",
             produces = "application/json")
-    public ResponseEntity<?> consultarporcedula(@RequestParam("tdoc") String tdoc, @RequestParam("ndoc") String ndoc) {
+    public ResponseEntity<Optional<Alumno>> consultarporcedula(@RequestParam("tdoc") String tdoc, @RequestParam("ndoc") String ndoc) {
         return ResponseEntity.ok().body(alumnoservice.consultarAlumnoPorCedula(tdoc,ndoc));
     }
    //CREAR
     @PreAuthorize("hasRole('DIRECTOR') || hasRole('ADMINISTRATIVO')")
     @PostMapping("crear")
-    public ResponseEntity<?> crear(@RequestBody Alumno alumno) {
+    public ResponseEntity<Optional<Alumno>> crear(@RequestBody Alumnodto alumnodto) {
+        ModelMapper modelMapper=new ModelMapper();
+        Alumno alumno=modelMapper.map(alumnodto,Alumno.class);
         Optional<Alumno> optionalAlumno=alumnoservice.consultarAlumnoPorCedula(alumno.getTipoDocumento(),alumno.getNumeroDocumento());
         if(optionalAlumno.isPresent()){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
@@ -50,13 +54,15 @@ public class AlumnoController {
     //MODIFICAR
     @PreAuthorize("hasRole('DIRECTOR') || hasRole('ADMINISTRATIVO')")
     @PutMapping("modificar/{idAlumno}")
-    public ResponseEntity<?> modificar(@RequestBody Alumno alumno,@PathVariable Long idAlumno) {
+    public ResponseEntity<Optional<Alumno>> modificar(@RequestBody Alumnodto alumnodto, @PathVariable Long idAlumno) {
+        ModelMapper modelMapper=new ModelMapper();
+        Alumno alumno=modelMapper.map(alumnodto,Alumno.class);
         return ResponseEntity.status(HttpStatus.OK).body(alumnoservice.guardarAlumno(alumno,idAlumno));
     }
     //DESACTIVAR
     @PreAuthorize("hasRole('DIRECTOR') || hasRole('ADMINISTRATIVO')")
     @PutMapping("desactivar/{idAlumno}/{condicion}")
-    public ResponseEntity<?> desactivar(@PathVariable Long idAlumno,@PathVariable String condicion) {
+    public ResponseEntity<Optional<Alumno>> desactivar(@PathVariable Long idAlumno,@PathVariable String condicion) {
         alumnoservice.desactivar(idAlumno,condicion);
         return ResponseEntity.noContent().build();
     }

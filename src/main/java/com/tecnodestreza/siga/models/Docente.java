@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.tecnodestreza.siga.models;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,13 +23,12 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "representantes")
-public class Representante implements Serializable {
+@Table(name = "docentes")
+public class Docente implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic(optional = false)
-	@Column(name = "id")
 	private Long id;
 	@Basic(optional = false)
 	@Column(name = "tipo_documento")
@@ -51,29 +51,46 @@ public class Representante implements Serializable {
 	@Basic(optional = false)
 	@Column(name = "fecha_nacimiento")
 	@Temporal(TemporalType.DATE)
-	private Date fechaNacimieno;
+	private Date fechaNacimiento;
 	@Basic(optional = false)
 	private String edad;
+	@Basic(optional = false)
+	private String direccion;
+	@Basic(optional = false)
+	private String telefono;
+	@Basic(optional = false)
+	private String email;
+	@Basic(optional = false)
+	@Column(name = "fecha_ingreso")
+	@Temporal(TemporalType.DATE)
+	private Date fechaIngreso;
+	@Basic(optional = false)
+	@Column(name = "fecha_creacion")
+	@Temporal(TemporalType.DATE)
+	private Date fechaCreacion;
+	@Basic(optional = false)
+	private Boolean activo;
+	@Basic(optional = false)
+	private String condicion;
 	@Basic(optional = false)
 	@Column(name = "estado_civil")
 	private String estadoCivil;
 	@Basic(optional = false)
-	private String direccion;
+	private String pregrado1;
+	private String pregrado2;
+	private String curso1;
+	private String curso2;
+	private String curso3;
+	private String curso4;
 	@Basic(optional = false)
-	@Column(name = "empresa_donde_trabaja")
-	private String empresaDondeTrabaja;
+	@Column(name = "graduado_pregrado1")
+	private String graduadoPregrado1;
+	private String categoria;
 	@Basic(optional = false)
-	@Column(name = "direccion_laboral")
-	private String direccionLaboral;
-	@Basic(optional = false)
-	private String telefono;
-	@Basic(optional = false)
-	@Column(name = "telefono_empresa")
-	private String telefonoEmpresa;
-	@Basic(optional = false)
-	private String email;
-	@Basic(optional = false)
-	private Boolean activo;
-	private String profesion;
-	private String ocupacion;
+	@Column(name = "tiempo_de_servicio")
+	private Integer tiempoDeServicio;
+	@PrePersist
+	public void prePersist() {
+		fechaCreacion = new Date();
+	}
 }
