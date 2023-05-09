@@ -15,8 +15,12 @@ public class IDocenteServiceImpl implements IDocenteService{
     IDocenteRepo docenteRepo;
     @Override
     public Optional<Docente> consultarDocentePorCedula(String tipoDoc, String numDoc) {
-        Optional<Docente> docente=docenteRepo.findDocenteByTipoDocumentoAndNumeroDocumento(tipoDoc,numDoc);
-        return docente;
+         return docenteRepo.findDocenteByTipoDocumentoAndNumeroDocumento(tipoDoc,numDoc);
+    }
+
+    @Override
+    public Optional<Docente> consultarDocentePorId(Long docenteId) {
+        return docenteRepo.findById(docenteId);
     }
 
     @Override
@@ -26,11 +30,13 @@ public class IDocenteServiceImpl implements IDocenteService{
 
     @Override
     public Optional<Docente> guardarDocente(Docente docente, Long idDocente) {
-        Docente docenteGuardado=new Docente();
+        Docente docenteGuardado;
         if(idDocente!=null){  //MODIFICAR
             Optional<Docente> optionalDocenteGuardado=docenteRepo.findById(idDocente);
             docente.setId(idDocente);
-            docente.setFechaCreacion(optionalDocenteGuardado.get().getFechaCreacion());
+            if(optionalDocenteGuardado.isPresent()) {
+                docente.setFechaCreacion(optionalDocenteGuardado.get().getFechaCreacion());
+            }
         }
         docente.setFechaCreacion(new Date());
         if(docente.getCondicion().equals("EN EJERCICIO")){
@@ -49,6 +55,8 @@ public class IDocenteServiceImpl implements IDocenteService{
             docente.get().setActivo(false);
             docente.get().setCondicion(condicion);
         }
-        docenteRepo.save(docente.get());
+        if(docente.isPresent()) {
+            docenteRepo.save(docente.get());
+        }
     }
 }

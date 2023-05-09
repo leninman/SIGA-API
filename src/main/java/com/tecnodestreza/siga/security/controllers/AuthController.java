@@ -6,7 +6,7 @@ import com.tecnodestreza.siga.security.dto.Mensaje;
 import com.tecnodestreza.siga.security.dto.NuevoUsuario;
 import com.tecnodestreza.siga.security.entity.Rol;
 import com.tecnodestreza.siga.security.entity.Usuario;
-import com.tecnodestreza.siga.security.enums.RolNombre;
+
 import com.tecnodestreza.siga.security.jwt.JwtProvider;
 import com.tecnodestreza.siga.security.service.RolService;
 import com.tecnodestreza.siga.security.service.UsuarioService;

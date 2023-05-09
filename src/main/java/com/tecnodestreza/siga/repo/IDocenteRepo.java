@@ -1,7 +1,6 @@
 package com.tecnodestreza.siga.repo;
 
 
-import com.tecnodestreza.siga.models.Alumno;
 import com.tecnodestreza.siga.models.Docente;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

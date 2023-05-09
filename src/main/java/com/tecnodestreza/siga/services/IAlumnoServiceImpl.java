@@ -51,7 +51,9 @@ public class IAlumnoServiceImpl implements IAlumnoService {
             if(idAlumno!=null){  //MODIFICAR
                 Optional<Alumno> optionalAlumnoguardado=alumnorepo.findById(idAlumno);
                 alumno.setId(idAlumno);
-                alumno.setFechaCreacion(optionalAlumnoguardado.get().getFechaCreacion());
+                if(optionalAlumnoguardado.isPresent()) {
+                    alumno.setFechaCreacion(optionalAlumnoguardado.get().getFechaCreacion());
+                }
             }
             alumno.setFechaCreacion(new Date());
             if(alumno.getCondicion().equals("REGULAR")){
@@ -74,7 +76,9 @@ public class IAlumnoServiceImpl implements IAlumnoService {
             alumno.get().setActivo(false);
             alumno.get().setCondicion(condicion);
         }
-        alumnorepo.save(alumno.get());
+        if(alumno.isPresent()) {
+            alumnorepo.save(alumno.get());
+        }
     }
 
     @Override

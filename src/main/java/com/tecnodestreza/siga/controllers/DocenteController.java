@@ -2,7 +2,7 @@ package com.tecnodestreza.siga.controllers;
 
 
 
-import com.tecnodestreza.siga.models.Alumno;
+
 import com.tecnodestreza.siga.models.Docente;
 import com.tecnodestreza.siga.models.dto.Docentedto;
 import com.tecnodestreza.siga.services.IDocenteService;

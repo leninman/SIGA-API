@@ -65,7 +65,7 @@ create table alumnos
     sexo             varchar(15) not null,
     telefono         varchar(255) not null,
     tipo_documento   varchar(1) not null,
-    curso            bigint       null,
+    curso            bigint       not null,
     representante    bigint       not null,
     constraint fk_curso
         foreign key (curso) references cursos (id),
@@ -145,6 +145,20 @@ create table condiciones
     id                bigint auto_increment
         primary key,
     valor             varchar(255) null
+);
+create table cursos_docentes
+(
+    id                bigint auto_increment
+        primary key,
+    docente    bigint not null,
+    curso       bigint not null,
+    materia     bigint not null,
+    constraint curso_docente_fk_profesor
+        foreign key (docente) references docentes (id),
+    constraint curso_docente_fk_curso
+        foreign key (curso) references cursos (id),
+    constraint curso_docente_fk_materia
+        foreign key (materia) references materias (id)
 );
 create table usuarios
 (

@@ -22,10 +22,17 @@ import java.util.Optional;
 public class ICursoServiceImpl implements ICursoService {
 
     private final ICursoRepo cursorepo;
+    private final ICursoDocenteRepo cursoDocenteRepo;
+
 
     @Override
     public Optional<Curso> consultarCursoPorParametros(String periodo, String annio, String seccion, String turno, String nivel, String periodoAcademico) {
         return cursorepo.consultarCursosPorParametros(annio,seccion,periodoAcademico,turno,nivel);
+    }
+
+    @Override
+    public Optional<Curso> consultarCursoPorId(Long cursoId) {
+        return cursorepo.findById(cursoId);
     }
 
     @Override
@@ -36,5 +43,10 @@ public class ICursoServiceImpl implements ICursoService {
     @Override
     public List<Curso> listarcursos() {
         return cursorepo.findAll();
+    }
+
+    @Override
+    public Optional<CursoDocente> asignarcursos(CursoDocente cursoDocente) {
+        return Optional.of(cursoDocenteRepo.save(cursoDocente));
     }
 }
