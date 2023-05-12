@@ -30,7 +30,7 @@ public class Alumnodto {
     private String representanteTipoDocumento;
     private String representanteNumeroDocumento;
     private String representantePrimerNombre;
-    private String representantesegundoNombre;
+    private String representanteSegundoNombre;
     private String representantePrimerApellido;
     private String representanteSegundoApellido;
     private String representanteSexo;

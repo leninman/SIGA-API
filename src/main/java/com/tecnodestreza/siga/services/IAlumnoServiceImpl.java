@@ -90,4 +90,9 @@ public class IAlumnoServiceImpl implements IAlumnoService {
     public Optional<Alumno> consultarAlumnoPorCedula(String tipoDoc, String numDoc) {
         return alumnorepo.findAlumnoByTipoDocumentoAndNumeroDocumento(tipoDoc, numDoc);
     }
+
+    @Override
+    public Optional<Alumno> consultarAlumnoPorId(Long alumnoId) {
+        return alumnorepo.findById(alumnoId);
+    }
 }

@@ -160,6 +160,26 @@ create table cursos_docentes
     constraint curso_docente_fk_materia
         foreign key (materia) references materias (id)
 );
+create table notas_parciales
+(
+    id                bigint auto_increment
+    primary key,
+    alumno     bigint not null,
+    docente    bigint not null,
+    curso      bigint not null,
+    materia    bigint not null,
+    lapso      varchar(15) not null,
+    nota       varchar(2) not null,
+    porcentaje varchar(2) not null,
+    constraint nota_fk_alumno
+        foreign key (alumno) references alumnos (id),
+    constraint nota_fk_docente
+        foreign key (docente) references docentes (id),
+    constraint nota_fk_curso
+        foreign key (curso) references cursos (id),
+    constraint nota_fk_materia
+        foreign key (materia) references materias (id)
+);
 create table usuarios
 (
     id                bigint auto_increment

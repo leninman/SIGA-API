@@ -3,6 +3,7 @@ package com.tecnodestreza.siga.controllers;
 
 
 import com.tecnodestreza.siga.models.Representante;
+import com.tecnodestreza.siga.models.dto.PersonaDocumentodto;
 import com.tecnodestreza.siga.models.dto.Representantedto;
 import com.tecnodestreza.siga.services.IRepresentanteService;
 import lombok.RequiredArgsConstructor;
@@ -33,8 +34,8 @@ public class RepresentanteController {
     }
     //CONSULTA POR CEDULA
     @GetMapping(path = "/consultarporcedula")
-    public ResponseEntity<Optional<Representante>> consultarporcedula(@RequestParam("tdoc") String tdoc, @RequestParam("ndoc") String ndoc) {
-        return ResponseEntity.ok().body(iRepresentanteService.consultarRepresentantePorCedula(tdoc,ndoc));
+    public ResponseEntity<Optional<Representante>> consultarporcedula(PersonaDocumentodto personaDocumentodto) {
+        return ResponseEntity.ok().body(iRepresentanteService.consultarRepresentantePorCedula(personaDocumentodto.getTipoDocumento(),personaDocumentodto.getNumeroDocumento()));
     }
 
 }

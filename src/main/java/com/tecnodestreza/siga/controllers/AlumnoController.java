@@ -6,6 +6,7 @@
 package com.tecnodestreza.siga.controllers;
 import com.tecnodestreza.siga.models.*;
 import com.tecnodestreza.siga.models.dto.Alumnodto;
+import com.tecnodestreza.siga.models.dto.PersonaDocumentodto;
 import com.tecnodestreza.siga.services.IAlumnoService;
 import java.util.List;
 import java.util.Optional;
@@ -36,8 +37,8 @@ public class AlumnoController {
     //CONSULTA POR CEDULA
     @GetMapping(path = "/consultarporcedula",
             produces = "application/json")
-    public ResponseEntity<Optional<Alumno>> consultarporcedula(@RequestParam("tdoc") String tdoc, @RequestParam("ndoc") String ndoc) {
-        return ResponseEntity.ok().body(alumnoservice.consultarAlumnoPorCedula(tdoc,ndoc));
+    public ResponseEntity<Optional<Alumno>> consultarporcedula(@RequestBody PersonaDocumentodto personaDocumentodto) {
+        return ResponseEntity.ok().body(alumnoservice.consultarAlumnoPorCedula(personaDocumentodto.getTipoDocumento(),personaDocumentodto.getNumeroDocumento()));
     }
    //CREAR
     @PreAuthorize("hasRole('DIRECTOR') || hasRole('ADMINISTRATIVO')")
