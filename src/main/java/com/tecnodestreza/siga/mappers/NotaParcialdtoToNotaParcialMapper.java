@@ -1,8 +1,6 @@
 package com.tecnodestreza.siga.mappers;
 
-import com.tecnodestreza.siga.models.Alumno;
-import com.tecnodestreza.siga.models.Docente;
-import com.tecnodestreza.siga.models.NotaParcial;
+import com.tecnodestreza.siga.models.*;
 import com.tecnodestreza.siga.models.dto.NotaParcialdto;
 import com.tecnodestreza.siga.services.IAlumnoService;
 import com.tecnodestreza.siga.services.ICursoService;
@@ -17,6 +15,7 @@ public class NotaParcialdtoToNotaParcialMapper implements Function<NotaParcialdt
     private final IDocenteService docenteService;
     private final ICursoService cursoService;
     private final IAlumnoService alumnoService;
+    private NotaParcial nota;
 
     public NotaParcialdtoToNotaParcialMapper(IMateriaService materiaService, IDocenteService docenteService, ICursoService cursoService, IAlumnoService alumnoService) {
         this.materiaService = materiaService;
@@ -29,8 +28,11 @@ public class NotaParcialdtoToNotaParcialMapper implements Function<NotaParcialdt
     public NotaParcial apply(NotaParcialdto notadto) {
         Optional<Alumno> alumno=alumnoService.consultarAlumnoPorId(notadto.getAlumnoId());
         Optional<Docente> docente=docenteService.consultarDocentePorId(notadto.getDocenteId());
-        NotaParcial nota=new NotaParcial();
-
+        Optional<Materia> materia=materiaService.consultarMateriaPorId(notadto.getMateriaId());
+        Optional<Curso> curso=cursoService.consultarCursoPorId(notadto.getCursoId());
+        if(alumno.isPresent() && docente.isPresent() && materia.isPresent() && curso.isPresent()){
+            nota=new NotaParcial(null,alumno.get(),docente.get(),curso.get(),materia.get(),notadto.getLapso(),notadto.getNota(),null);
+        }
         return nota;
     }
 }
