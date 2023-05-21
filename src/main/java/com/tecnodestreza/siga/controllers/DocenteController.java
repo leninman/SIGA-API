@@ -10,7 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
+//import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -23,7 +23,7 @@ import java.util.Optional;
 public class DocenteController {
     private final IDocenteService docenteService;
 
-    @PreAuthorize("hasRole('DIRECTOR') || hasRole('ADMINISTRATIVO')")
+  //  @PreAuthorize("hasRole('DIRECTOR') || hasRole('ADMINISTRATIVO')")
     @PostMapping("crear")
     public ResponseEntity<Optional<Docente>> crear(@RequestBody Docentedto docentedto) {
         ModelMapper modelMapper=new ModelMapper();

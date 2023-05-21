@@ -66,12 +66,6 @@
 	  <version>2.5.2</version>
 	  <scope>provided</scope>
 	 </dependency>
-         <dependency>
-		<groupId>org.projectlombok</groupId>
-		<artifactId>lombok</artifactId>
-		<version>1.18.16</version>
-		<scope>provided</scope>
-	</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -86,17 +80,17 @@
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security -->
-		<dependency>
+		<!--<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 			<version>3.0.5</version>
-		</dependency>
+		</dependency>-->
 		<!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt -->
-		<dependency>
+		<!--<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt</artifactId>
 			<version>0.9.1</version>
-		</dependency>
+		</dependency>-->
 		<dependency>
 			<groupId>org.modelmapper</groupId>
 			<artifactId>modelmapper</artifactId>
@@ -121,5 +115,15 @@
             </plugin>
         </plugins>
 	</build>
+	<profiles>
+	<!-- Development environment -->
+	<profile>
+		<id>local</id>
+		<properties>
+			<DatabaseBasicRoute>http://localhost:3306</DatabaseBasicRoute>
+		</properties>
+	</profile>
+	</profiles>
+
 
 </project>
