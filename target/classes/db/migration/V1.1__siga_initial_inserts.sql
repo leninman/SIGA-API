@@ -7,19 +7,52 @@ INSERT INTO materias (codigo,nombre,annio,nivel) VALUES ('MAT1MED','MATEMÁTICA'
                                                         ('CIE1MED','CIENCIAS NATURALES','1°','MEDIA'),
                                                          ('CIE2MED','CIENCIAS NATURALES','2°','MEDIA'),
                                                          ('CAS1MED','CASTELLANO','1°','MEDIA'),
-                                                        ('CASMED','CASTELLANO','2°','MEDIA'),
-                                                         ('ING1MED','INGLÉS','1°','MEDIA');
-INSERT INTO materias (codigo,nombre,annio,nivel) VALUES ('ING2MED','INGLÉS','2°','MEDIA'),
-                                                        ('ING3MED','INGLÉS','3°','MEDIA'),
-                                                        ('ING4MED','INGLÉS','4°','MEDIA'),
-                                                        ('ING5MED','INGLÉS','5°','MEDIA'),
+                                                        ('CAS2MED','CASTELLANO','2°','MEDIA'),
+                                                         ('ING1MED','INGLÉS Y OTRAS LENGUAS EXTRANJERAS','1°','MEDIA');
+INSERT INTO materias (codigo,nombre,annio,nivel) VALUES ('ING2MED','INGLÉS Y OTRAS LENGUAS EXTRANJERAS','2°','MEDIA'),
+                                                        ('ING3MED','INGLÉS Y OTRAS LENGUAS EXTRANJERAS','3°','MEDIA'),
+                                                        ('ING4MED','INGLÉS Y OTRAS LENGUAS EXTRANJERAS','4°','MEDIA'),
+                                                        ('ING5MED','INGLÉS Y OTRAS LENGUAS EXTRANJERAS','5°','MEDIA'),
                                                         ('ART1MED','ARTE Y PATRIMONIO','1°','MEDIA'),
                                                         ('ART2MED','ARTE Y PATRIMONIO','2°','MEDIA'),
-                                                        ('GHC1MED','GHC','1°','MEDIA'),
-                                                        ('GHC1MED','GHC','1°','MEDIA'),
-                                                        ('GHC2MED','GHC','2°','MEDIA'),
-                                                        ('EFI1BAS','EDUCACIÓN FISICA','1°','MEDIA');
-INSERT INTO materias (codigo,nombre,annio,nivel) VALUES ('EFI2BAS','EDUCACIÓN FISICA','2°','MEDIA');
+                                                        ('GHC1MED','GEOGRAFIA, HISTORIA Y CIUDADANIA','1°','MEDIA'),
+                                                        ('GHC2MED','GEOGRAFIA, HISTORIA Y CIUDADANIA','2°','MEDIA'),
+                                                        ('GHC3MED','GEOGRAFIA, HISTORIA Y CIUDADANIA','3°','MEDIA'),
+                                                        ('EFI1MED','EDUCACION FISICA','1°','MEDIA');
+INSERT INTO materias (codigo,nombre,annio,nivel) VALUES ('EFI2MED','EDUCACION FISICA','2°','MEDIA');
+INSERT INTO materias (codigo,nombre,annio,nivel) VALUES ('CAS3MED','CASTELLANO','3°','MEDIA'),
+                                                        ('EFI3MED','EDUCACION FISICA','3°','MEDIA'),
+                                                        ('FIS3MED','FISICA','3°','MEDIA'),
+                                                        ('QUI3MED','QUIMICA','3°','MEDIA'),
+                                                        ('BIO3MED','BIOLOGIA','3°','MEDIA');
+INSERT INTO materias (codigo,nombre,annio,nivel) VALUES ('GIN3MED','GRUPOS DE INTERES','3°','MEDIA'),
+                                                        ('CAS5MED','CASTELLANO','5°','MEDIA'),
+                                                        ('EFI5MED','EDUCACION FISICA','5°','MEDIA');
+INSERT INTO materias (codigo,nombre,annio,nivel) VALUES ('FIS5MED','FISICA','5°','MEDIA'),
+                                                        ('QUI5MED','QUIMICA','5°','MEDIA'),
+                                                        ('BIO5MED','BILOGIA','5°','MEDIA'),
+                                                        ('CST5MED','CIENCIAS DE LA TIERRA','5°','MEDIA'),
+                                                        ('GHC5MED','GEOGRAFIA, HISTORIA Y CIUDADANIA','5°','MEDIA');
+INSERT INTO materias (codigo,nombre,annio,nivel) VALUES ('FSN5MED','FORMACIÓN PARA LA SOBERANIA NACIONAL','5°','MEDIA'),
+                                                        ('ORI5MED','ORIENTACION Y CONVIVENCIA','5°','MEDIA'),
+                                                        ('GIN5MED','GRUPOS DE INTERES','5°','MEDIA'),
+                                                        ('ORI1MED','ORIENTACION Y CONVIVENCIA','1°','MEDIA'),
+                                                        ('ORI2MED','ORIENTACION Y CONVIVENCIA','2°','MEDIA');
+INSERT INTO materias (codigo,nombre,annio,nivel) VALUES ('GIN2MED','GRUPOS DE INTERES','2°','MEDIA'),
+                                                        ('GIN1MED','GRUPOS DE INTERES','1°','MEDIA'),
+                                                        ('GIN4MED','GRUPOS DE INTERES','4°','MEDIA'),
+                                                        ('ORI3MED','ORIENTACION Y CONVIVENCIA','3°','MEDIA'),
+                                                        ('ORI4MED','ORIENTACION Y CONVIENCIA','4°','MEDIA');
+INSERT INTO materias (codigo,nombre,annio,nivel) VALUES ('CAS4MED','CASTELLANO','4°','MEDIA'),
+                                                        ('EFI4MED','EDUCACION FISICA','4°','MEDIA'),
+                                                        ('FIS4MED','FISICA','4°','MEDIA'),
+                                                        ('QUI4MED','QUIMICA','4°','MEDIA'),
+                                                        ('BIO4MED','BIOLOGIA','4°','MEDIA');
+INSERT INTO materias (codigo,nombre,annio,nivel) VALUES ('GHC4MED','GEOGRAFIA, HISTORIA Y CIUDADANIA','4°','MEDIA'),
+                                                        ('FSN4MED','FORMACIÓN PARA LA SOBERANIA NACIONAL','4°','MEDIA');
+
+
+
 
 INSERT INTO periodos (valor,estado) VALUES ('2022-2023','ACTIVO');
 INSERT INTO niveles (valor) VALUES ('PRIMARIA'),

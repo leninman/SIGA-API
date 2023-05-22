@@ -17,7 +17,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/representante")
-@CrossOrigin(origins = {"sigaBasicUrl"})
+@CrossOrigin(origins = {"*"})
 public class RepresentanteController {
     private final IRepresentanteService iRepresentanteService;
 

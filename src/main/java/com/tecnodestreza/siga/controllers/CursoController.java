@@ -20,7 +20,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/curso")
-@CrossOrigin(origins = {"sigaBasiUrl"})
+@CrossOrigin(origins = {"*"})
 public class CursoController {
     private final ICursoService cursoService;
     private final IMateriaService materiaService;
