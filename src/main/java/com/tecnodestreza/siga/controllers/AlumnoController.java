@@ -50,6 +50,16 @@ public class AlumnoController {
             return ResponseEntity.ok().body(alumno);
     }
 
+    @GetMapping(path = "/consultarporid/{id}",
+            produces = "application/json")
+    public ResponseEntity<Optional<Alumno>> consultarporid(@PathVariable Long id) {
+        Optional<Alumno> alumno = alumnoservice.consultarAlumnoPorId(id);
+        if (!alumno.isPresent())
+            return ResponseEntity.ok(Optional.empty());
+        else
+            return ResponseEntity.ok().body(alumno);
+    }
+
    //CREAR
     //@PreAuthorize("hasRole('DIRECTOR') || hasRole('ADMINISTRATIVO')")
     @PostMapping("crear")
