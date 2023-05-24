@@ -23,6 +23,9 @@ public class Representantedto {
     private String estadoCivil;
     private String direccion;
     private String empresaDondeTrabaja;
+    private String lugarDeNacimiento;
+    private String nacionalidad;
+    private String ingresoMensualAproximado;
     private String direccionLaboral;
     private String telefono;
     private String telefonoEmpresa;

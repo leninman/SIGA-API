@@ -76,4 +76,13 @@ public class Representante implements Serializable {
 	private Boolean activo;
 	private String profesion;
 	private String ocupacion;
+	@Basic(optional = false)
+	@Column(name = "lugar_de_nacimiento")
+	private String lugarDeNacimiento;
+	@Basic(optional = false)
+	private String nacionalidad;
+	@Basic(optional = false)
+	@Column(name = "ingreso_mensual_aproximado")
+	private String ingresoMensualAproximado;
+
 }

@@ -43,8 +43,13 @@ public class AlumnoController {
     @GetMapping(path = "/consultarporcedula",
             produces = "application/json")
     public ResponseEntity<Optional<Alumno>> consultarporcedula(@RequestBody PersonaDocumentodto personaDocumentodto) {
-        return ResponseEntity.ok().body(alumnoservice.consultarAlumnoPorCedula(personaDocumentodto.getTipoDocumento(),personaDocumentodto.getNumeroDocumento()));
+        Optional<Alumno> alumno = alumnoservice.consultarAlumnoPorCedula(personaDocumentodto.getTipoDocumento(), personaDocumentodto.getNumeroDocumento());
+        if (!alumno.isPresent())
+            return ResponseEntity.ok(Optional.empty());
+         else
+            return ResponseEntity.ok().body(alumno);
     }
+
    //CREAR
     //@PreAuthorize("hasRole('DIRECTOR') || hasRole('ADMINISTRATIVO')")
     @PostMapping("crear")

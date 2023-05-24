@@ -76,6 +76,11 @@ public class Docente implements Serializable {
 	@Column(name = "estado_civil")
 	private String estadoCivil;
 	@Basic(optional = false)
+	@Column(name = "lugar_de_nacimiento")
+	private String lugarDeNacimiento;
+	@Basic(optional = false)
+	private String nacionalidad;
+	@Basic(optional = false)
 	private String pregrado1;
 	private String pregrado2;
 	private String curso1;

@@ -37,7 +37,7 @@ public class CursoController {
     public ResponseEntity<Optional<Curso>> crear(@RequestBody Cursodto cursodto){
         ModelMapper modelMapper=new ModelMapper();
         Curso curso=modelMapper.map(cursodto,Curso.class);
-        Optional<Curso> optionalCurso=cursoService.consultarCursoPorParametros(curso.getPeriodoAcademico(), curso.getAnnio(),curso.getSeccion(),curso.getTurno(),curso.getNivel(),curso.getPeriodoAcademico());
+        Optional<Curso> optionalCurso=cursoService.consultarCursoPorParametros(curso.getAnnio(),curso.getSeccion(),curso.getTurno(),curso.getNivel(),curso.getPeriodoAcademico());
         if(optionalCurso.isPresent()){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }

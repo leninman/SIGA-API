@@ -41,7 +41,10 @@ create table representantes
     sexo                  varchar(15) not null,
     telefono              varchar(255) not null,
     telefono_empresa      varchar(255) not null,
-    tipo_documento        varchar(1) not null
+    tipo_documento        varchar(1) not null,
+    lugar_de_nacimiento   varchar(255) null,
+    nacionalidad          varchar(50) null,
+    ingreso_mensual_aproximado varchar(50) null
 );
 
 create table alumnos
@@ -65,6 +68,8 @@ create table alumnos
     sexo             varchar(15) not null,
     telefono         varchar(255) not null,
     tipo_documento   varchar(1) not null,
+    lugar_de_nacimiento   varchar(255) null,
+    nacionalidad          varchar(50) null,
     curso            bigint       not null,
     representante    bigint       not null,
     constraint fk_curso
@@ -102,7 +107,9 @@ create table docentes (
     telefono varchar(15) not null,
     email varchar(30) not null,
     activo bit not null,
-    condicion varchar(15) not null
+    condicion varchar(15) not null,
+    lugar_de_nacimiento   varchar(255) null,
+    nacionalidad          varchar(50) null
 );
 
 

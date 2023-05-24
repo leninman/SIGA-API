@@ -23,6 +23,8 @@ public class Docentedto {
     private String direccion;
     private String telefono;
     private String email;
+    private String lugarDeNacimiento;
+    private String nacionalidad;
     private Date fechaIngreso;
     private Date fechaCreacion;
     private Boolean activo;

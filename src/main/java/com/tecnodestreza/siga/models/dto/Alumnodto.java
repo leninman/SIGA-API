@@ -27,6 +27,8 @@ public class Alumnodto {
     private String telefono;
     private String email;
     private Date fechaIngreso;
+    private String lugarDeNacimiento;
+    private String nacionalidad;
     private String representanteTipoDocumento;
     private String representanteNumeroDocumento;
     private String representantePrimerNombre;
@@ -38,6 +40,9 @@ public class Alumnodto {
     private String representanteEdad;
     private String representanteEstadoCivil;
     private String representanteDireccion;
+    private String representanteLugarDeNacimiento;
+    private String representanteNacionalidad;
+    private String representanteIngresoMensualAproximado;
     private String representanteEmpresaDondeTrabaja;
     private String representanteDireccionLaboral;
     private String representanteTelefono;

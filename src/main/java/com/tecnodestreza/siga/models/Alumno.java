@@ -80,6 +80,11 @@ public class Alumno implements Serializable {
 	private Boolean activo;
 	@Basic(optional = false)
 	private String condicion;
+	@Basic(optional = false)
+	@Column(name = "lugar_de_nacimiento")
+	private String lugarDeNacimiento;
+	@Basic(optional = false)
+	private String nacionalidad;
 	@PrePersist
 	public void prePersist() {
 		fechaCreacion = new Date();
