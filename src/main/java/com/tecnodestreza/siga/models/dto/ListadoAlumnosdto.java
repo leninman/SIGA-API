@@ -10,6 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ListadoAlumnosdto {
+    private Long id;
     private String tipoDocumento;
     private String numeroDocumento;
     private String primerNombre;

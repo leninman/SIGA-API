@@ -6,7 +6,9 @@ C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\repo\INotaPar
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\repo\IDocenteRepo.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\repo\IMateriaRepo.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\models\Annio.java
+C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\repo\ICondicionRepo.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\models\Condicion.java
+C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\repo\INivelRepo.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\models\CursoDocente.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\controllers\VariosController.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\models\NotaParcial.java
@@ -24,6 +26,7 @@ C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\services\ICur
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\models\Curso.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\services\INotaParcialServiceImpl.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\models\Seccion.java
+C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\models\Nacionalidad.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\mappers\CursoDocentedtoToCursoDocenteMapper.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\models\Representante.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\models\Materia.java
@@ -36,6 +39,7 @@ C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\services\IAlu
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\repo\ICursoRepo.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\services\INotaParcialService.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\models\dto\CursoDocentedto.java
+C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\repo\ITurnoRepo.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\services\IVariosService.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\repo\IAlumnoRepo.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\repo\IRepresentanteRepo.java
@@ -46,6 +50,7 @@ C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\controllers\R
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\models\dto\Docentedto.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\models\dto\ListadoAlumnosdto.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\services\IRepresentanteServiceImpl.java
+C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\repo\ISeccionRepo.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\controllers\CursoController.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\models\dto\PersonaDocumentodto.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\models\dto\Representantedto.java
