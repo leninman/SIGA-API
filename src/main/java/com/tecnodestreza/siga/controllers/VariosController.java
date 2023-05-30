@@ -44,4 +44,24 @@ public class VariosController {
         List<Condicion> condiciones=variosService.condiciones();
         return ResponseEntity.ok().body(condiciones);
     }
+    @GetMapping(path = "/nacionalidades")
+    public ResponseEntity<List<Nacionalidad>> nacionalidades() {
+        List<Nacionalidad> nacionalidades=variosService.nacionalidades();
+        return ResponseEntity.ok().body(nacionalidades);
+    }
+    @GetMapping(path = "/sexos")
+    public ResponseEntity<List<Sexo>> sexos() {
+        List<Sexo> sexos=variosService.sexos();
+        return ResponseEntity.ok().body(sexos);
+    }
+    @GetMapping(path = "/estadocivil")
+    public ResponseEntity<List<EstadoCivil>> estadocivil() {
+        List<EstadoCivil> estadoCivils=variosService.estadocivil();
+        return ResponseEntity.ok().body(estadoCivils);
+    }
+    @GetMapping(path = "/lapsos")
+    public ResponseEntity<List<Lapso>> lapsos() {
+        List<Lapso> lapsos=variosService.lapsos();
+        return ResponseEntity.ok().body(lapsos);
+    }
 }

@@ -2,27 +2,31 @@ package com.tecnodestreza.siga.utils;
 
 
 
-import java.text.SimpleDateFormat;
-import java.util.Collection;
-import java.util.Date;
+import com.tecnodestreza.siga.models.Lapso;
+import com.tecnodestreza.siga.repo.ILapsoRepo;
+
+import java.util.Optional;
 
 public class Utils {
 	
-	static String valorDelPeriodo;
-	
-	
-	public static String extraePeriodoEscolar(Date fechaI,Date fechaF) {
-		
-	    
-		SimpleDateFormat getYearFormat = new SimpleDateFormat("yyyy");
-		
-		String AnnioInicial = getYearFormat.format(fechaI);
-		
-		String AnnioFinal = getYearFormat.format(fechaF);
-	    
-	   valorDelPeriodo=AnnioInicial.concat("-").concat(AnnioFinal);
-		
-		return valorDelPeriodo;
+	static String porcentajeNota;
+
+	private static ILapsoRepo lapsoRepo = null;
+
+	public Utils(ILapsoRepo lapsoRepo) {
+		this.lapsoRepo = lapsoRepo;
+	}
+
+
+	public static String calcularPorcentajeNota(String nota,String valor) {
+
+		Optional<Lapso> lapsoOptional=lapsoRepo.findLapsoByValor(valor);
+
+		String porcentaje=lapsoOptional.get().getPorcentaje();
+
+		Float porcentajeNota= (float) ((Integer.valueOf(nota))*(Integer.valueOf(porcentaje)));
+
+		return porcentajeNota.toString();
 	}
         
 

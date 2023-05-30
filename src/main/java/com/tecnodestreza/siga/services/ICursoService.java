@@ -22,5 +22,6 @@ public interface ICursoService {
       Optional<Curso>  crear(Curso curso);
       List<Curso> listarcursos();
       Optional<CursoDocente> asignarcursos(CursoDocente cursoDocente);
+      Curso cargarcurso(String[] cedulas, Long idcurso);
 
 }

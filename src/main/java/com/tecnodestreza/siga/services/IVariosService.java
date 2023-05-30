@@ -10,5 +10,10 @@ public interface IVariosService {
     List<Turno> turnos();
     List<Nivel> niveles();
     List<Condicion> condiciones();
+    List<Nacionalidad> nacionalidades();
+    List<Sexo> sexos();
+    List<EstadoCivil> estadocivil();
+    List<Lapso> lapsos();
+
 
 }

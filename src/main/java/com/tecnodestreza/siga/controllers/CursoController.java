@@ -55,6 +55,11 @@ public class CursoController {
         Optional<CursoDocente> cursoDocenteGuardado=cursoService.asignarcursos(cursoDocente);
         return ResponseEntity.ok().body(cursoDocenteGuardado);
     }
+    @PostMapping("/cargarcurso")
+    public ResponseEntity<Optional<Curso>> cargarcurso(@RequestParam String[] cedulas,@RequestParam Long idcurso){
+        Curso curso=cursoService.cargarcurso(cedulas,idcurso);
+        return ResponseEntity.ok().body(Optional.of(curso));
+    }
 
 
 

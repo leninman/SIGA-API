@@ -10,8 +10,10 @@ import com.tecnodestreza.siga.repo.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -23,6 +25,7 @@ public class ICursoServiceImpl implements ICursoService {
 
     private final ICursoRepo cursorepo;
     private final ICursoDocenteRepo cursoDocenteRepo;
+    private final IAlumnoRepo alumnoRepo;
 
 
     @Override
@@ -48,5 +51,17 @@ public class ICursoServiceImpl implements ICursoService {
     @Override
     public Optional<CursoDocente> asignarcursos(CursoDocente cursoDocente) {
         return Optional.of(cursoDocenteRepo.save(cursoDocente));
+    }
+
+    @Override
+    public Curso cargarcurso(String[] cedulas, Long idcurso) {
+        Optional<Curso> curso=cursorepo.findById(idcurso);
+        List<Alumno> alumnos=Arrays.stream(cedulas).map(cedula ->
+                (alumnoRepo.findAlumnoByTipoDocumentoAndNumeroDocumento(cedula.substring(0,1),cedula.substring(1))).get()).collect(Collectors.toList());
+        for (Alumno alumno:alumnos){
+            alumno.setCurso(curso.get());
+            alumnoRepo.save(alumno);
+        }
+        return curso.get();
     }
 }

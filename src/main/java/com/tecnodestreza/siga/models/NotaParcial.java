@@ -35,4 +35,7 @@ public class NotaParcial implements Serializable {
     private String lapso;
     private String nota;
     private String porcentaje;
+
+    public NotaParcial(Alumno alumno, Docente docente, Curso curso, Materia materia, String lapso, String nota, String porcentaje) {
+    }
 }
