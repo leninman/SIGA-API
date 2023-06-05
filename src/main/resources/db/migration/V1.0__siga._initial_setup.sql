@@ -205,7 +205,7 @@ create table notas_parciales
     materia    bigint not null,
     lapso      varchar(15) not null,
     nota       varchar(2) not null,
-    porcentaje varchar(2) not null,
+    porcentaje varchar(8) not null,
     constraint nota_fk_alumno
         foreign key (alumno) references alumnos (id),
     constraint nota_fk_docente

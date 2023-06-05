@@ -1,6 +1,7 @@
 package com.tecnodestreza.siga.services;
 
 import com.tecnodestreza.siga.models.*;
+import com.tecnodestreza.siga.models.dto.Variosdto;
 import com.tecnodestreza.siga.repo.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,48 +20,19 @@ public class IVariosServiceImpl implements IVariosService{
     private final ISexoRepo sexoRepo;
     private final IEstadoCivilRepo estadoCivilRepo;
     private final ILapsoRepo lapsoRepo;
-    @Override
-    public List<Annio> annios() {
-        return annioRepo.findAll();
-    }
 
     @Override
-    public List<Seccion> secciones() {
-        return seccionRepo.findAll();
+    public Variosdto obtenervarios() {
+
+        return new Variosdto(annioRepo.findAll(),
+                            seccionRepo.findAll(),
+                            turnoRepo.findAll(),
+                            nivelRepo.findAll(),
+                            condicionRepo.findAll(),
+                            nacionalidadRepo.findAll(),
+                            sexoRepo.findAll(),
+                            estadoCivilRepo.findAll(),
+                            lapsoRepo.findAll());
     }
 
-    @Override
-    public List<Turno> turnos() {
-        return turnoRepo.findAll();
-    }
-
-    @Override
-    public List<Nivel> niveles() {
-        return nivelRepo.findAll();
-    }
-
-    @Override
-    public List<Condicion> condiciones() {
-        return condicionRepo.findAll();
-    }
-
-    @Override
-    public List<Nacionalidad> nacionalidades() {
-        return nacionalidadRepo.findAll();
-    }
-
-    @Override
-    public List<Sexo> sexos() {
-        return sexoRepo.findAll();
-    }
-
-    @Override
-    public List<EstadoCivil> estadocivil() {
-        return estadoCivilRepo.findAll();
-    }
-
-    @Override
-    public List<Lapso> lapsos() {
-        return lapsoRepo.findAll();
-    }
 }

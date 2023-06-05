@@ -26,12 +26,18 @@ public class NotaParcialdtoToNotaParcialMapper implements Function<NotaParcialdt
 
     @Override
     public NotaParcial apply(NotaParcialdto notadto) {
-        Optional<Alumno> alumno=alumnoService.consultarAlumnoPorId(notadto.getAlumnoId());
-        Optional<Docente> docente=docenteService.consultarDocentePorId(notadto.getDocenteId());
-        Optional<Materia> materia=materiaService.consultarMateriaPorId(notadto.getMateriaId());
-        Optional<Curso> curso=cursoService.consultarCursoPorId(notadto.getCursoId());
-        if(alumno.isPresent() && docente.isPresent() && materia.isPresent() && curso.isPresent()){
-            nota=new NotaParcial(null,alumno.get(),docente.get(),curso.get(),materia.get(),notadto.getLapso(),notadto.getNota(),null);
+
+        try {
+            Optional<Curso> curso = cursoService.consultarCursoPorId(notadto.getCursoId());
+            Optional<Alumno> alumno = alumnoService.consultarAlumnoPorId(notadto.getAlumnoId());
+            Optional<Docente> docente = docenteService.consultarDocentePorId(notadto.getDocenteId());
+            Optional<Materia> materia = materiaService.consultarMateriaPorId(notadto.getMateriaId());
+
+            if (alumno.isPresent() && docente.isPresent() && materia.isPresent() && curso.isPresent()) {
+                nota = new NotaParcial(null, alumno.get(), docente.get(), curso.get(), materia.get(), notadto.getLapso(), notadto.getNota(), null);
+            }
+        }catch(Exception e){
+            e.printStackTrace();
         }
         return nota;
     }

@@ -29,13 +29,16 @@ C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\models\Alumno
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\services\IAlumnoServiceImpl.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\services\ICursoServiceImpl.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\models\Curso.java
+C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\models\dto\NotaConsultadto.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\services\INotaParcialServiceImpl.java
+C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\mappers\NotaParcialToConsultaNotasAlumnodtoMapper.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\models\Seccion.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\models\Nacionalidad.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\mappers\CursoDocentedtoToCursoDocenteMapper.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\models\Representante.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\models\Sexo.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\models\Materia.java
+C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\models\dto\ConsultaNotasAlumnodto.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\controllers\DocenteController.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\services\IDocenteService.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\utils\Utils.java
@@ -59,6 +62,7 @@ C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\models\dto\Li
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\services\IRepresentanteServiceImpl.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\repo\ISeccionRepo.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\repo\ILapsoRepo.java
+C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\models\dto\Variosdto.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\controllers\CursoController.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\models\dto\PersonaDocumentodto.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\models\dto\Representantedto.java

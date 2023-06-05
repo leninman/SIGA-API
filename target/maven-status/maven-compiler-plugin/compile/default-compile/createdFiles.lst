@@ -12,6 +12,7 @@ com\tecnodestreza\siga\controllers\CursoController.class
 com\tecnodestreza\siga\models\Nacionalidad_.class
 com\tecnodestreza\siga\models\NotaParcial_.class
 com\tecnodestreza\siga\models\Curso.class
+com\tecnodestreza\siga\models\dto\NotaConsultadto.class
 com\tecnodestreza\siga\services\INotaParcialService.class
 com\tecnodestreza\siga\repo\IMateriaRepo.class
 com\tecnodestreza\siga\models\Representante.class
@@ -43,6 +44,7 @@ com\tecnodestreza\siga\services\ICursoService.class
 com\tecnodestreza\siga\repo\ICondicionRepo.class
 com\tecnodestreza\siga\models\Alumno.class
 com\tecnodestreza\siga\models\Lapso_.class
+com\tecnodestreza\siga\models\dto\ConsultaNotasAlumnodto.class
 com\tecnodestreza\siga\models\Sexo_.class
 com\tecnodestreza\siga\services\IAlumnoService.class
 com\tecnodestreza\siga\models\Condicion.class
@@ -67,12 +69,14 @@ com\tecnodestreza\siga\models\Annio.class
 com\tecnodestreza\siga\services\IDocenteService.class
 com\tecnodestreza\siga\repo\INotaParcialRepo.class
 com\tecnodestreza\siga\repo\ICursoRepo.class
+com\tecnodestreza\siga\mappers\NotaParcialToConsultaNotasAlumnodtoMapper.class
 com\tecnodestreza\siga\models\dto\CedulaAlumnodto.class
 com\tecnodestreza\siga\models\Sexo.class
 com\tecnodestreza\siga\mappers\CursoDocentedtoToCursoDocenteMapper.class
 com\tecnodestreza\siga\models\dto\Alumnodto.class
 com\tecnodestreza\siga\models\Docente_.class
 com\tecnodestreza\siga\models\dto\Docentedto.class
+com\tecnodestreza\siga\models\dto\Variosdto.class
 com\tecnodestreza\siga\models\dto\NotaParcialdto.class
 com\tecnodestreza\siga\repo\ICursoDocenteRepo.class
 com\tecnodestreza\siga\models\Nacionalidad.class

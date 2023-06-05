@@ -39,7 +39,7 @@ public class IAlumnoServiceImpl implements IAlumnoService {
             }else{
                 representanteRepo.save(alumno.getRepresentante());
             }
-            optionalCurso=cursoRepo.consultarCursosPorParametros(alumno.getCurso().getAnnio(),
+            optionalCurso=cursoRepo.consultarCursoPorParametros(alumno.getCurso().getAnnio(),
                     alumno.getCurso().getSeccion(),alumno.getCurso().getPeriodoAcademico(),
                     alumno.getCurso().getTurno(),alumno.getCurso().getNivel());
            if(!optionalCurso.isPresent()) {

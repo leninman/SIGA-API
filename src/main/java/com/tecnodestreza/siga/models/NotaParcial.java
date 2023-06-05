@@ -13,7 +13,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "notas")
+@Table(name = "notas_parciales")
 public class NotaParcial implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

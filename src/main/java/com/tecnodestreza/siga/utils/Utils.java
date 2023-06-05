@@ -11,7 +11,7 @@ public class Utils {
 	
 	static String porcentajeNota;
 
-	private static ILapsoRepo lapsoRepo = null;
+	private static ILapsoRepo lapsoRepo;
 
 	public Utils(ILapsoRepo lapsoRepo) {
 		this.lapsoRepo = lapsoRepo;
@@ -20,11 +20,7 @@ public class Utils {
 
 	public static String calcularPorcentajeNota(String nota,String valor) {
 
-		Optional<Lapso> lapsoOptional=lapsoRepo.findLapsoByValor(valor);
-
-		String porcentaje=lapsoOptional.get().getPorcentaje();
-
-		Float porcentajeNota= (float) ((Integer.valueOf(nota))*(Integer.valueOf(porcentaje)));
+		Float porcentajeNota= (float) (((Integer.valueOf(nota))*(Integer.valueOf(valor))))/100;
 
 		return porcentajeNota.toString();
 	}

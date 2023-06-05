@@ -32,13 +32,13 @@ public class NotaController {
 
 
     @PostMapping("crear")
-    public ResponseEntity<Optional<NotasParcialesdto>> crear(@RequestBody NotasParcialesdto notasParciales) {
+    public ResponseEntity<List<NotaParcial>> crear(@RequestBody NotasParcialesdto notasParciales) {
 
         List<NotaParcial> notas=notasParciales.getNotasParcialesdto().stream().map(notaParcialdto ->
          new NotaParcialdtoToNotaParcialMapper(materiaService,docenteService,cursoService,alumnoService).apply(notaParcialdto)).collect(Collectors.toList());
 
-        notas.stream().map(notaParcial -> notaParcialService.registrarNotaParcial(notaParcial));
+        List<NotaParcial> notasRegistradas=notaParcialService.registrarNotasParciales(notas);
 
-        return null;
+        return ResponseEntity.ok().body(notasRegistradas);
     }
 }
