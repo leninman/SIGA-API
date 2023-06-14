@@ -9,5 +9,5 @@ import java.util.Optional;
 
 public interface INotaParcialService {
     List<NotaParcial> registrarNotasParciales(List<NotaParcial> notasParciales);
-    ConsultaNotasAlumnodto consultarNotasParciales(PersonaDocumentodto cedula);
+    Optional<ConsultaNotasAlumnodto> consultarNotasParciales(PersonaDocumentodto cedula,String lapso);
 }

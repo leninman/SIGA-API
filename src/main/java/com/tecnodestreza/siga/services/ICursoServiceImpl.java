@@ -6,6 +6,7 @@
 package com.tecnodestreza.siga.services;
 
 import com.tecnodestreza.siga.models.*;
+import com.tecnodestreza.siga.models.dto.PersonaDocumentodto;
 import com.tecnodestreza.siga.repo.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,7 +26,9 @@ public class ICursoServiceImpl implements ICursoService {
 
     private final ICursoRepo cursorepo;
     private final ICursoDocenteRepo cursoDocenteRepo;
+
     private final IAlumnoRepo alumnoRepo;
+    private final IDocenteRepo docenteRepo;
 
 
     @Override
@@ -64,5 +67,12 @@ public class ICursoServiceImpl implements ICursoService {
             alumnoRepo.save(alumno);
         }
         return curso.get();
+    }
+
+    @Override
+    public List<CursoDocente> consultarCursosPorDocente(PersonaDocumentodto cedula) {
+        Optional<Docente> docente=docenteRepo.findDocenteByTipoDocumentoAndNumeroDocumento(cedula.getTipoDocumento(),cedula.getNumeroDocumento());
+        Long idDocente=docente.get().getId();
+        return cursoDocenteRepo.consultarCursosPorDocente(idDocente);
     }
 }

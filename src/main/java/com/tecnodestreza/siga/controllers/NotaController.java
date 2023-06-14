@@ -2,7 +2,9 @@ package com.tecnodestreza.siga.controllers;
 
 import com.tecnodestreza.siga.mappers.NotaParcialdtoToNotaParcialMapper;
 import com.tecnodestreza.siga.models.NotaParcial;
+import com.tecnodestreza.siga.models.dto.ConsultaNotasAlumnodto;
 import com.tecnodestreza.siga.models.dto.NotasParcialesdto;
+import com.tecnodestreza.siga.models.dto.PersonaDocumentodto;
 import com.tecnodestreza.siga.services.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -41,4 +43,36 @@ public class NotaController {
 
         return ResponseEntity.ok().body(notasRegistradas);
     }
+
+    @GetMapping("consultar")
+    public ResponseEntity<Optional<ConsultaNotasAlumnodto>> consultar(@RequestBody PersonaDocumentodto cedula,@RequestParam(required = false) String lapso){
+        Optional<ConsultaNotasAlumnodto> consultaNotasAlumnodto=notaParcialService.consultarNotasParciales(cedula,lapso);
+        if(consultaNotasAlumnodto.isPresent()){
+            return ResponseEntity.ok().body(consultaNotasAlumnodto);
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

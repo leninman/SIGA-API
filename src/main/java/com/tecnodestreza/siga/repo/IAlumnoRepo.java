@@ -22,4 +22,9 @@ public interface IAlumnoRepo extends JpaRepository<Alumno, Long> {
                     + "WHERE a.activo=true")
     public List<Alumno> consultarAlumnos();
     Optional<Alumno> findAlumnoByTipoDocumentoAndNumeroDocumento(String tipoDocuemnto, String numeroDocumento);
+
+    @Query(value="SELECT a from Alumno a "
+            + "WHERE a.curso.id=?1")
+    List<Alumno> findAlumnosByCursoId(Long idCurso);
+
 }

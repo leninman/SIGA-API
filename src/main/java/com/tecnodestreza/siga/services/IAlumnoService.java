@@ -21,4 +21,5 @@ public interface IAlumnoService {
     List<Alumno> consultarAlumnos();
     Optional<Alumno> guardarAlumno(Alumno alumno,Long idAlumno);
     void desactivar(Long idAlumno,String condicion);
+    List<Alumno> alumnosPorCurso(Long idCurso);
 }

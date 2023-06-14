@@ -1,11 +1,13 @@
 package com.tecnodestreza.siga.controllers;
 
 import com.tecnodestreza.siga.mappers.CursoDocentedtoToCursoDocenteMapper;
+import com.tecnodestreza.siga.models.Alumno;
 import com.tecnodestreza.siga.models.Curso;
 
 import com.tecnodestreza.siga.models.CursoDocente;
 import com.tecnodestreza.siga.models.dto.CursoDocentedto;
 import com.tecnodestreza.siga.models.dto.Cursodto;
+import com.tecnodestreza.siga.models.dto.PersonaDocumentodto;
 import com.tecnodestreza.siga.services.ICursoService;
 import com.tecnodestreza.siga.services.IDocenteService;
 import com.tecnodestreza.siga.services.IMateriaService;
@@ -59,6 +61,12 @@ public class CursoController {
     public ResponseEntity<Optional<Curso>> cargarcurso(@RequestParam String[] cedulas,@RequestParam Long idcurso){
         Curso curso=cursoService.cargarcurso(cedulas,idcurso);
         return ResponseEntity.ok().body(Optional.of(curso));
+    }
+
+    @GetMapping(path = "/cursospordocente")
+    public ResponseEntity<List<CursoDocente>> cursospordocente(@RequestBody PersonaDocumentodto cedula) {
+        List<CursoDocente> cursosDocentes=cursoService.consultarCursosPorDocente(cedula);
+        return ResponseEntity.ok().body(cursosDocentes);
     }
 
 

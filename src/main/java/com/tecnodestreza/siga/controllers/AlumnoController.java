@@ -87,4 +87,14 @@ public class AlumnoController {
         alumnoservice.desactivar(idAlumno,condicion);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping(path = "/consultaralumnosporcurso")
+    public ResponseEntity<List<Alumno>> consultaralumnosporcurso(@RequestParam Long idcurso) {
+            List<Alumno> alumnos=alumnoservice.alumnosPorCurso(idcurso);
+            if (!alumnos.isEmpty()){
+                return ResponseEntity.status(HttpStatus.OK).body(alumnos);
+            }else{
+                return ResponseEntity.notFound().build();
+            }
+    }
 }

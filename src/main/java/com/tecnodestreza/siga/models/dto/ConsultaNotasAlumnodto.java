@@ -1,7 +1,15 @@
 package com.tecnodestreza.siga.models.dto;
 
-import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import java.util.List;
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class ConsultaNotasAlumnodto {
 
     private String tipoDocumentoAlumno;
@@ -12,7 +20,6 @@ public class ConsultaNotasAlumnodto {
     private String segundoApellidoAlumno;
     private String annio;
     private String periodo;
-    private String lapso;
     private String seccion;
     private String turno;
     private List<NotaConsultadto> notas;

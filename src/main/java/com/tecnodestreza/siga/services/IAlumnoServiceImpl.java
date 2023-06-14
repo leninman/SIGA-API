@@ -82,6 +82,11 @@ public class IAlumnoServiceImpl implements IAlumnoService {
     }
 
     @Override
+    public List<Alumno> alumnosPorCurso(Long idCurso) {
+        return alumnorepo.findAlumnosByCursoId(idCurso);
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public List<Alumno> consultarAlumnos() {
         return alumnorepo.consultarAlumnos();
