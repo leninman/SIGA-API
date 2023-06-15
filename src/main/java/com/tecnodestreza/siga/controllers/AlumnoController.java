@@ -68,7 +68,7 @@ public class AlumnoController {
         Alumno alumno=modelMapper.map(alumnodto,Alumno.class);
         Optional<Alumno> optionalAlumno=alumnoservice.consultarAlumnoPorCedula(alumno.getTipoDocumento(),alumno.getNumeroDocumento());
         if(optionalAlumno.isPresent()){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(alumnoservice.guardarAlumno(alumno,null));
     }
