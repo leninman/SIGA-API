@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface IVariosService {
     Variosdto obtenervarios();
+    List<Nacionalidad> obtenernacionalidades();
 
 }

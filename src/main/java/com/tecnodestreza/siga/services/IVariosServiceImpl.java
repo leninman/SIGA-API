@@ -6,7 +6,9 @@ import com.tecnodestreza.siga.repo.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+
 @RequiredArgsConstructor
 @Service
 public class IVariosServiceImpl implements IVariosService{
@@ -33,6 +35,18 @@ public class IVariosServiceImpl implements IVariosService{
                             sexoRepo.findAll(),
                             estadoCivilRepo.findAll(),
                             lapsoRepo.findAll());
+    }
+
+    @Override
+    public List<Nacionalidad> obtenernacionalidades() {
+        List<Nacionalidad> nacionalidads=nacionalidadRepo.findAll();
+        List<Nacionalidad> nacionalidades=new ArrayList<>();
+
+        for(Nacionalidad nacionalidad:nacionalidads){
+            nacionalidad.setPaisNac(nacionalidad.getPaisNac().toUpperCase());
+            nacionalidades.add(nacionalidad);
+        }
+        return nacionalidades;
     }
 
 }
