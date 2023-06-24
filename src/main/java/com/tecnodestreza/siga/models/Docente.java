@@ -57,6 +57,9 @@ public class Docente implements Serializable {
 	@Basic(optional = false)
 	private String direccion;
 	@Basic(optional = false)
+	@Column(name = "codigo_operadora_telefono")
+	private String codigoOperadoraTelefono;
+	@Basic(optional = false)
 	private String telefono;
 	@Basic(optional = false)
 	private String email;

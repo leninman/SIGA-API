@@ -66,7 +66,13 @@ public class Representante implements Serializable {
 	@Column(name = "direccion_laboral")
 	private String direccionLaboral;
 	@Basic(optional = false)
+	@Column(name = "codigo_operadora_telefono")
+	private String codigoOperadoraTelefono;
+	@Basic(optional = false)
 	private String telefono;
+	@Basic(optional = false)
+	@Column(name = "codigo_operadora_telefono_empresa")
+	private String codigoOperadoraTelefonoEmpresa;
 	@Basic(optional = false)
 	@Column(name = "telefono_empresa")
 	private String telefonoEmpresa;

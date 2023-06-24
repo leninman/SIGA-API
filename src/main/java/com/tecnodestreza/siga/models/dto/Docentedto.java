@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import javax.persistence.Basic;
+import javax.persistence.Column;
 import java.util.Date;
 
 @Getter
@@ -21,6 +24,7 @@ public class Docentedto {
     private Date fechaNacimiento;
     private String edad;
     private String direccion;
+    private String codigoOperadoraTelefono;
     private String telefono;
     private String email;
     private String lugarDeNacimiento;
