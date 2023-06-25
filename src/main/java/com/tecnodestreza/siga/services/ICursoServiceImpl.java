@@ -33,7 +33,7 @@ public class ICursoServiceImpl implements ICursoService {
 
     @Override
     public Optional<Curso> consultarCursoPorParametros(String annio, String seccion, String turno, String nivel, String periodoAcademico) {
-        return cursorepo.consultarCursoPorParametros(annio,seccion,turno,nivel,periodoAcademico);
+        return cursorepo.findCursoByAnnioAndSeccionAndTurnoAndNivelAndPeriodoAcademico(annio,seccion,turno,nivel,periodoAcademico);
     }
 
     @Override

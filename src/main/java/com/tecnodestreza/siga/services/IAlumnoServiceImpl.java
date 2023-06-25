@@ -39,12 +39,13 @@ public class IAlumnoServiceImpl implements IAlumnoService {
             }else{
                 representanteRepo.save(alumno.getRepresentante());
             }
-            optionalCurso=cursoRepo.consultarCursoPorParametros(alumno.getCurso().getAnnio(),
-                    alumno.getCurso().getSeccion(),alumno.getCurso().getPeriodoAcademico(),
-                    alumno.getCurso().getTurno(),alumno.getCurso().getNivel());
+            optionalCurso=cursoRepo.findCursoByAnnioAndSeccionAndTurnoAndNivelAndPeriodoAcademico(alumno.getCurso().getAnnio(),
+                    alumno.getCurso().getSeccion(),alumno.getCurso().getTurno(),
+                    alumno.getCurso().getNivel(),alumno.getCurso().getPeriodoAcademico());
            if(!optionalCurso.isPresent()) {
-               Curso curso=cursoRepo.save(alumno.getCurso());
-               alumno.setCurso(curso);
+            //   Curso curso=cursoRepo.save(alumno.getCurso());
+            //   alumno.setCurso(curso);
+               throw new RuntimeException("Curso no encontrado");
            }else {
                alumno.setCurso(optionalCurso.get());
            }

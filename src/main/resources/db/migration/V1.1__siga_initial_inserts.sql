@@ -302,22 +302,22 @@ INSERT INTO nacionalidad(`pais_nac`,`gentilicio_nac`,`iso_nac`)VALUES('Zambia','
 INSERT INTO nacionalidad(`pais_nac`,`gentilicio_nac`,`iso_nac`)VALUES('Zimbabue','ZIMBABUENSE','ZWE');
 
 INSERT INTO siga.cursos (annio,nivel,periodo_academico,seccion,turno) VALUES
-                                                                          ('1°','Media','2022-2023','A','Mañana'),
-                                                                          ('5°','Media','2022-2023','A','Mañana'),
-                                                                          ('1°','Media','2022-2023','B','Mañana'),
-                                                                          ('1°','Media','2022-2023','C','Mañana'),
-                                                                          ('2°','Media','2022-2023','A','Mañana'),
-                                                                          ('2°','Media','2022-2023','B','Mañana'),
-                                                                          ('2°','Media','2022-2023','C','Mañana'),
-                                                                          ('3°','Media','2022-2023','A','Mañana'),
-                                                                          ('3°','Media','2022-2023','B','Mañana'),
-                                                                          ('3°','Media','2022-2023','C','Mañana');
+                                                                          ('1°','MEDIA','2022-2023','A','MAÑANA'),
+                                                                          ('5°','MEDIA','2022-2023','A','MAÑANA'),
+                                                                          ('1°','MEDIA','2022-2023','B','MAÑANA'),
+                                                                          ('1°','MEDIA','2022-2023','C','MAÑANA'),
+                                                                          ('2°','MEDIA','2022-2023','A','MAÑANA'),
+                                                                          ('2°','MEDIA','2022-2023','B','MAÑANA'),
+                                                                          ('2°','MEDIA','2022-2023','C','MAÑANA'),
+                                                                          ('3°','MEDIA','2022-2023','A','MAÑANA'),
+                                                                          ('3°','MEDIA','2022-2023','B','MAÑANA'),
+                                                                          ('3°','MEDIA','2022-2023','C','MAÑANA');
 INSERT INTO siga.cursos (annio,nivel,periodo_academico,seccion,turno) VALUES
-                                                                          ('4°','Media','2022-2023','A','Mañana'),
-                                                                          ('4°','Media','2022-2023','B','Mañana'),
-                                                                          ('4°','Media','2022-2023','C','Mañana'),
-                                                                          ('5°','Media','2022-2023','B','Mañana'),
-                                                                          ('5°','Media','2022-2023','C','Mañana');
+                                                                          ('4°','MEDIA','2022-2023','A','MAÑANA'),
+                                                                          ('4°','MEDIA','2022-2023','B','MAÑANA'),
+                                                                          ('4°','MEDIA','2022-2023','C','MAÑANA'),
+                                                                          ('5°','MEDIA','2022-2023','B','MAÑANA'),
+                                                                          ('5°','MEDIA','2022-2023','C','MAÑANA');
 
 
 INSERT INTO siga.representantes (direccion,direccion_laboral,edad,email,empresa_donde_trabaja,activo,estado_civil,fecha_nacimiento,numero_documento,ocupacion,primer_apellido,primer_nombre,profesion,segundo_apellido,segundo_nombre,sexo,codigo_operadora_telefono,telefono,codigo_operadora_telefono_empresa,telefono_empresa,tipo_documento) VALUES
