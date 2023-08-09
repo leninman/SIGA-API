@@ -34,7 +34,7 @@ public class RepresentanteController {
     }
     //CONSULTA POR CEDULA
     @GetMapping(path = "/consultarporcedula")
-    public ResponseEntity<Optional<Representante>> consultarporcedula(PersonaDocumentodto personaDocumentodto) {
+    public ResponseEntity<Optional<Representante>> consultarporcedula(@RequestBody PersonaDocumentodto  personaDocumentodto) {
         return ResponseEntity.ok().body(iRepresentanteService.consultarRepresentantePorCedula(personaDocumentodto.getTipoDocumento(),personaDocumentodto.getNumeroDocumento()));
     }
 
