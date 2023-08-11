@@ -28,14 +28,20 @@ public class RepresentanteController {
         Representante representante=modelMapper.map(representantedto,Representante.class);
         Optional<Representante> optionalRepresentante=iRepresentanteService.consultarRepresentantePorCedula(representante.getTipoDocumento(),representante.getNumeroDocumento());
         if(optionalRepresentante.isPresent()){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(iRepresentanteService.crearRepresentante(representante));
     }
     //CONSULTA POR CEDULA
     @PostMapping(path = "/consultarporcedula")
     public ResponseEntity<Optional<Representante>> consultarporcedula(@RequestBody PersonaDocumentodto  personaDocumentodto) {
-        return ResponseEntity.ok().body(iRepresentanteService.consultarRepresentantePorCedula(personaDocumentodto.getTipoDocumento(),personaDocumentodto.getNumeroDocumento()));
+        Optional<Representante> representante=iRepresentanteService.consultarRepresentantePorCedula(personaDocumentodto.getTipoDocumento(),personaDocumentodto.getNumeroDocumento());
+
+        if(representante.isPresent()) {
+            return ResponseEntity.ok().body(representante);
+        }else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
     }
 
 }
