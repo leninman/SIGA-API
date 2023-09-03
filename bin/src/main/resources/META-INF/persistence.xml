@@ -8,10 +8,10 @@
     <class>com.virtualeduc.tuescuelavirtual.models.Secciones</class>
     <class>com.virtualeduc.tuescuelavirtual.models.Materias</class>
     <class>com.virtualeduc.tuescuelavirtual.models.Profesores</class>
-    <class>com.virtualeduc.tuescuelavirtual.models.AnnioEscolar</class>
+    <class>com.tecnodestreza.siga.models.AnnioEscolar</class>
     <class>com.virtualeduc.tuescuelavirtual.models.Empleados</class>
     <class>com.virtualeduc.tuescuelavirtual.models.Representantes</class>
-    <class>com.virtualeduc.tuescuelavirtual.models.Annio</class>
+    <class>com.tecnodestreza.siga.models.Annio</class>
     <class>com.virtualeduc.tuescuelavirtual.models.NotasPar</class>
     <class>com.virtualeduc.tuescuelavirtual.models.CursosProf</class>
     <class>com.virtualeduc.tuescuelavirtual.models.Annios</class>
