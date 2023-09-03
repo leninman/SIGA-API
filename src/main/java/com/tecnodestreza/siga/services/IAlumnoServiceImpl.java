@@ -33,41 +33,56 @@ public class IAlumnoServiceImpl implements IAlumnoService {
         Optional<Curso> optionalCurso;
         Alumno alumnoguardado=new Alumno();
         try {
-            optionalRepresentante=representanteRepo.findRepresentanteByTipoDocumentoAndNumeroDocumento(alumno.getRepresentante().getTipoDocumento(),alumno.getRepresentante().getNumeroDocumento());
-            if (optionalRepresentante.isPresent()) {
-                alumno.getRepresentante().setId(optionalRepresentante.get().getId());
-            }else{
-                representanteRepo.save(alumno.getRepresentante());
-            }
-            optionalCurso=cursoRepo.findCursoByAnnioAndSeccionAndTurnoAndNivelAndPeriodoAcademico(alumno.getCurso().getAnnio(),
-                    alumno.getCurso().getSeccion(),alumno.getCurso().getTurno(),
-                    alumno.getCurso().getNivel(),alumno.getCurso().getPeriodoAcademico());
-           if(!optionalCurso.isPresent()) {
-            //   Curso curso=cursoRepo.save(alumno.getCurso());
-            //   alumno.setCurso(curso);
-               throw new RuntimeException("Curso no encontrado");
-           }else {
-               alumno.setCurso(optionalCurso.get());
-           }
-            if(idAlumno!=null){  //MODIFICAR
-                Optional<Alumno> optionalAlumnoguardado=alumnorepo.findById(idAlumno);
-                alumno.setId(idAlumno);
-                if(optionalAlumnoguardado.isPresent()) {
+
+            if(idAlumno==null) { //GUARDAR
+                optionalRepresentante=representanteRepo.findRepresentanteByTipoDocumentoAndNumeroDocumento(alumno.getRepresentante().getTipoDocumento(),alumno.getRepresentante().getNumeroDocumento());
+                if (optionalRepresentante.isPresent()) {
+                    alumno.getRepresentante().setId(optionalRepresentante.get().getId());
+                }else{
+                    alumno.getRepresentante().setId(representanteRepo.save(alumno.getRepresentante()).getId());
+                }
+                optionalCurso = cursoRepo.findCursoByAnnioAndSeccionAndTurnoAndNivelAndPeriodoAcademico(alumno.getCurso().getAnnio(),
+                        alumno.getCurso().getSeccion(), alumno.getCurso().getTurno(),
+                        alumno.getCurso().getNivel(), alumno.getCurso().getPeriodoAcademico());
+                if (!optionalCurso.isPresent()) {
+                    throw new RuntimeException("Curso no encontrado");
+                } else {
+                    alumno.setCurso(optionalCurso.get());
+                }
+                alumno.setFechaCreacion(new Date());
+                if (alumno.getCondicion().equals("REGULAR")) {
+                    alumno.setActivo(true);
+                } else {
+                    alumno.setActivo(false);
+                }
+            } else { //MODIFICAR
+                Optional<Alumno> optionalAlumnoguardado = alumnorepo.findById(idAlumno);
+                if (optionalAlumnoguardado.isPresent()) {
+                    alumno.setId(optionalAlumnoguardado.get().getId());
                     alumno.setFechaCreacion(optionalAlumnoguardado.get().getFechaCreacion());
+                    alumno.setActivo(optionalAlumnoguardado.get().getActivo());
+                    Optional<Representante> optionalRepresentanteGuardado = representanteRepo.findById(optionalAlumnoguardado.get().getRepresentante().getId());
+                    if (optionalRepresentanteGuardado.isPresent()) {
+                        alumno.getRepresentante().setId(optionalRepresentanteGuardado.get().getId());
+                        representanteRepo.save(alumno.getRepresentante());
+                    }
+                    optionalCurso = cursoRepo.findCursoByAnnioAndSeccionAndTurnoAndNivelAndPeriodoAcademico(alumno.getCurso().getAnnio(),
+                            alumno.getCurso().getSeccion(), alumno.getCurso().getTurno(),
+                            alumno.getCurso().getNivel(), alumno.getCurso().getPeriodoAcademico());
+                    if (!optionalCurso.isPresent()) {
+                        throw new RuntimeException("Curso no encontrado");
+                    } else {
+                        alumno.setCurso(optionalCurso.get());
+                    }
+
                 }
             }
-            alumno.setFechaCreacion(new Date());
-            if(alumno.getCondicion().equals("REGULAR")){
-                alumno.setActivo(true);
-            }else{
-                alumno.setActivo(false);
-            }
+            alumnoguardado = alumnorepo.save(alumno);
 
-            alumnoguardado=alumnorepo.save(alumno);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return Optional.of(alumnoguardado);
+            return Optional.of(alumnoguardado);
     }
 
     @Override
