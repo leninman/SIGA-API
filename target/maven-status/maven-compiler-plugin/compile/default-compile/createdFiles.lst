@@ -1,6 +1,7 @@
 com\tecnodestreza\siga\repo\IRepresentanteRepo.class
 com\tecnodestreza\siga\services\IMateriaServiceImpl.class
 com\tecnodestreza\siga\models\Nivel.class
+com\tecnodestreza\siga\repo\IProfesionRepo.class
 com\tecnodestreza\siga\services\IVariosServiceImpl.class
 com\tecnodestreza\siga\models\dto\NotasParcialesdto.class
 com\tecnodestreza\siga\services\IMateriaService.class
@@ -11,11 +12,13 @@ com\tecnodestreza\siga\models\Nivel_.class
 com\tecnodestreza\siga\controllers\CursoController.class
 com\tecnodestreza\siga\models\Nacionalidad_.class
 com\tecnodestreza\siga\models\NotaParcial_.class
+com\tecnodestreza\siga\models\Profesion_.class
 com\tecnodestreza\siga\models\Curso.class
 com\tecnodestreza\siga\models\dto\NotaConsultadto.class
 com\tecnodestreza\siga\services\INotaParcialService.class
 com\tecnodestreza\siga\repo\IMateriaRepo.class
 com\tecnodestreza\siga\models\Representante.class
+com\tecnodestreza\siga\controllers\ProfesionController.class
 com\tecnodestreza\siga\models\Materia_.class
 com\tecnodestreza\siga\repo\ITurnoRepo.class
 com\tecnodestreza\siga\models\CursoDocente.class
@@ -36,6 +39,7 @@ com\tecnodestreza\siga\models\Seccion.class
 com\tecnodestreza\siga\models\Seccion_.class
 com\tecnodestreza\siga\repo\IDocenteRepo.class
 com\tecnodestreza\siga\models\Condicion_.class
+com\tecnodestreza\siga\models\Profesion.class
 com\tecnodestreza\siga\models\Materia.class
 com\tecnodestreza\siga\models\Alumno_.class
 com\tecnodestreza\siga\repo\IAnnioRepo.class

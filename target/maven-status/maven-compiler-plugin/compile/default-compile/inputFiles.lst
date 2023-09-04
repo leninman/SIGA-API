@@ -1,11 +1,13 @@
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\models\dto\Cursodto.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\repo\IEstadoCivilRepo.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\SigaApplication.java
+C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\models\Profesion.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\services\IMateriaService.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\services\IDocenteServiceImpl.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\models\dto\NotasParcialesdto.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\repo\INotaParcialRepo.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\repo\IDocenteRepo.java
+C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\repo\IProfesionRepo.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\repo\IMateriaRepo.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\repo\INacionalidadRepo.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\repo\ISexoRepo.java
@@ -14,6 +16,7 @@ C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\repo\ICondici
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\models\Lapso.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\models\Condicion.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\repo\INivelRepo.java
+C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\controllers\ProfesionController.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\models\CursoDocente.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\controllers\VariosController.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\models\NotaParcial.java

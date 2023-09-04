@@ -249,3 +249,11 @@ create table usuario_rol
     constraint fk_rol
         foreign key (rol_id) references roles (id)
 );
+
+create table profesiones
+(
+    id                bigint auto_increment
+        primary key,
+    profesion             varchar(256) null
+
+);

@@ -356,6 +356,28 @@ INSERT INTO siga.cursos_docentes (id, docente, curso, materia) VALUES (1, 1, 15,
 INSERT INTO siga.cursos_docentes (id, docente, curso, materia) VALUES (2, 2, 15, 30);
 
 
+INSERT INTO profesiones (profesion) VALUES
+                                                     ('ABOGADO'),
+                                                     ('ADMINISTRADOR'),
+                                                     ('ARQUITECTO'),
+                                                     ('BIBLIOTECARIO'),
+                                                     ('BIOLOGO'),
+                                                     ('ECONOMISTA'),
+                                                     ('FARMACEÚTICO'),
+                                                     ('FILÓSOFO'),
+                                                     ('FISIOTERAPEUTA'),
+                                                     ('GEÓGRAFO');
+INSERT INTO profesiones (profesion) VALUES
+                                                     ('GEÓLOGO'),
+                                                     ('HISTORIADOR'),
+                                                     ('INGENIERO'),
+                                                     ('LICENCIADO'),
+                                                     ('MÉDICO'),
+                                                     ('PROFESOR'),
+                                                     ('PROFESORA'),
+                                                     ('LICENCIADA');
+
+
 
 
 
