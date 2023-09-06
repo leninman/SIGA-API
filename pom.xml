@@ -124,10 +124,50 @@
 	<!-- Development environment -->
 	<profile>
 		<id>local</id>
+		<activation>
+			<activeByDefault>true</activeByDefault>
+		</activation>
 		<properties>
-			<DatabaseBasicRoute>http://localhost:3306</DatabaseBasicRoute>
+			<build.profile.id>local</build.profile.id>
+			<profileActive>local</profileActive>
 		</properties>
+		<build>
+			<resources>
+				<resource>
+					<directory>
+						src/main/resources
+					</directory>
+					<filtering>true</filtering>
+					<excludes>
+						<exclude>application-stage.properties</exclude>
+					</excludes>
+				</resource>
+			</resources>
+		</build>
 	</profile>
+		<profile>
+			<id>stage</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<build.profile.id>stage</build.profile.id>
+				<profileActive>stage</profileActive>
+			</properties>
+			<build>
+				<resources>
+					<resource>
+						<directory>
+							src/main/resources
+						</directory>
+						<filtering>true</filtering>
+						<excludes>
+							<exclude>application-local.properties</exclude>
+						</excludes>
+					</resource>
+				</resources>
+			</build>
+		</profile>
 	</profiles>
 
 
