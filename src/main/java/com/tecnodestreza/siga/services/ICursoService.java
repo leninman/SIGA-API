@@ -7,6 +7,7 @@ package com.tecnodestreza.siga.services;
 
 
 import com.tecnodestreza.siga.models.*;
+import com.tecnodestreza.siga.models.dto.CedulaAlumnodto;
 import com.tecnodestreza.siga.models.dto.PersonaDocumentodto;
 
 
@@ -23,6 +24,7 @@ public interface ICursoService {
       Optional<Curso>  crear(Curso curso);
       List<Curso> listarcursos();
       Optional<CursoDocente> asignarcursos(CursoDocente cursoDocente);
-      Curso cargarcurso(String[] cedulas, Long idcurso);
+      Curso cargarcurso(CedulaAlumnodto cedulas, Long idcurso);
       List<CursoDocente> consultarCursosPorDocente(PersonaDocumentodto cedula);
+      void asignarNumeroDeLista(List<Alumno> alumnos);
 }

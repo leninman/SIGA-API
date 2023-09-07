@@ -74,6 +74,7 @@ create table alumnos
     lugar_de_nacimiento   varchar(20) null,
     nacionalidad          varchar(20) null,
     curso            bigint       not null,
+    numero_lista     bigint       null,
     representante    bigint       not null,
     constraint fk_curso
         foreign key (curso) references cursos (id),

@@ -6,12 +6,14 @@
 package com.tecnodestreza.siga.services;
 
 import com.tecnodestreza.siga.models.*;
+import com.tecnodestreza.siga.models.dto.CedulaAlumnodto;
 import com.tecnodestreza.siga.models.dto.PersonaDocumentodto;
 import com.tecnodestreza.siga.repo.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -58,10 +60,12 @@ public class ICursoServiceImpl implements ICursoService {
     }
 
     @Override
-    public Curso cargarcurso(String[] cedulas, Long idcurso) {
+    public Curso cargarcurso(CedulaAlumnodto cedulasin, Long idcurso) {
+        List<PersonaDocumentodto> cedulasAlumnos = cedulasin.getCedulas();
         Optional<Curso> curso=cursorepo.findById(idcurso);
-        List<Alumno> alumnos=Arrays.stream(cedulas).map(cedula ->
-                (alumnoRepo.findAlumnoByTipoDocumentoAndNumeroDocumento(cedula.substring(0,1),cedula.substring(1))).get()).collect(Collectors.toList());
+        List<Alumno> alumnos=cedulasAlumnos.stream().map(cedulaAlumno ->
+                (alumnoRepo.findAlumnoByTipoDocumentoAndNumeroDocumento(cedulaAlumno.getTipoDocumento(),cedulaAlumno.getNumeroDocumento())).get()).collect(Collectors.toList());
+        asignarNumeroDeLista(alumnos);
         for (Alumno alumno:alumnos){
             alumno.setCurso(curso.get());
             alumnoRepo.save(alumno);
@@ -74,5 +78,21 @@ public class ICursoServiceImpl implements ICursoService {
         Optional<Docente> docente=docenteRepo.findDocenteByTipoDocumentoAndNumeroDocumento(cedula.getTipoDocumento(),cedula.getNumeroDocumento());
         Long idDocente=docente.get().getId();
         return cursoDocenteRepo.consultarCursosPorDocente(idDocente);
+    }
+
+    @Override
+    public void asignarNumeroDeLista(List<Alumno> alumnos) {
+        Long numLista= 1L;
+       alumnos.sort(new Comparator<Alumno>() {
+            @Override
+            public int compare(Alumno o1, Alumno o2) {
+                return o1.getNumeroDocumento().compareTo(o2.getNumeroDocumento());
+            }
+
+        });
+       for(Alumno alumno:alumnos){
+           alumno.setNumeroLista(numLista);
+           numLista++;
+       }
     }
 }

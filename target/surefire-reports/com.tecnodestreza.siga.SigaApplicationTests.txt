@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.tecnodestreza.siga.SigaApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 9.562 s - in com.tecnodestreza.siga.SigaApplicationTests
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 89.883 s - in com.tecnodestreza.siga.SigaApplicationTests
