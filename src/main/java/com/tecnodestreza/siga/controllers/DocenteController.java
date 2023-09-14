@@ -3,8 +3,10 @@ package com.tecnodestreza.siga.controllers;
 
 
 
+import com.tecnodestreza.siga.models.Alumno;
 import com.tecnodestreza.siga.models.Docente;
 import com.tecnodestreza.siga.models.dto.Docentedto;
+import com.tecnodestreza.siga.models.dto.ListadoAlumnosdto;
 import com.tecnodestreza.siga.services.IDocenteService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -13,7 +15,9 @@ import org.springframework.http.ResponseEntity;
 //import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @RequiredArgsConstructor
@@ -22,6 +26,14 @@ import java.util.Optional;
 @CrossOrigin(origins = {"*"})
 public class DocenteController {
     private final IDocenteService docenteService;
+
+
+    //CONSULTA LA LISTA COMPLETA DE DOCENTES ACTIVOS
+    @GetMapping(path = "/listado")
+    public ResponseEntity<List<Docente>> listado() {
+       List<Docente> docentes=docenteService.consultarDocentes();
+        return ResponseEntity.ok().body(docentes);
+    }
 
   //  @PreAuthorize("hasRole('DIRECTOR') || hasRole('ADMINISTRATIVO')")
     @PostMapping("crear")

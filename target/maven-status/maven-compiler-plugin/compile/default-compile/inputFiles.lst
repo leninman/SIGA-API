@@ -22,6 +22,7 @@ C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\controllers\V
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\models\NotaParcial.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\models\Docente.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\models\Turno.java
+C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\models\dto\ListadoDocentesdto.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\models\dto\Alumnodto.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\repo\IAnnioRepo.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\mappers\NotaParcialdtoToNotaParcialMapper.java

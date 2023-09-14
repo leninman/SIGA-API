@@ -36,6 +36,8 @@ public class Docentedto {
     private String estadoCivil;
     private String pregrado1;
     private String pregrado2;
+    private String postgrado1;
+    private String postgrado2;
     private String curso1;
     private String curso2;
     private String curso3;
@@ -43,4 +45,5 @@ public class Docentedto {
     private String graduadoPregrado1;
     private String categoria;
     private Integer tiempoDeServicio;
+    private String asignaturasEspecializadas;
 }

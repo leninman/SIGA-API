@@ -86,6 +86,8 @@ public class Docente implements Serializable {
 	@Basic(optional = false)
 	private String pregrado1;
 	private String pregrado2;
+	private String postgrado1;
+	private String postgrado2;
 	private String curso1;
 	private String curso2;
 	private String curso3;
@@ -97,6 +99,8 @@ public class Docente implements Serializable {
 	@Basic(optional = false)
 	@Column(name = "tiempo_de_servicio")
 	private Integer tiempoDeServicio;
+	@Column(name = "asignaturas_especializadas")
+	private String asignaturasEspecializadas;
 	@PrePersist
 	public void prePersist() {
 		fechaCreacion = new Date();

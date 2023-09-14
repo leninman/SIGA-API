@@ -114,7 +114,8 @@ create table docentes (
     activo bit not null,
     condicion varchar(15) not null,
     lugar_de_nacimiento   varchar(20) null,
-    nacionalidad          varchar(20) null
+    nacionalidad          varchar(20) null,
+    asignaturas_especializadas      varchar(500) null
 );
 
 

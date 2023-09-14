@@ -79,6 +79,7 @@ com\tecnodestreza\siga\SigaApplication.class
 com\tecnodestreza\siga\models\NotaParcial.class
 com\tecnodestreza\siga\services\IVariosService.class
 com\tecnodestreza\siga\models\dto\ListadoAlumnosdto.class
+com\tecnodestreza\siga\models\dto\ListadoDocentesdto.class
 com\tecnodestreza\siga\repo\INotaParcialRepo.class
 com\tecnodestreza\siga\repo\ICursoRepo.class
 com\tecnodestreza\siga\models\dto\CedulaAlumnodto.class
