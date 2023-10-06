@@ -30,7 +30,7 @@ INSERT INTO materias (codigo,nombre,annio,nivel) VALUES ('GIN3MED','GRUPOS DE IN
                                                         ('EFI5MED','EDUCACION FISICA','5°','MEDIA');
 INSERT INTO materias (codigo,nombre,annio,nivel) VALUES ('FIS5MED','FISICA','5°','MEDIA'),
                                                         ('QUI5MED','QUIMICA','5°','MEDIA'),
-                                                        ('BIO5MED','BILOGIA','5°','MEDIA'),
+                                                        ('BIO5MED','BIOLOGIA','5°','MEDIA'),
                                                         ('CST5MED','CIENCIAS DE LA TIERRA','5°','MEDIA'),
                                                         ('GHC5MED','GEOGRAFIA, HISTORIA Y CIUDADANIA','5°','MEDIA');
 INSERT INTO materias (codigo,nombre,annio,nivel) VALUES ('FSN5MED','FORMACIÓN PARA LA SOBERANIA NACIONAL','5°','MEDIA'),
@@ -42,7 +42,7 @@ INSERT INTO materias (codigo,nombre,annio,nivel) VALUES ('GIN2MED','GRUPOS DE IN
                                                         ('GIN1MED','GRUPOS DE INTERES','1°','MEDIA'),
                                                         ('GIN4MED','GRUPOS DE INTERES','4°','MEDIA'),
                                                         ('ORI3MED','ORIENTACION Y CONVIVENCIA','3°','MEDIA'),
-                                                        ('ORI4MED','ORIENTACION Y CONVIENCIA','4°','MEDIA');
+                                                        ('ORI4MED','ORIENTACION Y CONVIVENCIA','4°','MEDIA');
 INSERT INTO materias (codigo,nombre,annio,nivel) VALUES ('CAS4MED','CASTELLANO','4°','MEDIA'),
                                                         ('EFI4MED','EDUCACION FISICA','4°','MEDIA'),
                                                         ('FIS4MED','FISICA','4°','MEDIA'),

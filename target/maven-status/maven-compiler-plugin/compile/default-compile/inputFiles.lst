@@ -42,6 +42,7 @@ C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\mappers\Curso
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\models\Representante.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\models\Sexo.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\models\Materia.java
+C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\controllers\MateriaController.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\models\dto\ConsultaNotasAlumnodto.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\controllers\DocenteController.java
 C:\Gestion academica\SIGA-API\src\main\java\com\tecnodestreza\siga\services\IDocenteService.java

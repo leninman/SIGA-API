@@ -7,6 +7,7 @@ import com.tecnodestreza.siga.models.Alumno;
 import com.tecnodestreza.siga.models.Docente;
 import com.tecnodestreza.siga.models.dto.Docentedto;
 import com.tecnodestreza.siga.models.dto.ListadoAlumnosdto;
+import com.tecnodestreza.siga.models.dto.PersonaDocumentodto;
 import com.tecnodestreza.siga.services.IDocenteService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -45,6 +46,26 @@ public class DocenteController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(docenteService.guardarDocente(docente,null));
+    }
+
+    //CONSULTA POR CEDULA
+    @GetMapping(path = "/consultarporcedula",
+            produces = "application/json")
+    public ResponseEntity<Optional<Docente>> consultarporcedula(@RequestBody PersonaDocumentodto personaDocumentodto) {
+        Optional<Docente> docente = docenteService.consultarDocentePorCedula(personaDocumentodto.getTipoDocumento(), personaDocumentodto.getNumeroDocumento());
+        if (!docente.isPresent())
+            return ResponseEntity.ok(Optional.empty());
+        else
+            return ResponseEntity.ok().body(docente);
+    }
+    @GetMapping(path = "/consultarporid/{id}",
+            produces = "application/json")
+    public ResponseEntity<Optional<Docente>> consultarporid(@PathVariable Long id) {
+        Optional<Docente> docente = docenteService.consultarDocentePorId(id);
+        if (!docente.isPresent())
+            return ResponseEntity.ok(Optional.empty());
+        else
+            return ResponseEntity.ok().body(docente);
     }
 
 

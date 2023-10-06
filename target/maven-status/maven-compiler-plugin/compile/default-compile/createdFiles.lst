@@ -36,6 +36,7 @@ com\tecnodestreza\siga\controllers\AlumnoController.class
 com\tecnodestreza\siga\models\Turno.class
 com\tecnodestreza\siga\models\EstadoCivil.class
 com\tecnodestreza\siga\repo\INivelRepo.class
+com\tecnodestreza\siga\controllers\MateriaController.class
 com\tecnodestreza\siga\models\Annio.class
 com\tecnodestreza\siga\services\IDocenteService.class
 com\tecnodestreza\siga\mappers\NotaParcialToConsultaNotasAlumnodtoMapper.class
