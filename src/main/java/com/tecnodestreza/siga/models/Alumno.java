@@ -75,6 +75,9 @@ public class Alumno implements Serializable {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "curso",referencedColumnName ="id" )
 	private Curso curso;
+	@Column(name = "numero_lista")
+	private Long numeroLista;
+
 	@Basic(optional = false)
 	@Column(name = "fecha_creacion")
 	@Temporal(TemporalType.DATE)

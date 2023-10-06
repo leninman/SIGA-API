@@ -5,6 +5,7 @@ import com.tecnodestreza.siga.models.Alumno;
 import com.tecnodestreza.siga.models.Curso;
 
 import com.tecnodestreza.siga.models.CursoDocente;
+import com.tecnodestreza.siga.models.dto.CedulaAlumnodto;
 import com.tecnodestreza.siga.models.dto.CursoDocentedto;
 import com.tecnodestreza.siga.models.dto.Cursodto;
 import com.tecnodestreza.siga.models.dto.PersonaDocumentodto;
@@ -58,7 +59,7 @@ public class CursoController {
         return ResponseEntity.ok().body(cursoDocenteGuardado);
     }
     @PostMapping("/cargarcurso")
-    public ResponseEntity<Optional<Curso>> cargarcurso(@RequestParam String[] cedulas,@RequestParam Long idcurso){
+    public ResponseEntity<Optional<Curso>> cargarcurso(@RequestBody CedulaAlumnodto cedulas, @RequestParam Long idcurso){
         Curso curso=cursoService.cargarcurso(cedulas,idcurso);
         return ResponseEntity.ok().body(Optional.of(curso));
     }

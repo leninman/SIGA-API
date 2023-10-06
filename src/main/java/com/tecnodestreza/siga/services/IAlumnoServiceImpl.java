@@ -25,6 +25,8 @@ public class IAlumnoServiceImpl implements IAlumnoService {
     IRepresentanteRepo representanteRepo;
     @Autowired
     ICursoRepo cursoRepo;
+    @Autowired
+    ICursoService cursoService;
     @Transactional
     @Override
     @ResponseStatus(HttpStatus.CREATED)
@@ -72,6 +74,7 @@ public class IAlumnoServiceImpl implements IAlumnoService {
                     if (!optionalCurso.isPresent()) {
                         throw new RuntimeException("Curso no encontrado");
                     } else {
+                        reordenarListas(optionalCurso.get().getId(),alumno);
                         alumno.setCurso(optionalCurso.get());
                     }
 
@@ -100,6 +103,16 @@ public class IAlumnoServiceImpl implements IAlumnoService {
     @Override
     public List<Alumno> alumnosPorCurso(Long idCurso) {
         return alumnorepo.findAlumnosByCursoId(idCurso);
+    }
+
+    @Override
+    public void reordenarListas(Long idCursoNuevo, Alumno nuevoAlumno) {
+        List<Alumno> alumnosCursoNuevo = alumnorepo.findAlumnosByCursoId(idCursoNuevo);
+        List<Alumno> alumnnosCursoViejo = alumnorepo.findAlumnosByCursoId(nuevoAlumno.getCurso().getId());
+        alumnnosCursoViejo.remove(nuevoAlumno);
+        alumnosCursoNuevo.add(nuevoAlumno);
+        cursoService.asignarNumeroDeLista(alumnosCursoNuevo);
+        cursoService.asignarNumeroDeLista(alumnnosCursoViejo);
     }
 
     @Override

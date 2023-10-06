@@ -21,12 +21,6 @@ import java.util.List;
 public class VariosController {
     private final IVariosService variosService;
 
-   // @GetMapping
-   // public ResponseEntity<Variosdto> varios() {
-     //   Variosdto variosdto=variosService.obtenervarios();
-      //  return ResponseEntity.ok().body(variosdto);
-   // }
-
     @GetMapping
     public ResponseEntity<List<Nacionalidad>> nacionalidades() {
         List<Nacionalidad> nacionalidads=variosService.obtenernacionalidades();

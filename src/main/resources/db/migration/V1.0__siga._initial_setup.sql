@@ -74,6 +74,7 @@ create table alumnos
     lugar_de_nacimiento   varchar(20) null,
     nacionalidad          varchar(20) null,
     curso            bigint       not null,
+    numero_lista     bigint       null,
     representante    bigint       not null,
     constraint fk_curso
         foreign key (curso) references cursos (id),
@@ -113,7 +114,8 @@ create table docentes (
     activo bit not null,
     condicion varchar(15) not null,
     lugar_de_nacimiento   varchar(20) null,
-    nacionalidad          varchar(20) null
+    nacionalidad          varchar(20) null,
+    asignaturas_especializadas      varchar(500) null
 );
 
 
@@ -248,4 +250,12 @@ create table usuario_rol
         foreign key (usuario_id) references usuarios (id),
     constraint fk_rol
         foreign key (rol_id) references roles (id)
+);
+
+create table profesiones
+(
+    id                bigint auto_increment
+        primary key,
+    profesion             varchar(256) null
+
 );

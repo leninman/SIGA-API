@@ -22,4 +22,5 @@ public interface IAlumnoService {
     Optional<Alumno> guardarAlumno(Alumno alumno,Long idAlumno);
     void desactivar(Long idAlumno,String condicion);
     List<Alumno> alumnosPorCurso(Long idCurso);
+    void reordenarListas(Long idCurso,Alumno nuevoAlumno);
 }

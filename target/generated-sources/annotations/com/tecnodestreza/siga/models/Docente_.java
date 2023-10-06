@@ -5,7 +5,7 @@ import javax.annotation.Generated;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2023-09-03T16:58:37")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2023-10-06T10:44:12")
 @StaticMetamodel(Docente.class)
 public class Docente_ { 
 
@@ -21,6 +21,7 @@ public class Docente_ {
     public static volatile SingularAttribute<Docente, String> nacionalidad;
     public static volatile SingularAttribute<Docente, String> pregrado1;
     public static volatile SingularAttribute<Docente, String> pregrado2;
+    public static volatile SingularAttribute<Docente, String> asignaturasEspecializadas;
     public static volatile SingularAttribute<Docente, Long> id;
     public static volatile SingularAttribute<Docente, String> numeroDocumento;
     public static volatile SingularAttribute<Docente, String> telefono;
@@ -33,6 +34,8 @@ public class Docente_ {
     public static volatile SingularAttribute<Docente, String> estadoCivil;
     public static volatile SingularAttribute<Docente, String> edad;
     public static volatile SingularAttribute<Docente, String> condicion;
+    public static volatile SingularAttribute<Docente, String> postgrado1;
+    public static volatile SingularAttribute<Docente, String> postgrado2;
     public static volatile SingularAttribute<Docente, String> tipoDocumento;
     public static volatile SingularAttribute<Docente, Date> fechaIngreso;
     public static volatile SingularAttribute<Docente, String> lugarDeNacimiento;
