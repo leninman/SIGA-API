@@ -370,12 +370,20 @@ INSERT INTO profesiones (profesion) VALUES
 INSERT INTO profesiones (profesion) VALUES
                                                      ('GEÓLOGO'),
                                                      ('HISTORIADOR'),
-                                                     ('INGENIERO'),
                                                      ('LICENCIADO'),
                                                      ('MÉDICO'),
                                                      ('PROFESOR'),
                                                      ('PROFESORA'),
                                                      ('LICENCIADA');
+INSERT INTO profesiones (profesion) VALUES
+                                        ('INGENIERO ELECTRICISTA'),
+                                        ('INGENIERO ELECTRÓNICO'),
+                                        ('INGENIERO DE SISTEMAS'),
+                                        ('INGENIERO CIVIL'),
+                                        ('INGENIERO EN TELECOMUNICACIONES'),
+                                        ('INGENIERO QUIMICO'),
+                                        ('INGENIERO EN INFORMÁTICA'),
+                                        ('INGENIERO METALÚRGICO');
 
 
 
