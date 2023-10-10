@@ -47,6 +47,12 @@ public class DocenteController {
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(docenteService.guardarDocente(docente,null));
     }
+    @PutMapping("modificar/{idDocente}")
+    public ResponseEntity<Optional<Docente>> modificar(@RequestBody Docentedto docentedto, @PathVariable Long idDocente) {
+        ModelMapper modelMapper=new ModelMapper();
+        Docente docente=modelMapper.map(docentedto,Docente.class);
+        return ResponseEntity.status(HttpStatus.OK).body(docenteService.guardarDocente(docente,idDocente));
+    }
 
     //CONSULTA POR CEDULA
     @GetMapping(path = "/consultarporcedula",
