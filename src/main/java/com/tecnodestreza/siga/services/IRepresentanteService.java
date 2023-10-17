@@ -16,4 +16,5 @@ import java.util.Optional;
 public interface IRepresentanteService {
     public Optional<Representante> consultarRepresentantePorCedula(String tipodocumento, String numerodocumento);
     public Optional<Representante> crearRepresentante(Representante representante);
+    void desactivar(Long idRepresentante);
 }

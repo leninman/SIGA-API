@@ -5,6 +5,7 @@
  */
 package com.tecnodestreza.siga.services;
 
+import com.tecnodestreza.siga.models.Docente;
 import com.tecnodestreza.siga.models.Representante;
 import com.tecnodestreza.siga.repo.IRepresentanteRepo;
 import lombok.RequiredArgsConstructor;
@@ -28,5 +29,14 @@ public class IRepresentanteServiceImpl implements IRepresentanteService {
     @Override
     public Optional<Representante> crearRepresentante(Representante representante) {
         return Optional.of(representanteRepo.save(representante));
+    }
+
+    @Override
+    public void desactivar(Long idRepresentante) {
+        Optional<Representante> representante=representanteRepo.findById(idRepresentante);
+        if(representante.isPresent()){
+            representante.get().setActivo(false);
+            representanteRepo.save(representante.get());
+        }
     }
 }

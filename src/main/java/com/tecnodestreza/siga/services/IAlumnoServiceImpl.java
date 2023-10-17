@@ -27,6 +27,8 @@ public class IAlumnoServiceImpl implements IAlumnoService {
     ICursoRepo cursoRepo;
     @Autowired
     ICursoService cursoService;
+    @Autowired
+    IRepresentanteService representanteService;
     @Transactional
     @Override
     @ResponseStatus(HttpStatus.CREATED)
@@ -93,10 +95,15 @@ public class IAlumnoServiceImpl implements IAlumnoService {
         Optional<Alumno> alumno=alumnorepo.findById(idAlumno);
         if(alumno.isPresent()){
             alumno.get().setActivo(false);
-            alumno.get().setCondicion(condicion);
-        }
-        if(alumno.isPresent()) {
+            alumno.get().setCondicion(condicion.toUpperCase());
             alumnorepo.save(alumno.get());
+            Optional<Representante> representante= Optional.ofNullable(alumno.get().getRepresentante());
+            //Busca si el representante tiene algun otro alumno relacionado
+            //Si no lo tiene desactiva el representante
+            List<Alumno> alumnos=alumnorepo.consultarAlumnosPorRepresentante(representante.get().getId());
+            if (alumnos.isEmpty()){
+                representanteService.desactivar(representante.get().getId());
+            }
         }
     }
 

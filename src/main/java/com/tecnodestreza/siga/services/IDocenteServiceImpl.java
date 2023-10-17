@@ -53,10 +53,9 @@ public class IDocenteServiceImpl implements IDocenteService{
         Optional<Docente> docente=docenteRepo.findById(idDocente);
         if(docente.isPresent()){
             docente.get().setActivo(false);
-            docente.get().setCondicion(condicion);
-        }
-        if(docente.isPresent()) {
+            docente.get().setCondicion(condicion.toUpperCase());
             docenteRepo.save(docente.get());
         }
+
     }
 }

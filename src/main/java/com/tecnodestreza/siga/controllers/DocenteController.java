@@ -74,5 +74,13 @@ public class DocenteController {
             return ResponseEntity.ok().body(docente);
     }
 
+    //DESACTIVAR
+    // @PreAuthorize("hasRole('DIRECTOR') || hasRole('ADMINISTRATIVO')")
+    @PutMapping("desactivar/{idDocente}/{condicion}")
+    public ResponseEntity<Optional<Alumno>> desactivar(@PathVariable Long idDocente,@PathVariable String condicion) {
+        docenteService.desactivar(idDocente,condicion);
+        return ResponseEntity.noContent().build();
+    }
+
 
 }
