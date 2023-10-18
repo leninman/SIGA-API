@@ -43,7 +43,7 @@ public class DocenteController {
         Docente docente=modelMapper.map(docentedto,Docente.class);
         Optional<Docente> optionalDocente=docenteService.consultarDocentePorCedula(docente.getTipoDocumento(),docente.getNumeroDocumento());
         if(optionalDocente.isPresent()){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(docenteService.guardarDocente(docente,null));
     }
