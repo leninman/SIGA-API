@@ -51,6 +51,10 @@ public class DocenteController {
     public ResponseEntity<Optional<Docente>> modificar(@RequestBody Docentedto docentedto, @PathVariable Long idDocente) {
         ModelMapper modelMapper=new ModelMapper();
         Docente docente=modelMapper.map(docentedto,Docente.class);
+        Optional<Docente> optionalDocente=docenteService.consultarDocentePorCedula(docente.getTipoDocumento(),docente.getNumeroDocumento());
+        if(optionalDocente.isPresent()){
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        }
         return ResponseEntity.status(HttpStatus.OK).body(docenteService.guardarDocente(docente,idDocente));
     }
 

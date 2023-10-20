@@ -78,6 +78,10 @@ public class AlumnoController {
     public ResponseEntity<Optional<Alumno>> modificar(@RequestBody Alumnodto alumnodto, @PathVariable Long idAlumno) {
         ModelMapper modelMapper=new ModelMapper();
         Alumno alumno=modelMapper.map(alumnodto,Alumno.class);
+        Optional<Alumno> optionalAlumno=alumnoservice.consultarAlumnoPorCedula(alumno.getTipoDocumento(),alumno.getNumeroDocumento());
+        if(optionalAlumno.isPresent()){
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        }
         return ResponseEntity.status(HttpStatus.OK).body(alumnoservice.guardarAlumno(alumno,idAlumno));
     }
     //DESACTIVAR

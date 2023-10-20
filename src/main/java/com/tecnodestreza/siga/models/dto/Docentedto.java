@@ -219,7 +219,9 @@ public class Docentedto {
     }
 
     public void setPregrado2(String pregrado2) {
-        this.pregrado2 = pregrado2.toUpperCase();
+        if(pregrado2!=null) {
+            this.pregrado2 = pregrado2.toUpperCase();
+        }
     }
 
     public String getPostgrado1() {
@@ -227,7 +229,9 @@ public class Docentedto {
     }
 
     public void setPostgrado1(String postgrado1) {
-        this.postgrado1 = postgrado1.toUpperCase();
+        if(postgrado1!=null) {
+            this.postgrado1 = postgrado1.toUpperCase();
+        }
     }
 
     public String getPostgrado2() {
@@ -235,7 +239,9 @@ public class Docentedto {
     }
 
     public void setPostgrado2(String postgrado2) {
-        this.postgrado2 = postgrado2.toUpperCase();
+        if(postgrado2!=null) {
+            this.postgrado2 = postgrado2.toUpperCase();
+        }
     }
 
     public String getCurso1() {
@@ -243,7 +249,9 @@ public class Docentedto {
     }
 
     public void setCurso1(String curso1) {
-        this.curso1 = curso1.toUpperCase();
+        if(curso1!=null) {
+            this.curso1 = curso1.toUpperCase();
+        }
     }
 
     public String getCurso2() {
@@ -251,7 +259,9 @@ public class Docentedto {
     }
 
     public void setCurso2(String curso2) {
-        this.curso2 = curso2.toUpperCase();
+        if(curso2!=null) {
+            this.curso2 = curso2.toUpperCase();
+        }
     }
 
     public String getCurso3() {
@@ -259,7 +269,9 @@ public class Docentedto {
     }
 
     public void setCurso3(String curso3) {
-        this.curso3 = curso3.toUpperCase();
+        if(curso3!=null) {
+            this.curso3 = curso3.toUpperCase();
+        }
     }
 
     public String getCurso4() {
@@ -267,7 +279,9 @@ public class Docentedto {
     }
 
     public void setCurso4(String curso4) {
-        this.curso4 = curso4.toUpperCase();
+        if(curso4!=null) {
+            this.curso4 = curso4.toUpperCase();
+        }
     }
 
     public String getGraduadoPregrado1() {
@@ -275,7 +289,9 @@ public class Docentedto {
     }
 
     public void setGraduadoPregrado1(String graduadoPregrado1) {
-        this.graduadoPregrado1 = graduadoPregrado1.toUpperCase();
+        if(graduadoPregrado1!=null) {
+            this.graduadoPregrado1 = graduadoPregrado1.toUpperCase();
+        }
     }
 
     public String getCategoria() {
@@ -283,7 +299,9 @@ public class Docentedto {
     }
 
     public void setCategoria(String categoria) {
-        this.categoria = categoria.toUpperCase();
+        if(categoria!=null) {
+            this.categoria = categoria.toUpperCase();
+        }
     }
 
     public Integer getTiempoDeServicio() {
@@ -299,6 +317,8 @@ public class Docentedto {
     }
 
     public void setAsignaturasEspecializadas(String asignaturasEspecializadas) {
-        this.asignaturasEspecializadas = asignaturasEspecializadas.toUpperCase();
+        if(asignaturasEspecializadas!=null) {
+            this.asignaturasEspecializadas = asignaturasEspecializadas.toUpperCase();
+        }
     }
 }
