@@ -66,7 +66,7 @@ public class IAlumnoServiceImpl implements IAlumnoService {
                     alumno.setFechaCreacion(optionalAlumnoguardado.get().getFechaCreacion());
                     alumno.setActivo(optionalAlumnoguardado.get().getActivo());
                     Optional<Representante> optionalRepresentanteGuardado = representanteRepo.findById(optionalAlumnoguardado.get().getRepresentante().getId());
-                    if (optionalRepresentanteGuardado.isPresent()&&optionalRepresentanteGuardado.get().getId()==alumno.getRepresentante().getId()) {
+                    if (optionalRepresentanteGuardado.isPresent()) {
                         alumno.getRepresentante().setId(optionalRepresentanteGuardado.get().getId());
                         representanteRepo.save(alumno.getRepresentante());
                     }
