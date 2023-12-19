@@ -9,16 +9,27 @@ import com.tecnodestreza.siga.models.dto.Alumnodto;
 import com.tecnodestreza.siga.models.dto.ListadoAlumnosdto;
 import com.tecnodestreza.siga.models.dto.PersonaDocumentodto;
 import com.tecnodestreza.siga.services.IAlumnoService;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 //import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+
+
+
 /**
  *
  * @author Lenin
@@ -27,6 +38,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/alumno")
 @CrossOrigin(origins = {"*"})
+@Slf4j
 public class AlumnoController {
     private final IAlumnoService alumnoservice;
 
@@ -42,13 +54,31 @@ public class AlumnoController {
     //CONSULTA POR CEDULA
     @GetMapping(path = "/consultarporcedula",
             produces = "application/json")
-    public ResponseEntity<Optional<Alumno>> consultarporcedula(@RequestBody PersonaDocumentodto personaDocumentodto) {
-        Optional<Alumno> alumno = alumnoservice.consultarAlumnoPorCedula(personaDocumentodto.getTipoDocumento(), personaDocumentodto.getNumeroDocumento());
-        if (!alumno.isPresent())
-           // return ResponseEntity.ok(Optional.empty());
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-         else
-            return ResponseEntity.ok().body(alumno);
+    public ResponseEntity<?> consultarporcedula(@Valid @RequestBody PersonaDocumentodto personaDocumentodto, BindingResult result) {
+        Map<String,Object> responses=new HashMap<>();
+        if(result.hasErrors()){
+            List<String> errors=result.getFieldErrors().stream().map(e->"El campo ".concat(e.getField()).concat(" ").concat(e.getDefaultMessage())).collect(Collectors.toList());
+            errors.stream().forEach(error->{
+                responses.put("Error en los datos de la peticion",error);
+                log.error(error);
+            });
+            return new ResponseEntity<>(responses,HttpStatus.BAD_REQUEST);
+
+        }
+        try {
+            Optional<Alumno> alumno = alumnoservice.consultarAlumnoPorCedula(personaDocumentodto.getTipoDocumento(), personaDocumentodto.getNumeroDocumento());
+            if (!alumno.isPresent()) {
+                responses.put("mensaje", "El alumno con el número de cédula ".concat(personaDocumentodto.getTipoDocumento().concat(personaDocumentodto.getNumeroDocumento())).concat(" no está registrado"));
+                log.error("El alumno con el número de cédula {}{} no esta registrado",personaDocumentodto.getTipoDocumento(),personaDocumentodto.getNumeroDocumento());
+                return new ResponseEntity<>(responses, HttpStatus.NOT_FOUND);
+            } else {
+                return ResponseEntity.ok().body(alumno);
+            }
+        }catch (DataAccessException e){
+            responses.put("mensaje","Error al realizar la consulta a la base de datos:");
+            responses.put("error",e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+            return new ResponseEntity<>(responses, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @GetMapping(path = "/consultarporid/{id}",
