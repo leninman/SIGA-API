@@ -1,6 +1,6 @@
 FROM openjdk:17-jdk-alpine
 
-VOLUME /tmp
+WORKDIR /app
 
 COPY ./target/siga.jar app.jar
 

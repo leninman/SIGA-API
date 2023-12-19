@@ -45,7 +45,8 @@ public class AlumnoController {
     public ResponseEntity<Optional<Alumno>> consultarporcedula(@RequestBody PersonaDocumentodto personaDocumentodto) {
         Optional<Alumno> alumno = alumnoservice.consultarAlumnoPorCedula(personaDocumentodto.getTipoDocumento(), personaDocumentodto.getNumeroDocumento());
         if (!alumno.isPresent())
-            return ResponseEntity.ok(Optional.empty());
+           // return ResponseEntity.ok(Optional.empty());
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
          else
             return ResponseEntity.ok().body(alumno);
     }
@@ -55,7 +56,7 @@ public class AlumnoController {
     public ResponseEntity<Optional<Alumno>> consultarporid(@PathVariable Long id) {
         Optional<Alumno> alumno = alumnoservice.consultarAlumnoPorId(id);
         if (!alumno.isPresent())
-            return ResponseEntity.ok(Optional.empty());
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         else
             return ResponseEntity.ok().body(alumno);
     }
