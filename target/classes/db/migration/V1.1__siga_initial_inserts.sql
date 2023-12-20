@@ -349,8 +349,8 @@ INSERT INTO siga.alumnos (condicion,direccion,edad,email,activo,fecha_creacion,f
 
 
 
-INSERT INTO siga.docentes (id, tipo_documento, numero_documento, primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, sexo, fecha_nacimiento, fecha_ingreso, fecha_creacion, estado_civil, edad, pregrado1, pregrado2, postgrado1, postgrado2, curso1, curso2, curso3, curso4, graduado_pregrado1, categoria, tiempo_de_servicio, direccion,codigo_operadora_telefono, telefono, email, activo, condicion, lugar_de_nacimiento, nacionalidad, asignaturas_especializadas) VALUES (1, 'V', '9523698', 'MIGUEL', 'ANGEL', 'PALACIOS', 'FERNADEZ', 'MASCULINO', '1969-11-26', '2012-10-14', '2023-06-04', 'SOLTERO', '53', 'INGENIERIA DE SISTEMAS', null, null, null, 'TECNICO EN TELECOMUNICACIONES', 'REDES DE COMPUTADORAS', '', '', 'SI', 'DOCENTE 1', 5, 'CALLE REAL DEL CEMENTERIO','0412', '5698877', 'mpfernadez@gmail.com', true, 'EN EJERCICIO', 'VENEZUELA', 'VENEZOLANA', 'FISICA,MATEMÁTICA');
-INSERT INTO siga.docentes (id, tipo_documento, numero_documento, primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, sexo, fecha_nacimiento, fecha_ingreso, fecha_creacion, estado_civil, edad, pregrado1, pregrado2, postgrado1, postgrado2, curso1, curso2, curso3, curso4, graduado_pregrado1, categoria, tiempo_de_servicio, direccion,codigo_operadora_telefono,telefono, email, activo, condicion, lugar_de_nacimiento, nacionalidad,asignaturas_especializadas) VALUES (2, 'V', '6456789', 'MIGUEL', 'ANGEL', 'ESTEVA', 'RUIZ', 'MASCULINO', '1959-04-26', '2012-10-14', '2023-06-09', 'SOLTERO', '63', 'INGENIERIA DE SISTEMAS', null, null, null, 'TECNICO EN TELECOMUNICACIONES', 'REDES DE COMPUTADORAS', '', '', 'SI', 'DOCENTE 3', 5, 'LOS FRAILES DE CATIA','0414', '9986756', 'mesteva@gmail.com', true, 'EN EJERCICIO', 'VENEZUELA', 'VENEZOLANA', 'FISICA,MATEMÁTICA');
+INSERT INTO siga.docentes (id, tipo_documento, numero_documento, primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, sexo, fecha_nacimiento, fecha_ingreso, fecha_creacion, estado_civil, edad, pregrado1, pregrado2, postgrado1, postgrado2, curso1, curso2, curso3, curso4, graduado_pregrado1, categoria, tiempo_de_servicio, direccion,codigo_operadora_telefono, telefono, email, activo, condicion, lugar_de_nacimiento, nacionalidad, asignaturas_especializadas) VALUES (1, 'V', '9523698', 'MIGUEL', 'ANGEL', 'PALACIOS', 'FERNADEZ', 'MASCULINO', '1969-11-26', '2012-10-14', '2023-06-04', 'SOLTERO', '53', 'INGENIERO DE SISTEMAS', null, null, null, 'TECNICO EN TELECOMUNICACIONES', 'REDES DE COMPUTADORAS', '', '', 'SI', 'DOCENTE 1', 5, 'CALLE REAL DEL CEMENTERIO','0412', '5698877', 'mpfernadez@gmail.com', true, 'EN EJERCICIO', 'VENEZUELA', 'VENEZOLANA', 'FISICA,MATEMÁTICA');
+INSERT INTO siga.docentes (id, tipo_documento, numero_documento, primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, sexo, fecha_nacimiento, fecha_ingreso, fecha_creacion, estado_civil, edad, pregrado1, pregrado2, postgrado1, postgrado2, curso1, curso2, curso3, curso4, graduado_pregrado1, categoria, tiempo_de_servicio, direccion,codigo_operadora_telefono,telefono, email, activo, condicion, lugar_de_nacimiento, nacionalidad,asignaturas_especializadas) VALUES (2, 'V', '6456789', 'MIGUEL', 'ANGEL', 'ESTEVA', 'RUIZ', 'MASCULINO', '1959-04-26', '2012-10-14', '2023-06-09', 'SOLTERO', '63', 'INGENIERO DE SISTEMAS', null, null, null, 'TECNICO EN TELECOMUNICACIONES', 'REDES DE COMPUTADORAS', '', '', 'SI', 'DOCENTE 3', 5, 'LOS FRAILES DE CATIA','0414', '9986756', 'mesteva@gmail.com', true, 'EN EJERCICIO', 'VENEZUELA', 'VENEZOLANA', 'FISICA,MATEMÁTICA');
 
 INSERT INTO siga.cursos_docentes (id, docente, curso, materia) VALUES (1, 1, 15, 5);
 INSERT INTO siga.cursos_docentes (id, docente, curso, materia) VALUES (2, 2, 15, 30);
@@ -370,12 +370,20 @@ INSERT INTO profesiones (profesion) VALUES
 INSERT INTO profesiones (profesion) VALUES
                                                      ('GEÓLOGO'),
                                                      ('HISTORIADOR'),
-                                                     ('INGENIERO'),
                                                      ('LICENCIADO'),
                                                      ('MÉDICO'),
                                                      ('PROFESOR'),
                                                      ('PROFESORA'),
                                                      ('LICENCIADA');
+INSERT INTO profesiones (profesion) VALUES
+                                        ('INGENIERO ELECTRICISTA'),
+                                        ('INGENIERO ELECTRÓNICO'),
+                                        ('INGENIERO DE SISTEMAS'),
+                                        ('INGENIERO CIVIL'),
+                                        ('INGENIERO EN TELECOMUNICACIONES'),
+                                        ('INGENIERO QUIMICO'),
+                                        ('INGENIERO EN INFORMÁTICA'),
+                                        ('INGENIERO METALÚRGICO');
 
 
 

@@ -7,60 +7,111 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor
 public class Alumnodto {
 
+    @NotEmpty
     private String tipoDocumento;
+    @NotEmpty
     private String numeroDocumento;
+    @NotEmpty
     private String primerNombre;
+    @NotEmpty
     private String segundoNombre;
+    @NotEmpty
     private String primerApellido;
+    @NotEmpty
     private String segundoApellido;
+    @NotEmpty
     private String sexo;
+    @NotNull
     private Date fechaNacimiento;
+    @NotEmpty
     private String edad;
+    @NotEmpty
     private String direccion;
+    @NotEmpty
     private String codigoOperadoraTelefono;
+    @NotEmpty
     private String telefono;
+    @NotEmpty
     private String email;
+    @NotNull
     private Date fechaIngreso;
+    @NotEmpty
     private String lugarDeNacimiento;
+    @NotEmpty
     private String nacionalidad;
+    @NotEmpty
     private String representanteTipoDocumento;
+    @NotEmpty
     private String representanteNumeroDocumento;
+    @NotEmpty
     private String representantePrimerNombre;
+    @NotEmpty
     private String representanteSegundoNombre;
+    @NotEmpty
     private String representantePrimerApellido;
+    @NotEmpty
     private String representanteSegundoApellido;
+    @NotEmpty
     private String representanteSexo;
+    @NotNull
     private Date representanteFechaNacimieno;
+    @NotEmpty
     private String representanteEdad;
+    @NotEmpty
     private String representanteEstadoCivil;
+    @NotEmpty
     private String representanteDireccion;
+    @NotEmpty
     private String representanteLugarDeNacimiento;
+    @NotEmpty
     private String representanteNacionalidad;
+    @NotEmpty
     private String representanteIngresoMensualAproximado;
+    @NotEmpty
     private String representanteEmpresaDondeTrabaja;
+    @NotEmpty
     private String representanteDireccionLaboral;
+    @NotEmpty
     private String representanteCodigoOperadoraTelefono;
+    @NotEmpty
     private String representanteTelefono;
+    @NotEmpty
     private String representanteCodigoOperadoraTelefonoEmpresa;
+    @NotEmpty
     private String representanteTelefonoEmpresa;
+    @NotEmpty
     private String representanteEmail;
+    @NotNull
     private Boolean representanteActivo;
+    @NotEmpty
     private String representanteProfesion;
+    @NotEmpty
     private String representanteOcupacion;
+    @NotEmpty
     private String parentesco;
+    @NotEmpty
     private String cursoAnnio;
+    @NotEmpty
     private String cursoSeccion;
+    @NotEmpty
     private String cursoPeriodoAcademico;
+    @NotEmpty
     private String cursoTurno;
+    @NotEmpty
     private String cursoNivel;
+
     private Date fechaCreacion;
+
     private Boolean activo;
+    @NotEmpty
     private String condicion;
 
     public String getTipoDocumento() {

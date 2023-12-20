@@ -43,9 +43,19 @@ public class DocenteController {
         Docente docente=modelMapper.map(docentedto,Docente.class);
         Optional<Docente> optionalDocente=docenteService.consultarDocentePorCedula(docente.getTipoDocumento(),docente.getNumeroDocumento());
         if(optionalDocente.isPresent()){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(docenteService.guardarDocente(docente,null));
+    }
+    @PutMapping("modificar/{idDocente}")
+    public ResponseEntity<Optional<Docente>> modificar(@RequestBody Docentedto docentedto, @PathVariable Long idDocente) {
+        ModelMapper modelMapper=new ModelMapper();
+        Docente docente=modelMapper.map(docentedto,Docente.class);
+        Optional<Docente> optionalDocente=docenteService.consultarDocentePorCedula(docente.getTipoDocumento(),docente.getNumeroDocumento());
+        if(optionalDocente.isPresent()&&idDocente!=optionalDocente.get().getId()){
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(docenteService.guardarDocente(docente,idDocente));
     }
 
     //CONSULTA POR CEDULA
@@ -66,6 +76,14 @@ public class DocenteController {
             return ResponseEntity.ok(Optional.empty());
         else
             return ResponseEntity.ok().body(docente);
+    }
+
+    //DESACTIVAR
+    // @PreAuthorize("hasRole('DIRECTOR') || hasRole('ADMINISTRATIVO')")
+    @PutMapping("desactivar/{idDocente}/{condicion}")
+    public ResponseEntity<Optional<Alumno>> desactivar(@PathVariable Long idDocente,@PathVariable String condicion) {
+        docenteService.desactivar(idDocente,condicion);
+        return ResponseEntity.noContent().build();
     }
 
 
