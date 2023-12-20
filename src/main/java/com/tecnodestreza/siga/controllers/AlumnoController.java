@@ -10,10 +10,7 @@ import com.tecnodestreza.siga.models.dto.ListadoAlumnosdto;
 import com.tecnodestreza.siga.models.dto.PersonaDocumentodto;
 import com.tecnodestreza.siga.services.IAlumnoService;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import lombok.RequiredArgsConstructor;
@@ -57,9 +54,9 @@ public class AlumnoController {
     public ResponseEntity<?> consultarporcedula(@Valid @RequestBody PersonaDocumentodto personaDocumentodto, BindingResult result) {
         Map<String,Object> responses=new HashMap<>();
         if(result.hasErrors()){
-            List<String> errors=result.getFieldErrors().stream().map(e->"El campo ".concat(e.getField()).concat(" ").concat(e.getDefaultMessage())).collect(Collectors.toList());
+            List<String> errors=result.getFieldErrors().stream().map(e->"El campo ".concat(e.getField()).concat(" ").concat(e.getDefaultMessage()).concat(" ")).collect(Collectors.toList());
             errors.stream().forEach(error->{
-                responses.put("Error en los datos de la peticion",error);
+                responses.put("mensaje",error);
                 log.error(error);
             });
             return new ResponseEntity<>(responses,HttpStatus.BAD_REQUEST);
@@ -94,12 +91,23 @@ public class AlumnoController {
    //CREAR
     //@PreAuthorize("hasRole('DIRECTOR') || hasRole('ADMINISTRATIVO')")
     @PostMapping("crear")
-    public ResponseEntity<Optional<Alumno>> crear(@RequestBody Alumnodto alumnodto) {
+    public ResponseEntity<?> crear(@Valid @RequestBody Alumnodto alumnodto,BindingResult result) {
+        Map<String,Object> responses=new HashMap<>();
+        if(result.hasErrors()){
+            List<String> errors=result.getFieldErrors().stream().map(error->"Error con el campo ".concat(error.getField()).concat(" ").concat(error.getDefaultMessage()).concat(" ")).collect(Collectors.toList());
+            errors.stream().forEach(error->{
+                responses.put("mensaje",error);
+                log.error(error);
+            });
+            return new ResponseEntity<>(responses,HttpStatus.BAD_REQUEST);
+        }
+
         ModelMapper modelMapper=new ModelMapper();
         Alumno alumno=modelMapper.map(alumnodto,Alumno.class);
         Optional<Alumno> optionalAlumno=alumnoservice.consultarAlumnoPorCedula(alumno.getTipoDocumento(),alumno.getNumeroDocumento());
         if(optionalAlumno.isPresent()){
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+            responses.put("mensaje","El alumno con cedula ".concat(alumno.getTipoDocumento().concat(alumno.getNumeroDocumento())).concat(" ya esta registrado"));
+            return new ResponseEntity<>(responses,HttpStatus.BAD_REQUEST);
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(alumnoservice.guardarAlumno(alumno,null));
     }
