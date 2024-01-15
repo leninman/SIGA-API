@@ -91,7 +91,7 @@ public class IAlumnoServiceImpl implements IAlumnoService {
     }
 
     @Override
-    public void desactivar(Long idAlumno,String condicion) {
+    public Boolean desactivar(Long idAlumno,String condicion) {
         Optional<Alumno> alumno=alumnorepo.findById(idAlumno);
         if(alumno.isPresent()){
             alumno.get().setActivo(false);
@@ -104,6 +104,9 @@ public class IAlumnoServiceImpl implements IAlumnoService {
             if (alumnos.isEmpty()){
                 representanteService.desactivar(representante.get().getId());
             }
+            return true;
+        }else{
+            return false;
         }
     }
 

@@ -20,7 +20,7 @@ public interface IAlumnoService {
     Optional<Alumno> consultarAlumnoPorId(Long alumnoId);
     List<Alumno> consultarAlumnos();
     Optional<Alumno> guardarAlumno(Alumno alumno,Long idAlumno);
-    void desactivar(Long idAlumno,String condicion);
+    Boolean desactivar(Long idAlumno,String condicion);
     List<Alumno> alumnosPorCurso(Long idCurso);
     void reordenarListas(Long idCurso,Alumno nuevoAlumno);
 }
