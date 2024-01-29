@@ -17,10 +17,10 @@
     <class>com.virtualeduc.tuescuelavirtual.models.Annios</class>
     <class>com.virtualeduc.tuescuelavirtual.models.NotasDef</class>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/sisacad?zeroDateTimeBehavior=convertToNull"/>
-      <property name="javax.persistence.jdbc.user" value="user"/>
-      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-      <property name="javax.persistence.jdbc.password" value="12345"/>
+      <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/sisacad?zeroDateTimeBehavior=convertToNull"/>
+      <property name="jakarta.persistence.jdbc.user" value="user"/>
+      <property name="jakarta.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="jakarta.persistence.jdbc.password" value="12345"/>
     </properties>
   </persistence-unit>
 </persistence>

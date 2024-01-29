@@ -225,11 +225,15 @@ create table usuarios
 (
     id                bigint auto_increment
         primary key,
-    nombre             varchar(20) null,
-    apellido           varchar(20) null,
+    nombres             varchar(20) null,
+    apellidos           varchar(20) null,
     nombre_usuario      varchar(20) not null,
-    password             varchar(255) not null,
-    email             varchar(20) null,
+    clave             varchar(255) not null,
+    correo             varchar(20) null,
+    fecha_creacion      Date null,
+    fecha_modificacion  Date null,
+    locked              boolean null,
+    enabled             boolean null,
     num_intentos_fallidos             integer null,
     activo             bit null,
     fecha_ultima_conexion             date null
@@ -238,7 +242,7 @@ create table roles
 (
     id                bigint auto_increment
         primary key,
-    rol_nombre             varchar(20) not null
+    nombre_rol             varchar(20) not null
 );
 create table usuario_rol
 (
