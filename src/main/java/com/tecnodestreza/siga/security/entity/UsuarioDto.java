@@ -14,6 +14,5 @@ public class UsuarioDto {
     private String apellidos;
     private String nombreUsuario;
     private String clave;
-    private String grupo;
     private String correo;
 }

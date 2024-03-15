@@ -11,7 +11,6 @@ public class UsuarioDtoToUsuarioMapper implements Function<UsuarioDto,Usuario> {
                 usuarioDto.getApellidos(),
                 usuarioDto.getNombreUsuario(),
                 usuarioDto.getClave(),
-                usuarioDto.getGrupo(),
                 usuarioDto.getCorreo()
         );
     }

@@ -11,6 +11,7 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -32,16 +33,19 @@ public class Usuario implements Serializable {
     @NotEmpty
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String clave;
-    private String grupo;
     private String correo;
     private LocalDate fechaCreacion;
     private LocalDate fechaModificacion;
     private Boolean locked;
     private Boolean enabled;
+    private Integer numIntentosFallidos;
+    private Boolean activo;
+    private Date fechaUltimaConexion;
+
     @JsonIgnoreProperties({"usuarios", "handler", "hibernateLazyInitializer"})
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
-            name = "usuarios_roles",
+            name = "usuario_rol",
             joinColumns = @JoinColumn(name="usuario_id"),
             inverseJoinColumns = @JoinColumn(name = "rol_id"),
             uniqueConstraints = {@UniqueConstraint(columnNames = {"usuario_id","rol_id"})}
@@ -49,12 +53,11 @@ public class Usuario implements Serializable {
     private List<Rol> roles;
 
 
-    public Usuario(String nombres, String apellidos, String nombreUsuario, String clave, String grupo, String correo) {
+    public Usuario(String nombres, String apellidos, String nombreUsuario, String clave, String correo) {
         this.nombres = nombres;
         this.apellidos = apellidos;
         this.nombreUsuario = nombreUsuario;
         this.clave = clave;
-        this.grupo = grupo;
         this.correo = correo;
     }
 
