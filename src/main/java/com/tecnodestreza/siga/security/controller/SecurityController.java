@@ -37,6 +37,26 @@ public class SecurityController {
         return usuarioService.usuarios();
     }
 
+    @GetMapping("consultar/{id}")
+    public ResponseEntity<?> findById(@PathVariable Long id){
+        Map<String,Object> response=new HashMap<>();
+
+        try{
+            Optional<Usuario> usuario=usuarioService.findById(id);
+            if(usuario.isPresent()){
+                return new ResponseEntity<>(usuario.get(), HttpStatus.OK);
+            }else{
+                response.put("mensaje","El usuario con Id: ".concat(id.toString().concat(" no existe en la base de datos")));
+                log.error("Afiliado con  id {} no existe en  la base de datos",id);
+                return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+            }
+        }catch(DataAccessException e){
+            response.put("mensaje","Error al realizar la consulta a la base de datos:");
+            response.put("error",e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @PostMapping("crear")//RUTA PRIVADA PARA CREAR USUARIOS CON ROLE_ADMIN
   //  @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> crear(@Valid @RequestBody Usuario usuario,BindingResult result){
@@ -69,27 +89,6 @@ public class SecurityController {
         response.put("usuario",nuevoUsuario);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
-
-    @GetMapping("consultar/{id}")
-    public ResponseEntity<?> findById(@PathVariable Long id){
-        Map<String,Object> response=new HashMap<>();
-
-        try{
-            Optional<Usuario> usuario=usuarioService.findById(id);
-            if(usuario.isPresent()){
-                return new ResponseEntity<>(usuario.get(), HttpStatus.OK);
-            }else{
-                response.put("mensaje","El usuario con Id: ".concat(id.toString().concat(" no existe en la base de datos")));
-                log.error("Afiliado con  id {} no existe en  la base de datos",id);
-                return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
-            }
-        }catch(DataAccessException e){
-            response.put("mensaje","Error al realizar la consulta a la base de datos:");
-            response.put("error",e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
-            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
 
     @PostMapping("registrar") //RUTA PUBLICA PARA REGISTRAR CUALQUIER USUARIO CON ROL_USER
     public ResponseEntity<?> registrar(@Valid @RequestBody Usuario usuario,BindingResult result){

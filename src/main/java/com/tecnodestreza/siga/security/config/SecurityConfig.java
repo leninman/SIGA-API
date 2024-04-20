@@ -53,7 +53,6 @@ public class SecurityConfig {
                       .requestMatchers(HttpMethod.GET,"usuarios/consultar/**").permitAll()
                       .requestMatchers(HttpMethod.PUT,"usuarios/modificar/**").permitAll()
                       .requestMatchers("v3/api-docs/**","swagger-ui/**","swagger-ui.html").permitAll()
-                     // .requestMatchers("afiliado/**").permitAll()
                       .anyRequest().authenticated())
               .addFilter(new JwtAuthenticationFilter(authenticationManager()))  //Filtro de autenticacion
               .addFilter(new JwtValidationFilter(authenticationManager())) //Filtro de validacion
