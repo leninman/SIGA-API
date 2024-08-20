@@ -1,5 +1,22 @@
-version: '3.9'
 services:
+  siga_db:
+    container_name: siga_db
+    image: mysql
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=siga
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=sigadbpassword
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_db:/var/lib/mysql
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8085:8080
   siga-api:
     container_name: siga-api
     image: siga-api:1.0.0
@@ -16,25 +33,7 @@ services:
       - siga_db
     volumes:
         - ./src:/app/src
-  siga_db:
-    container_name: siga_db
-    image: mysql
-    restart: unless-stopped
-    environment:
-      - MYSQL_ROOT_PASSWORD=password
-      - MYSQL_DATABASE=siga
-      - MYSQL_USER=user
-      - MYSQL_PASSWORD=sigadbpassword
-    ports:
-      - "3306:3306"
-    volumes:
-      - mysql_db:/var/lib/mysql
-
-  adminer:
-    image: adminer
     restart: always
-    ports:
-      - 8085:8080
 volumes:
   mysql_db:
     driver: local
