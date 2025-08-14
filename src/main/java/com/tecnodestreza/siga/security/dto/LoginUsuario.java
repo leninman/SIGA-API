@@ -1,6 +1,7 @@
 package com.tecnodestreza.siga.security.dto;
 
-import com.sun.istack.NotNull;
+
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

@@ -1,6 +1,10 @@
 package com.tecnodestreza.siga.security.jwt;
 
 import com.tecnodestreza.siga.security.service.UsuarioDetailsServiceImpl;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -12,10 +16,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 
 public class JwtTokenFilter extends OncePerRequestFilter {
@@ -41,6 +42,9 @@ public class JwtTokenFilter extends OncePerRequestFilter {
                 SecurityContextHolder.getContext().setAuthentication(auth);
             }
 
+
+
+
         } catch (Exception e) {
             logger.error("Fallo en el método doFilter");
         }
@@ -55,5 +59,10 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         }else {
             return null;
         }
+    }
+
+    @Override
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+
     }
 }
