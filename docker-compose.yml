@@ -9,14 +9,9 @@ services:
       - MYSQL_USER=user
       - MYSQL_PASSWORD=sigadbpassword
     ports:
-      - "3306:3306"
+      - "3307:3306"
     volumes:
       - mysql_db:/var/lib/mysql
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - 8085:8080
   siga-api:
     container_name: siga-api
     image: siga-api:1.0.0
