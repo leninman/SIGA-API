@@ -8,6 +8,8 @@ Sistema de Información de Gestión Académica. API REST para la administración
 | **Paquete base** | `com.tecnodestreza.siga` |
 | **Versión** | 1.0 |
 | **URL base (local)** | `http://localhost:8090/siga/api/v1` |
+| **OpenAPI** | [`docs/openapi.yaml`](openapi.yaml) |
+| **Postman** | [`docs/postman/SIGA-API.postman_collection.json`](postman/SIGA-API.postman_collection.json) |
 
 ---
 
@@ -534,7 +536,7 @@ Registra notas parciales en lote. Solo guarda si no existe nota previa para el m
 
 ```json
 {
-  "notasParciales": [
+  "notasParcialesdto": [
     {
       "alumnoId": 1,
       "docenteId": 2,
@@ -660,7 +662,7 @@ Sin validación Bean Validation.
 
 `NotaParcialdto`: `alumnoId`, `docenteId`, `cursoId`, `materiaId`, `lapso`, `nota`, `porcentaje`.
 
-`NotasParcialesdto`: wrapper con `List<NotaParcialdto> notasParciales`.
+`NotasParcialesdto`: wrapper con `List<NotaParcialdto> notasParcialesdto`.
 
 ### 9.8 DTOs de respuesta
 
@@ -867,6 +869,38 @@ No hay tests de integración para controllers ni servicios.
 | `IMateriaRepo` | `listadoMaterias()` (nombres distintos) |
 | `IRepresentanteRepo` | `findRepresentanteByTipoDocumentoAndNumeroDocumento` |
 | `ILapsoRepo` | `findLapsoByValor` |
+
+---
+
+## Apéndice — OpenAPI y Postman
+
+### OpenAPI (Swagger)
+
+Archivo: [`docs/openapi.yaml`](openapi.yaml)
+
+**Visualizar en Swagger UI (Docker):**
+
+```powershell
+docker run -p 8081:8080 -e SWAGGER_JSON=/docs/openapi.yaml -v ${PWD}/docs:/docs swaggerapi/swagger-ui
+```
+
+Abrir: `http://localhost:8081`
+
+**Importar en Postman:** File → Import → seleccionar `docs/openapi.yaml`
+
+### Colección Postman
+
+| Archivo | Descripción |
+|---------|-------------|
+| `docs/postman/SIGA-API.postman_collection.json` | 22 requests organizados por módulo |
+| `docs/postman/SIGA-API-Local.postman_environment.json` | Entorno local con `baseUrl` |
+
+**Importar:**
+
+1. Postman → **Import** → seleccionar ambos archivos JSON
+2. Elegir entorno **SIGA-API Local**
+3. Levantar la API con `.\scripts\start-local.ps1`
+4. Probar requests (los GET con body funcionan nativamente en Postman)
 
 ---
 

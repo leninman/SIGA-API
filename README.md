@@ -8,6 +8,8 @@ API REST del Sistema de Información de Gestión Académica (SIGA) para instituc
 
 📄 **[Documentación completa → docs/DOCUMENTACION.md](docs/DOCUMENTACION.md)** (API, modelo de datos, DTOs, servicios, Docker, debug)
 
+📋 **API specs:** [OpenAPI](docs/openapi.yaml) · [Colección Postman](docs/postman/SIGA-API.postman_collection.json)
+
 ---
 
 ## Requisitos
