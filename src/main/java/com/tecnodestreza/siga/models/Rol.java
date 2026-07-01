@@ -7,21 +7,17 @@ import lombok.Setter;
 
 import jakarta.persistence.*;
 
+@Entity
+@Table(name = "roles")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "nacionalidad")
-public class Nacionalidad {
+public class Rol {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
     private Long id;
-    @Column(name = "pais_nac")
-    private String paisNac;
-    @Column(name = "gentilicio_nac")
-    private String gentilicioNac;
-    @Column(name = "iso_nac")
-    private String isoNac;
+
+    @Column(name = "rol_nombre", nullable = false)
+    private String rolNombre;
 }

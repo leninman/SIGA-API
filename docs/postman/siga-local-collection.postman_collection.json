@@ -1,0 +1,641 @@
+{
+  "info": {
+    "_postman_id": "siga-local-collection-id",
+    "name": "siga-local-collection",
+    "description": "Colección Postman para SIGA-API v1.0 con soporte Multi-tenancy y seguridad JWT.\n\nUse la variable {{tenantId}} para cambiar de tenant y ejecute la petición 'Iniciar sesión' para autenticarse automáticamente.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8090/siga/api/v1"
+    },
+    {
+      "key": "tenantId",
+      "value": "siga-tenant1"
+    },
+    {
+      "key": "token",
+      "value": ""
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "item": [
+    {
+      "name": "Autenticación",
+      "item": [
+        {
+          "name": "Iniciar sesión (Director)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData.token) {",
+                  "    pm.collectionVariables.set(\"token\", jsonData.token);",
+                  "    console.log(\"Token guardado automáticamente en {{token}}\");",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Tenant-ID",
+                "value": "{{tenantId}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"director\",\n  \"password\": \"director\"\n}"
+            },
+            "url": "{{baseUrl}}/auth/login"
+          }
+        },
+        {
+          "name": "Iniciar sesión (Administrativo)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData.token) {",
+                  "    pm.collectionVariables.set(\"token\", jsonData.token);",
+                  "    console.log(\"Token guardado automáticamente en {{token}}\");",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Tenant-ID",
+                "value": "{{tenantId}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"administrativo\",\n  \"password\": \"administrativo\"\n}"
+            },
+            "url": "{{baseUrl}}/auth/login"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Catálogos",
+      "item": [
+        {
+          "name": "Listar profesiones",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-Tenant-ID",
+                "value": "{{tenantId}}",
+                "type": "text"
+              }
+            ],
+            "url": "{{baseUrl}}/profesiones"
+          }
+        },
+        {
+          "name": "Listar nacionalidades",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-Tenant-ID",
+                "value": "{{tenantId}}",
+                "type": "text"
+              }
+            ],
+            "url": "{{baseUrl}}/nacionalidades"
+          }
+        },
+        {
+          "name": "Listar materias",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-Tenant-ID",
+                "value": "{{tenantId}}",
+                "type": "text"
+              }
+            ],
+            "url": "{{baseUrl}}/materia/listado"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Alumnos",
+      "item": [
+        {
+          "name": "Listar alumnos activos",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-Tenant-ID",
+                "value": "{{tenantId}}",
+                "type": "text"
+              }
+            ],
+            "url": "{{baseUrl}}/alumno/listado"
+          }
+        },
+        {
+          "name": "Consultar por cédula (GET+body)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Tenant-ID",
+                "value": "{{tenantId}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tipoDocumento\": \"V\",\n  \"numeroDocumento\": \"12345678\"\n}"
+            },
+            "url": "{{baseUrl}}/alumno/consultarporcedula"
+          }
+        },
+        {
+          "name": "Consultar por ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-Tenant-ID",
+                "value": "{{tenantId}}",
+                "type": "text"
+              }
+            ],
+            "url": "{{baseUrl}}/alumno/consultarporid/1"
+          }
+        },
+        {
+          "name": "Consultar alumnos por curso",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-Tenant-ID",
+                "value": "{{tenantId}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/alumno/consultaralumnosporcurso?idcurso=1",
+              "host": ["{{baseUrl}}"],
+              "path": ["alumno", "consultaralumnosporcurso"],
+              "query": [
+                {
+                  "key": "idcurso",
+                  "value": "1"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Crear alumno",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Tenant-ID",
+                "value": "{{tenantId}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tipoDocumento\": \"V\",\n  \"numeroDocumento\": \"30123456\",\n  \"primerNombre\": \"JUAN\",\n  \"segundoNombre\": \"CARLOS\",\n  \"primerApellido\": \"PEREZ\",\n  \"segundoApellido\": \"GOMEZ\",\n  \"sexo\": \"MASCULINO\",\n  \"fechaNacimiento\": \"2010-05-15\",\n  \"edad\": \"14\",\n  \"direccion\": \"CALLE PRINCIPAL 123\",\n  \"codigoOperadoraTelefono\": \"0412\",\n  \"telefono\": \"1234567\",\n  \"email\": \"juan@email.com\",\n  \"fechaIngreso\": \"2024-09-01\",\n  \"lugarDeNacimiento\": \"CARACAS\",\n  \"nacionalidad\": \"VENEZOLANA\",\n  \"representanteTipoDocumento\": \"V\",\n  \"representanteNumeroDocumento\": \"12345678\",\n  \"representantePrimerNombre\": \"MARIA\",\n  \"representanteSegundoNombre\": \"ELENA\",\n  \"representantePrimerApellido\": \"PEREZ\",\n  \"representanteSegundoApellido\": \"RODRIGUEZ\",\n  \"representanteSexo\": \"FEMENINO\",\n  \"representanteFechaNacimieno\": \"1980-03-20\",\n  \"representanteEdad\": \"44\",\n  \"representanteEstadoCivil\": \"CASADO\",\n  \"representanteDireccion\": \"CALLE PRINCIPAL 123\",\n  \"representanteLugarDeNacimiento\": \"CARACAS\",\n  \"representanteNacionalidad\": \"VENEZOLANA\",\n  \"representanteIngresoMensualAproximado\": \"500\",\n  \"representanteEmpresaDondeTrabaja\": \"EMPRESA XYZ\",\n  \"representanteDireccionLaboral\": \"AV LIBERTADOR\",\n  \"representanteCodigoOperadoraTelefono\": \"0412\",\n  \"representanteTelefono\": \"7654321\",\n  \"representanteCodigoOperadoraTelefonoEmpresa\": \"0212\",\n  \"representanteTelefonoEmpresa\": \"9876543\",\n  \"representanteEmail\": \"maria@email.com\",\n  \"representanteActivo\": true,\n  \"representanteProfesion\": \"PROFESORA\",\n  \"representanteOcupacion\": \"DOCENTE\",\n  \"parentesco\": \"MADRE\",\n  \"cursoAnnio\": \"1°\",\n  \"cursoSeccion\": \"A\",\n  \"cursoPeriodoAcademico\": \"2022-2023\",\n  \"cursoTurno\": \"DIURNO\",\n  \"cursoNivel\": \"MEDIA\",\n  \"condicion\": \"REGULAR\"\n}"
+            },
+            "url": "{{baseUrl}}/alumno/crear"
+          }
+        },
+        {
+          "name": "Modificar alumno",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Tenant-ID",
+                "value": "{{tenantId}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tipoDocumento\": \"V\",\n  \"numeroDocumento\": \"30123456\",\n  \"primerNombre\": \"JUAN\",\n  \"segundoNombre\": \"CARLOS\",\n  \"primerApellido\": \"PEREZ\",\n  \"segundoApellido\": \"GOMEZ\",\n  \"sexo\": \"MASCULINO\",\n  \"fechaNacimiento\": \"2010-05-15\",\n  \"edad\": \"14\",\n  \"direccion\": \"CALLE ACTUALIZADA 456\",\n  \"codigoOperadoraTelefono\": \"0412\",\n  \"telefono\": \"1234567\",\n  \"email\": \"juan@email.com\",\n  \"fechaIngreso\": \"2024-09-01\",\n  \"lugarDeNacimiento\": \"CARACAS\",\n  \"nacionalidad\": \"VENEZOLANA\",\n  \"representanteTipoDocumento\": \"V\",\n  \"representanteNumeroDocumento\": \"12345678\",\n  \"representantePrimerNombre\": \"MARIA\",\n  \"representanteSegundoNombre\": \"ELENA\",\n  \"representantePrimerApellido\": \"PEREZ\",\n  \"representanteSegundoApellido\": \"RODRIGUEZ\",\n  \"representanteSexo\": \"FEMENINO\",\n  \"representanteFechaNacimieno\": \"1980-03-20\",\n  \"representanteEdad\": \"44\",\n  \"representanteEstadoCivil\": \"CASADO\",\n  \"representanteDireccion\": \"CALLE PRINCIPAL 123\",\n  \"representanteLugarDeNacimiento\": \"CARACAS\",\n  \"representanteNacionalidad\": \"VENEZOLANA\",\n  \"representanteIngresoMensualAproximado\": \"500\",\n  \"representanteEmpresaDondeTrabaja\": \"EMPRESA XYZ\",\n  \"representanteDireccionLaboral\": \"AV LIBERTADOR\",\n  \"representanteCodigoOperadoraTelefono\": \"0412\",\n  \"representanteTelefono\": \"7654321\",\n  \"representanteCodigoOperadoraTelefonoEmpresa\": \"0212\",\n  \"representanteTelefonoEmpresa\": \"9876543\",\n  \"representanteEmail\": \"maria@email.com\",\n  \"representanteActivo\": true,\n  \"representanteProfesion\": \"PROFESORA\",\n  \"representanteOcupacion\": \"DOCENTE\",\n  \"parentesco\": \"MADRE\",\n  \"cursoAnnio\": \"1°\",\n  \"cursoSeccion\": \"A\",\n  \"cursoPeriodoAcademico\": \"2022-2023\",\n  \"cursoTurno\": \"DIURNO\",\n  \"cursoNivel\": \"MEDIA\",\n  \"condicion\": \"REGULAR\"\n}"
+            },
+            "url": "{{baseUrl}}/alumno/modificar/1"
+          }
+        },
+        {
+          "name": "Desactivar alumno",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "X-Tenant-ID",
+                "value": "{{tenantId}}",
+                "type": "text"
+              }
+            ],
+            "url": "{{baseUrl}}/alumno/desactivar/1/RETIRADO"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Docentes",
+      "item": [
+        {
+          "name": "Listar docentes activos",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-Tenant-ID",
+                "value": "{{tenantId}}",
+                "type": "text"
+              }
+            ],
+            "url": "{{baseUrl}}/docente/listado"
+          }
+        },
+        {
+          "name": "Consultar por cédula (GET+body)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Tenant-ID",
+                "value": "{{tenantId}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tipoDocumento\": \"V\",\n  \"numeroDocumento\": \"87654321\"\n}"
+            },
+            "url": "{{baseUrl}}/docente/consultarporcedula"
+          }
+        },
+        {
+          "name": "Consultar por ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-Tenant-ID",
+                "value": "{{tenantId}}",
+                "type": "text"
+              }
+            ],
+            "url": "{{baseUrl}}/docente/consultarporid/1"
+          }
+        },
+        {
+          "name": "Crear docente",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Tenant-ID",
+                "value": "{{tenantId}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tipoDocumento\": \"V\",\n  \"numeroDocumento\": \"87654321\",\n  \"primerNombre\": \"ANA\",\n  \"segundoNombre\": \"ISABEL\",\n  \"primerApellido\": \"LOPEZ\",\n  \"segundoApellido\": \"MARTINEZ\",\n  \"sexo\": \"FEMENINO\",\n  \"fechaNacimiento\": \"1985-08-10\",\n  \"edad\": \"39\",\n  \"direccion\": \"URB LOS ROSALES\",\n  \"codigoOperadoraTelefono\": \"0414\",\n  \"telefono\": \"5551234\",\n  \"email\": \"ana.lopez@email.com\",\n  \"lugarDeNacimiento\": \"VALENCIA\",\n  \"nacionalidad\": \"VENEZOLANA\",\n  \"fechaIngreso\": \"2020-01-15\",\n  \"activo\": true,\n  \"condicion\": \"EN EJERCICIO\",\n  \"estadoCivil\": \"SOLTERO\",\n  \"pregrado1\": \"LICENCIATURA EN EDUCACION\",\n  \"graduadoPregrado1\": \"SI\",\n  \"tiempoDeServicio\": 5,\n  \"asignaturasEspecializadas\": \"MATEMATICAS, FISICA\"\n}"
+            },
+            "url": "{{baseUrl}}/docente/crear"
+          }
+        },
+        {
+          "name": "Modificar docente",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Tenant-ID",
+                "value": "{{tenantId}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tipoDocumento\": \"V\",\n  \"numeroDocumento\": \"87654321\",\n  \"primerNombre\": \"ANA\",\n  \"segundoNombre\": \"ISABEL\",\n  \"primerApellido\": \"LOPEZ\",\n  \"segundoApellido\": \"MARTINEZ\",\n  \"sexo\": \"FEMENINO\",\n  \"fechaNacimiento\": \"1985-08-10\",\n  \"edad\": \"39\",\n  \"direccion\": \"URB LOS ROSALES ACTUALIZADA\",\n  \"codigoOperadoraTelefono\": \"0414\",\n  \"telefono\": \"5551234\",\n  \"email\": \"ana.lopez@email.com\",\n  \"lugarDeNacimiento\": \"VALENCIA\",\n  \"nacionalidad\": \"VENEZOLANA\",\n  \"fechaIngreso\": \"2020-01-15\",\n  \"activo\": true,\n  \"condicion\": \"EN EJERCICIO\",\n  \"estadoCivil\": \"SOLTERO\",\n  \"pregrado1\": \"LICENCIATURA EN EDUCACION\",\n  \"graduadoPregrado1\": \"SI\",\n  \"tiempoDeServicio\": 5,\n  \"asignaturasEspecializadas\": \"MATEMATICAS, FISICA, QUIMICA\"\n}"
+            },
+            "url": "{{baseUrl}}/docente/modificar/1"
+          }
+        },
+        {
+          "name": "Desactivar docente",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "X-Tenant-ID",
+                "value": "{{tenantId}}",
+                "type": "text"
+              }
+            ],
+            "url": "{{baseUrl}}/docente/desactivar/1/RETIRADO"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Representantes",
+      "item": [
+        {
+          "name": "Crear representante",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Tenant-ID",
+                "value": "{{tenantId}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tipoDocumento\": \"V\",\n  \"numeroDocumento\": \"11223344\",\n  \"primerNombre\": \"PEDRO\",\n  \"segundoNombre\": \"JOSE\",\n  \"primerApellido\": \"RAMIREZ\",\n  \"segundoApellido\": \"SILVA\",\n  \"sexo\": \"MASCULINO\",\n  \"fechaNacimieno\": \"1975-11-30\",\n  \"edad\": \"49\",\n  \"estadoCivil\": \"CASADO\",\n  \"direccion\": \"CALLE 10\",\n  \"empresaDondeTrabaja\": \"COMERCIAL ABC\",\n  \"lugarDeNacimiento\": \"MARACAY\",\n  \"nacionalidad\": \"VENEZOLANA\",\n  \"ingresoMensualAproximado\": \"800\",\n  \"direccionLaboral\": \"CENTRO COMERCIAL\",\n  \"codigoOperadoraTelefono\": \"0416\",\n  \"telefono\": \"1112233\",\n  \"codigoOperadoraTelefonoEmpresa\": \"0243\",\n  \"telefonoEmpresa\": \"3344556\",\n  \"email\": \"pedro@email.com\",\n  \"activo\": true,\n  \"profesion\": \"INGENIERO CIVIL\",\n  \"ocupacion\": \"GERENTE\"\n}"
+            },
+            "url": "{{baseUrl}}/representante/crear"
+          }
+        },
+        {
+          "name": "Consultar por cédula",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Tenant-ID",
+                "value": "{{tenantId}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tipoDocumento\": \"V\",\n  \"numeroDocumento\": \"11223344\"\n}"
+            },
+            "url": "{{baseUrl}}/representante/consultarporcedula"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Cursos",
+      "item": [
+        {
+          "name": "Listar cursos",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-Tenant-ID",
+                "value": "{{tenantId}}",
+                "type": "text"
+              }
+            ],
+            "url": "{{baseUrl}}/curso/listado"
+          }
+        },
+        {
+          "name": "Crear curso",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Tenant-ID",
+                "value": "{{tenantId}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"annio\": \"1°\",\n  \"seccion\": \"A\",\n  \"periodoAcademico\": \"2022-2023\",\n  \"turno\": \"DIURNO\",\n  \"nivel\": \"MEDIA\"\n}"
+            },
+            "url": "{{baseUrl}}/curso/crear"
+          }
+        },
+        {
+          "name": "Asignar docente a curso",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Tenant-ID",
+                "value": "{{tenantId}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cursoId\": 1,\n  \"materiaId\": 5,\n  \"docenteId\": 1\n}"
+            },
+            "url": "{{baseUrl}}/curso/asignardocente"
+          }
+        },
+        {
+          "name": "Cargar alumnos en curso",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Tenant-ID",
+                "value": "{{tenantId}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cedulas\": [\n    { \"tipoDocumento\": \"V\", \"numeroDocumento\": \"30123456\" },\n    { \"tipoDocumento\": \"V\", \"numeroDocumento\": \"30234567\" }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/curso/cargarcurso?idcurso=1",
+              "host": ["{{baseUrl}}"],
+              "path": ["curso", "cargarcurso"],
+              "query": [
+                {
+                  "key": "idcurso",
+                  "value": "1"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Cursos por docente (GET+body)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Tenant-ID",
+                "value": "{{tenantId}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tipoDocumento\": \"V\",\n  \"numeroDocumento\": \"87654321\"\n}"
+            },
+            "url": "{{baseUrl}}/curso/cursospordocente"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Notas",
+      "item": [
+        {
+          "name": "Registrar notas parciales",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Tenant-ID",
+                "value": "{{tenantId}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"notasParcialesdto\": [\n    {\n      \"alumnoId\": 1,\n      \"docenteId\": 1,\n      \"cursoId\": 1,\n      \"materiaId\": 5,\n      \"lapso\": \"1°\",\n      \"nota\": \"18\",\n      \"porcentaje\": null\n    }\n  ]\n}"
+            },
+            "url": "{{baseUrl}}/notas/crear"
+          }
+        },
+        {
+          "name": "Consultar notas (GET+body)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Tenant-ID",
+                "value": "{{tenantId}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tipoDocumento\": \"V\",\n  \"numeroDocumento\": \"30123456\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/notas/consultar?lapso=1°",
+              "host": ["{{baseUrl}}"],
+              "path": ["notas", "consultar"],
+              "query": [
+                {
+                  "key": "lapso",
+                  "value": "1°"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

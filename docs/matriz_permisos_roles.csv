@@ -1,0 +1,14 @@
+Módulo / Endpoin;Ruta (URL);Métod;Rol con Acceso (Con @PreAuthorize activ
+Autenticació;/auth/login;POST;Público (Sin toke
+Alumnos (Listado;/alumno/listado;GET;Cualquier usuario autenticado
+Alumnos (Consulta;/alumno/consultarporcedula, /alumno/consultarporid/;GET;Cualquier usuario autenticado
+Alumnos (Crear;/alumno/crear;POST;ROLE_DIRECTOR o ROLE_ADMINISTRATI
+Alumnos (Modificar;/alumno/modificar/*;PUT;ROLE_DIRECTOR o ROLE_ADMINISTRATI
+Alumnos (Desactivar;/alumno/desactivar/*;PUT;ROLE_DIRECTOR o ROLE_ADMINISTRATI
+Docentes (Listado;/docente/listado;GET;Cualquier usuario autenticado
+Docentes (Crear;/docente/crear;POST;ROLE_DIRECTOR o ROLE_ADMINISTRATI
+Docentes (Modificar;/docente/modificar/*;PUT;ROLE_DIRECTOR o ROLE_ADMINISTRATI
+Docentes (Desactivar;/docente/desactivar/*;PUT;ROLE_DIRECTOR o ROLE_ADMINISTRATI
+Cursos;/curso/*;Todos;Cualquier usuario autenticado
+Notas;/notas/*;Todos;Cualquier usuario autenticado
+Catálogo;/profesiones, /nacionalidades, /materia/lista;GET;Cualquier usuario autenticado

@@ -764,13 +764,25 @@ No existe `@ControllerAdvice` global. Cada controlador maneja errores de forma i
 
 | Estado | Detalle |
 |--------|---------|
-| Spring Security | Dependencia comentada en `pom.xml` |
-| JWT | Configurado en properties, no implementado |
-| `@PreAuthorize` | Comentado en controladores |
-| CORS | Abierto a `*` |
-| Tablas auth | `usuarios`, `roles`, `usuario_rol` con seed en BD |
+| **Spring Security** | Implementado en su versión 6.x (Spring Boot 3.3.0) con soporte para Multi-tenancy por esquema. |
+| **JWT** | Activo y obligatorio para endpoints protegidos (JJWT `0.12.5`). Expiración fijada en 1 hora (`3600` s). |
+| **`@PreAuthorize`** | Definido en controladores para restringir operaciones de modificación a roles autorizados (comentado por defecto en desarrollo). |
+| **CORS** | Abierto globalmente (`@CrossOrigin("*")`). |
+| **Tablas auth** | `usuarios`, `roles`, `usuario_rol` activas con datos seed en cada esquema/tenant. |
 
-Ramas remotas con trabajo de seguridad: `springsecurity`, `Springsecurity-6`, `springsecurity-actualizacion`.
+### Matriz de Permisos por Rol
+El sistema gestiona accesos mediante roles basados en claims de JWT. Puedes descargar y abrir la matriz completa compatible con Microsoft Excel en [docs/matriz_permisos_roles.csv](matriz_permisos_roles.csv).
+
+| Rol | Iniciar Sesión | Lectura / Consulta | Escritura / Modificación | Gestión de Notas / Cursos |
+| :--- | :---: | :---: | :---: | :---: |
+| **`ROLE_DIRECTOR`** | ✔️ Sí | ✔️ Sí | ✔️ **Sí** | ✔️ Sí |
+| **`ROLE_ADMINISTRATIVO`** | ✔️ Sí | ✔️ Sí | ✔️ **Sí** | ✔️ Sí |
+| **`ROLE_PROFESOR`** | ✔️ Sí | ✔️ Sí | ❌ No | ✔️ Sí |
+| **`ROLE_ALUMNO`** | ✔️ Sí | ✔️ Sí | ❌ No | Solo Lectura |
+| **`ROLE_REPRESENTANTE`** | ✔️ Sí | ✔️ Sí | ❌ No | Solo Lectura |
+| **`ROLE_SISTEMA`** / **`ROLE_EMPLEADO`** | ✔️ Sí | ✔️ Sí | ❌ No | ✔️ Sí |
+
+*Nota: Para hacer efectivas las restricciones de escritura, asegúrate de descomentar las anotaciones `@PreAuthorize` en los controladores y habilitar `@EnableMethodSecurity` en la clase `SecurityConfig`.*
 
 ---
 

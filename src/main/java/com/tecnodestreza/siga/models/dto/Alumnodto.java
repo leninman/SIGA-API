@@ -7,25 +7,26 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import java.util.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor
 public class Alumnodto {
 
+    // ── Alumno ────────────────────────────────────────────────────────────────
     @NotEmpty
     private String tipoDocumento;
     @NotEmpty
     private String numeroDocumento;
     @NotEmpty
     private String primerNombre;
-    @NotEmpty
+    // Opcional en BD (sin @Basic(optional=false))
     private String segundoNombre;
     @NotEmpty
     private String primerApellido;
-    @NotEmpty
+    // Opcional en BD
     private String segundoApellido;
     @NotEmpty
     private String sexo;
@@ -39,6 +40,7 @@ public class Alumnodto {
     private String codigoOperadoraTelefono;
     @NotEmpty
     private String telefono;
+    // email es @Basic(optional=false) en BD → requerido
     @NotEmpty
     private String email;
     @NotNull
@@ -47,17 +49,19 @@ public class Alumnodto {
     private String lugarDeNacimiento;
     @NotEmpty
     private String nacionalidad;
+
+    // ── Representante ─────────────────────────────────────────────────────────
     @NotEmpty
     private String representanteTipoDocumento;
     @NotEmpty
     private String representanteNumeroDocumento;
     @NotEmpty
     private String representantePrimerNombre;
-    @NotEmpty
+    // Opcional en BD
     private String representanteSegundoNombre;
     @NotEmpty
     private String representantePrimerApellido;
-    @NotEmpty
+    // Opcional en BD
     private String representanteSegundoApellido;
     @NotEmpty
     private String representanteSexo;
@@ -87,16 +91,17 @@ public class Alumnodto {
     private String representanteCodigoOperadoraTelefonoEmpresa;
     @NotEmpty
     private String representanteTelefonoEmpresa;
-    @NotEmpty
+    // email opcional en representante (profesion/ocupacion tampoco tienen @Basic(optional=false))
     private String representanteEmail;
     @NotNull
     private Boolean representanteActivo;
-    @NotEmpty
+    // profesion y ocupacion son opcionales en BD
     private String representanteProfesion;
-    @NotEmpty
     private String representanteOcupacion;
     @NotEmpty
     private String parentesco;
+
+    // ── Datos Académicos ──────────────────────────────────────────────────────
     @NotEmpty
     private String cursoAnnio;
     @NotEmpty
@@ -109,8 +114,8 @@ public class Alumnodto {
     private String cursoNivel;
 
     private Date fechaCreacion;
-
     private Boolean activo;
+
     @NotEmpty
     private String condicion;
 
