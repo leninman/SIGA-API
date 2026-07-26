@@ -25,9 +25,6 @@ public class CustomUserDetailsService implements UserDetailsService {
         Usuario usuario = usuarioRepo.findByNombreUsuario(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado: " + username));
 
-        System.out.println(">>> DEBUG TENANT: " + com.tecnodestreza.siga.config.tenant.TenantContext.getCurrentTenant());
-        System.out.println(">>> DEBUG USER_PW: [" + usuario.getPassword() + "]");
-
         return new User(
                 usuario.getNombreUsuario(),
                 usuario.getPassword(),
