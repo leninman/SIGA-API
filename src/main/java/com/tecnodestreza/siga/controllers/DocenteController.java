@@ -11,6 +11,7 @@ import com.tecnodestreza.siga.models.dto.PersonaDocumentodto;
 import com.tecnodestreza.siga.services.IDocenteService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 //import org.springframework.security.access.prepost.PreAuthorize;
@@ -30,6 +31,7 @@ public class DocenteController {
 
 
     //CONSULTA LA LISTA COMPLETA DE DOCENTES ACTIVOS
+    @PreAuthorize("hasRole('ADMIN') or hasRole('DIRECTOR') or hasRole('ADMINISTRATIVO')")
     @GetMapping(path = "/listado")
     public ResponseEntity<List<Docente>> listado() {
        List<Docente> docentes=docenteService.consultarDocentes();

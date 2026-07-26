@@ -13,6 +13,7 @@ import com.tecnodestreza.siga.services.ICursoService;
 import com.tecnodestreza.siga.services.IDocenteService;
 import com.tecnodestreza.siga.services.IMateriaService;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -47,6 +48,7 @@ public class CursoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(cursoService.crear(curso));
     }
     @GetMapping(path = "/listado")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('DIRECTOR') or hasRole('ADMINISTRATIVO')")
     public ResponseEntity<List<Curso>> listado() {
         List<Curso> cursos=cursoService.listarcursos();
         return ResponseEntity.ok().body(cursos);

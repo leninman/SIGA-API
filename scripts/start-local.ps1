@@ -7,7 +7,7 @@ $dbHost = if ($env:SIGA_DB_SERVERNAME) { $env:SIGA_DB_SERVERNAME } else { "local
 $dbPort = if ($env:SIGA_DB_PORT) { $env:SIGA_DB_PORT } else { "3306" }
 $dbName = if ($env:SIGA_DB_NAME) { $env:SIGA_DB_NAME } else { "siga" }
 $dbUser = if ($env:SIGA_DB_USERNAME) { $env:SIGA_DB_USERNAME } else { "root" }
-$dbPass = if ($env:SIGA_DB_PASSWORD) { $env:SIGA_DB_PASSWORD } else { "password" }
+$dbPass = if ($env:SIGA_DB_PASSWORD) { $env:SIGA_DB_PASSWORD } else { "" }
 
 Write-Host "SIGA-API - arranque local" -ForegroundColor Cyan
 Write-Host "Proyecto: $projectRoot"
@@ -29,4 +29,4 @@ $env:SIGA_DB_PASSWORD = $dbPass
 Write-Host "API disponible en: http://localhost:8090/siga/api/v1" -ForegroundColor Green
 Write-Host "Detener con Ctrl+C`n"
 
-mvn spring-boot:run
+.\mvnw.cmd spring-boot:run

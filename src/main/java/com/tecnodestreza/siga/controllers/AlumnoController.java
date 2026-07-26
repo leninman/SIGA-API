@@ -19,6 +19,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 //import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -40,6 +41,7 @@ public class AlumnoController {
     private final IAlumnoService alumnoservice;
 
     //CONSULTA LA LISTA COMPLETA DE ALUMNOS ACTIVOS
+    @PreAuthorize("hasRole('ADMIN') or hasRole('DIRECTOR') or hasRole('ADMINISTRATIVO')")
     @GetMapping(path = "/listado")
     public ResponseEntity<List<ListadoAlumnosdto>> listado() {
         List<Alumno> alumnos=alumnoservice.consultarAlumnos();
